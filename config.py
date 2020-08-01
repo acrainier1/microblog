@@ -7,6 +7,9 @@ load_dotenv(os.path.join(basedir, 'env'))
 
 
 class Config(object):
+    # HEROKU DEPLOYMENT
+    LOG_TO_STDOUT = os.environ.get('LOG_TO_STDOUT')
+
     # DATABASE CONFIGURATION
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'you-will-never-guess'
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or \
