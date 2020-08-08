@@ -1,4 +1,5 @@
 import os
+# import psycopg2
 from dotenv import load_dotenv
 
 
@@ -11,10 +12,16 @@ class Config(object):
     LOG_TO_STDOUT = os.environ.get('LOG_TO_STDOUT')
 
     # DATABASE CONFIGURATION
+        # SGQLITE
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'you-will-never-guess'
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or \
                                 'sqlite:///' + os.path.join(basedir, 'app.db')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+        # POSTGRESQL
+    # DATABASE_URL=postgres://ufzsgerrsavtzx:3df65af006863a8434fb4e76c08f7ce7712cf8c908e3e984fee81b41b6cac975@ec2-54-236-146-234.compute-1.amazonaws.com:5432/d6i78qj51jvgkb
+    # DATABASE_URL = os.environ.get('DATABASE_URL')
+    # print("DATABASE_URL=====\n", DATABASE_URL)
+    # conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 
     # EMAIL ERROR NOTICIES
     MAIL_SERVER = os.environ.get('MAIL_SERVER')
