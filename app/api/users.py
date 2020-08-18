@@ -13,24 +13,12 @@ def get_user(id):
 
 
 @bp.route('/users', methods=['GET'])
-# @token_auth.login_required
+@token_auth.login_required
 def get_users():
-    print("================ SEARCH API MADE IT! ================")
-    res = [
-        [43, '由', ['reason','',''], ['bar','field','',''], 3],
-        [44, '由', ['a','',''], ['bar','field','',''], 3],
-        [45, '由', ['b','',''], ['bar','field','',''], 3],
-        [46, '由', ['c','',''], ['bar','field','',''], 3],
-        [47, '由', ['d','',''], ['bar','field','',''], 3]
-    ]
-    res = jsonify(res)
-    res.status_code = 201
-    return res
-
-    # page = request.args.get('page', 1, type=int)
-    # per_page = min(request.args.get('per_page', 10, type=int), 100)
-    # data = User.to_collection_dict(User.query, page, per_page, 'api.get_users')
-    # return jsonify(data)
+    page = request.args.get('page', 1, type=int)
+    per_page = min(request.args.get('per_page', 10, type=int), 100)
+    data = User.to_collection_dict(User.query, page, per_page, 'api.get_users')
+    return jsonify(data)
 
 
 @bp.route('/users/<int:id>/followers', methods=['GET'])
@@ -90,3 +78,19 @@ def update_user(id):
     user.from_dict(data, new_user=False)
     db.session.commit()
     return jsonify(user.to_dict())
+
+
+
+@bp.route('/getsearch/<search_term>', methods=['GET'])
+def getsearch(search_term):
+    print("================ SEARCH API MADE IT! ================")
+    search_data = [
+        [43, '由', ['reason','',''], ['bar','field','',''], 0],
+        [44, '由', ['a','',''], ['bar','field','',''], 2],
+        [45, '由', ['b','',''], ['bar','field','',''], 3],
+        [46, '由', ['c','',''], ['bar','field','',''], 3],
+        [47, '由', ['d','',''], ['bar','field','',''], 3]
+    ]
+    res = jsonify(search_data)
+    print("res", res)
+    return res
