@@ -84,6 +84,8 @@ def update_user(id):
 @bp.route('/test/<search_term>', methods=['GET'])
 def test(search_term=''):
     print("================ SEARCH API MADE IT! ================")
+    print("================ SEARCH API MADE IT! ================")
+    print("================ SEARCH API MADE IT! ================")
     search_data = [
         [43, '由', ['reason','',''], ['bar','field','',''], 0],
         [44, '由', ['a','',''], ['bar','field','',''], 2],
