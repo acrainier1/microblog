@@ -5,11 +5,11 @@ Bash command for using requirements.txt:
 
 ===== LOCAL POSTGRESQL =====
 
-kanjiremadmin
+kanjiremastered
 
 ~$
 sudo -i -u postgres     # start psql
-sudo -u kanjiremadmin psql   # start psql directly
+sudo -u kanjiremastered psql   # start psql directly
 
 postgres=#
 \q                      # quit
@@ -30,6 +30,8 @@ heroku run bash;
 flask db migrate -m "update DB"; flask db upgrade;
 
 <!-- if error above, update migration version manually -->
+
+heroku psql
 
 select * from alembic_version; <!-- gets revision's old_version_# -->
 
