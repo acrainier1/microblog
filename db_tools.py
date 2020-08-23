@@ -1,5 +1,5 @@
-def test(stdout="db tools running"):
-    print(stdout)
+def test(msg="db tools running"):
+    print(msg)
 
 
 if __name__ == '__main__':
