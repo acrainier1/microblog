@@ -261,3 +261,23 @@ class Notification(db.Model):
 
     def get_data(self):
         return json.loads(str(self.payload_json))
+
+
+class KanjiData(db.Model):
+    Order = db.Column(db.Integer, primary_key=True)
+    Frequency = db.Column(db.String(32))
+    Kanji = db.Column(db.String(32))
+    Type = db.Column(db.String(32))
+    Meaning1 = db.Column(db.String(32))
+    Meaning2 = db.Column(db.String(32))
+    Meaning3 = db.Column(db.String(32))
+    Radical1 = db.Column(db.String(32))
+    Radical2 = db.Column(db.String(32))
+    Radical3 = db.Column(db.String(32))
+    Radical4 = db.Column(db.String(32))
+    Onyomi_Reading1 = db.Column(db.String(32))
+    Onyomi_Reading2 = db.Column(db.String(32))
+    Kunyomi_Reading1 = db.Column(db.String(32))
+    Kunyomi_Reading2 = db.Column(db.String(32))
+    Mnemonic = db.Column(db.String(32))
+    Notes = db.Column(db.String(32))
