@@ -1,14 +1,6 @@
 import psycopg2
 import os
 import csv
-# from dotenv import load_dotenv
-
-
-# basedir = os.path.abspath(os.path.dirname(__file__))
-# load_dotenv(os.path.join(basedir, 'env'))
-
-# DATABASE_URL = os.environ.get('DATABASE_URL') or \
-#                                 'sqlite:///' + os.path.join(basedir, 'app.db')
 
 DATABASE_URL = os.environ['DATABASE_URL']
 KANJI_DATA = 'kanjidata.csv'
