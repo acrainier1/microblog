@@ -280,5 +280,5 @@ class KanjiData(db.Model):
     Onyomi_Reading2 = db.Column(db.String(32))
     Kunyomi_Reading1 = db.Column(db.String(32))
     Kunyomi_Reading2 = db.Column(db.String(32))
-    Mnemonic = db.Column(db.String(128))
-    Notes = db.Column(db.String(128))
+    Mnemonic = db.Column(db.String(256))
+    Notes = db.Column(db.String(256))

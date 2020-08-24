@@ -34,8 +34,8 @@ def upgrade():
     sa.Column('Onyomi_Reading2', sa.String(length=32), nullable=True),
     sa.Column('Kunyomi_Reading1', sa.String(length=32), nullable=True),
     sa.Column('Kunyomi_Reading2', sa.String(length=32), nullable=True),
-    sa.Column('Mnemonic', sa.String(length=128), nullable=True),
-    sa.Column('Notes', sa.String(length=128), nullable=True),
+    sa.Column('Mnemonic', sa.String(length=256), nullable=True),
+    sa.Column('Notes', sa.String(length=256), nullable=True),
     sa.PrimaryKeyConstraint('Order')
     )
     # ### end Alembic commands ###
