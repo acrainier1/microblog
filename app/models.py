@@ -250,7 +250,7 @@ class Message(db.Model):
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
 
     def __repr__(self):
-        return '<Message {}>'.format(self.body)
+        return f'<Message {self.body}>'
 
 
 class Notification(db.Model):
@@ -282,3 +282,6 @@ class KanjiData(db.Model):
     Kunyomi_Reading2 = db.Column(db.String(32))
     Mnemonic = db.Column(db.String(256))
     Notes = db.Column(db.String(256))
+
+    def __repr__(self):
+        return f'<Kanji {self.Kanji}>'

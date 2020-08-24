@@ -1,9 +1,15 @@
 import psycopg2
 import os
 import csv
+# from dotenv import load_dotenv
 
 
-# DATABASE_URL = os.environ.get('DATABASE_URL')
+# basedir = os.path.abspath(os.path.dirname(__file__))
+# load_dotenv(os.path.join(basedir, 'env'))
+
+# DATABASE_URL = os.environ.get('DATABASE_URL') or \
+#                                 'sqlite:///' + os.path.join(basedir, 'app.db')
+
 DATABASE_URL = os.environ['DATABASE_URL']
 KANJI_DATA = 'kanjidata.csv'
 
@@ -23,16 +29,12 @@ with open(KANJI_DATA, 'r') as f:
 
 
 cur.execute('SELECT * FROM kanji_data')
-one_kd = cur.fetchone()
-all_kd = cur.fetchall()
-
+first_row = cur.fetchone()
 cur.close()
 
 
 def test(msg="db tools running"):
-    print(msg, "DATABASE_URL\n", DATABASE_URL)
-    print("one\n", one, "\nall\n", all)
-    print("one_kd\n", one_kd, "\nall_kd\n", all_kd)
+    print("first_row\n", first_row)
 
 
 if __name__ == '__main__':

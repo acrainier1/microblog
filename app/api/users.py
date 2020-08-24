@@ -1,6 +1,6 @@
 from flask import jsonify, request, url_for, abort
 from app import db
-from app.models import User
+from app.models import User, KanjiData
 from app.api import bp
 from app.api.auth import token_auth
 from app.api.errors import bad_request
@@ -83,14 +83,15 @@ def update_user(id):
 
 @bp.route('/test/<search_term>', methods=['GET'])
 def getsearch(search_term):
-    print("================ SEARCH API MADE IT! ================")
-    search_data = [
-        [43, '由', ['reason','',''], ['bar','field','',''], 0],
-        [44, '由', ['a','',''], ['bar','field','',''], 2],
-        [45, '由', ['b','',''], ['bar','field','',''], 3],
-        [46, '由', ['c','',''], ['bar','field','',''], 3],
-        [47, '由', ['d','',''], ['bar','field','',''], 3]
-    ]
+    print(f"== SEARCH API MADE IT! search_term: {search_term} ==")
+    search_data = KanjiData.query.filter_by(Order=search_term).first()
+    # search_data = [
+    #     [43, '由', ['reason','',''], ['bar','field','',''], 0],
+    #     [44, '由', ['a','',''], ['bar','field','',''], 2],
+    #     [45, '由', ['b','',''], ['bar','field','',''], 3],
+    #     [46, '由', ['c','',''], ['bar','field','',''], 3],
+    #     [47, '由', ['d','',''], ['bar','field','',''], 3]
+    # ]
+    print("search_data\n", search_data)
     res = jsonify(search_data)
-    print("res", res)
     return res
