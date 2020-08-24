@@ -5,6 +5,9 @@ Bash command for using requirements.txt:
 
 ===== LOCAL POSTGRESQL =====
 
+
+==== Login
+
 kanjiremastered
 
 ~$
@@ -23,7 +26,8 @@ sudo /etc/init.d/postgresql restart
 
 ===== HEROKU POSTGRESQL =====
 
-To update postgresql on Herko:
+
+==== To update postgresql on Herko:
 
 heroku run bash;
 
@@ -36,6 +40,8 @@ heroku pg:psql;
 SELECT * FROM alembic_version; <!-- gets revision's old_version_# -->
 
 UPDATE alembic_version SET version_num = 'new_version_#' WHERE version_num = 'old_version_#';
+
+
 
 =====
 
