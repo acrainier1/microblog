@@ -1,13 +1,11 @@
 import psycopg2
 import os
 import csv
-from config import SQLALCHEMY_DATABASE_URI, KANJI_DATA
 
 
 # DATABASE_URL = os.environ.get('DATABASE_URL')
-# DATABASE_URL = os.environ['DATABASE_URL']
-DATABASE_URL = SQLALCHEMY_DATABASE_URI
-# KANJI_DATA = 'kanjidata.csv'
+DATABASE_URL = os.environ['DATABASE_URL']
+KANJI_DATA = 'kanjidata.csv'
 
 
 conn = psycopg2.connect(DATABASE_URL, sslmode='require')
