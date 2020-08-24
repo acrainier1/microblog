@@ -15,7 +15,7 @@ cur.execute('SELECT * FROM "user"')
 one = cur.fetchone()
 all = cur.fetchall()
 
-curr.copy_expert("COPY kanji_data FROM STDIN CSV", KANJI_DATA)
+cur.copy_expert("COPY kanji_data FROM STDIN CSV", KANJI_DATA)
 # with open(KANJI_DATA, 'r') as f:
 #     next(f) # Skip the header row.
 #     cur.copy_from(f, 'kanji_data', sep=',')
