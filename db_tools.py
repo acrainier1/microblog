@@ -28,8 +28,8 @@ all_kd = cur.fetchall()
 
 def test(msg="db tools running"):
     print(msg, "DATABASE_URL\n", DATABASE_URL)
-    print("one\n", one, "all\n", all)
-    print("one_kd\n", one_kd, "all_kd\n", all_kd)
+    print("one\n", one, "\nall\n", all)
+    print("one_kd\n", one_kd, "\nall_kd\n", all_kd)
 
 
 if __name__ == '__main__':
