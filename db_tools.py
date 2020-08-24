@@ -15,16 +15,19 @@ cur.execute('SELECT * FROM "user"')
 one = cur.fetchone()
 all = cur.fetchall()
 
-cur.copy_expert("""COPY kanji_data FROM STDIN WITH (FORMAT CSV)""", KANJI_DATA)
-# with open(KANJI_DATA, 'r') as f:
-#     next(f) # Skip the header row.
+# cur.copy_expert("""COPY kanji_data FROM STDIN WITH (FORMAT CSV)""", KANJI_DATA)
+with open(KANJI_DATA, 'r') as f:
+    next(f) # Skip the header row.
+    cur.copy_expert(sql="""COPY kanji_data FROM STDIN WITH (FORMAT CSV)""", file=f)
 #     cur.copy_from(f, 'kanji_data', sep=',')
-conn.commit()
+    conn.commit()
 
 
 cur.execute('SELECT * FROM kanji_data')
 one_kd = cur.fetchone()
 all_kd = cur.fetchall()
+
+cur.close()
 
 
 def test(msg="db tools running"):
