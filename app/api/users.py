@@ -83,7 +83,7 @@ def update_user(id):
 @bp.route('/test/<search_term>', methods=['GET'])
 def testroute(search_term):
     print(f"== SEARCH API MADE IT! search_term: {search_term} ==")
-    test_data = KanjiData.query.filter_by(Order=search_term).first()
+    test_data = KanjiData.query.filter_by(Order="200").first()
     print("test_data\n", test_data)
     res = jsonify(test_data)
     return res
@@ -102,5 +102,3 @@ def getsearch(search_term):
     print("search_data\n", search_data)
     res = jsonify(search_data)
     return res
-
-
