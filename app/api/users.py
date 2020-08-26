@@ -85,7 +85,7 @@ def testroute(search_term):
     print(f"== SEARCH API MADE IT! search_term: {search_term} ==")
     test_data = KanjiData.query.filter_by(Order=200).first()[0]
     print("test_data\n", test_data)
-    res = jsonify(test_data)
+    res = jsonify([43, '由', ['reason','',''], ['bar','field','',''], 0])
     return res
 
 
