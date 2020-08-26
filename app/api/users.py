@@ -80,11 +80,11 @@ def update_user(id):
     return jsonify(user.to_dict())
 
 
-@bp.route('/test/<search_term>', methods=['GET'])
+@bp.route('/test/<int:search_term>', methods=['GET'])
 def testroute(search_term):
     print(f"== SEARCH API MADE IT! search_term: {search_term} ==")
     # test_data = KanjiData.query.filter_by(Order=200).first()[0]
-    test_data = User.query.get_or_404(1)
+    test_data = User.query.get_or_404(search_term)
     # print("test_data\n", test_data)
     # test_data = [
     #     [44, '由', ['a','',''], ['bar','field','',''], 2],
