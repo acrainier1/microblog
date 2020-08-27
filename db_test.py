@@ -12,7 +12,7 @@ cur = conn.cursor()
 
 
 cur.execute('SELECT * FROM kanji_data')
-first_row = cur.fetchall()
+all = cur.fetchall()
 cur.close()
 
 
