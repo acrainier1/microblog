@@ -239,7 +239,7 @@ class Post(SearchableMixin, db.Model):
     language = db.Column(db.String(5))
 
     def __repr__(self):
-        return '<Post {}>'.format(self.body)
+        return f'<Post {self.body}>'
 
 
 class Message(db.Model):
