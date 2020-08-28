@@ -63,7 +63,7 @@
                             getkanji(column, search_term)
 
         SQL Query:          First query is defined within getkanji() function
-                            sql_query4(radicals)
+                            add_bushu(radicals)
 
         Data Structuring:   nest_kanji_result(result)
 
@@ -73,7 +73,7 @@
                             getkanjiset(column, search_term)
 
         SQL Query:          First query is defined within getkanji() function
-                            sql_query4(radicals)
+                            add_bushu(radicals)
 
         Data Structuring:   nest_kanji_result(result)
 
@@ -241,11 +241,9 @@ def kanji(search_term):
         search_term = search_term.encode('iso-8859-1').decode('utf8')
     """
     result = KanjiData.query.filter_by(Order=int(search_term)).first()
-    print("=== result ===\n", result.Kanji)
     if result:
         nested = nest_kanji_result(result)
-        nested[4] = sql_query4(nested[5])
-    print("nested\n",nested)
+        nested[4] = add_bushu(nested[5])
     if nested:
         return jsonify(nested)
     return jsonify([[0], [], [], ["NO_KANJI_DATA"], [], [], [], [], [], []])
@@ -264,7 +262,7 @@ def kanjiset(search_term):
         if results:
             for result in results:
                 nested = nest_kanji_result(result)
-                nested.append(sql_query4(nested[4]))
+                nested.append(add_bushu(nested[4]))
                 nested_results_query[str(result[0])] = nested
         if nested_results_query:
             return jsonify(nested_results_query)
@@ -393,9 +391,9 @@ def sql_query3(search_term, columns):
     return nested_query_results
 
 
-def sql_query4(radicals):
-    """ This extracts kanji version of radical.
-        For example, "tree" it finds the kanji for its 
+def add_bushu(radicals):
+    """ This extracts kanji version of a radical.
+        For example, for "tree" it finds the kanji for its 
         radicals, "big" and "bar", and returns ["大", "|"]
     """
     bushus = []
