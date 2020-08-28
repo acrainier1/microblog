@@ -94,7 +94,7 @@ def update_user(id):
 def testroute(search_term):
     print(f"== SEARCH API MADE IT! search_term: {search_term} ==")
     # test_data = KanjiData.query.filter_by(Order=200).first()
-    test_data = KanjiData.query.all()[0]
+    test_data = KanjiData.query.all()[55]
     # row = test_data[2]
     print("test_data\n", test_data)
     # test_data = [
@@ -104,7 +104,7 @@ def testroute(search_term):
     #     [47, '由', ['d','',''], ['bar','field','',''], 3]
     # ]
     # return jsonify(test_data)
-    return jsonify({"id" : "id"})
+    return jsonify({"Kanji" : test_data.Kanji})
 
 
 @bp.route('/search/<search_term>', methods=['GET'])
