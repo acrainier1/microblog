@@ -9,6 +9,7 @@ from app.api.errors import bad_request
 @bp.route('/users/<int:id>', methods=['GET'])
 @token_auth.login_required
 def get_user(id):
+    # ============ STATUS CODE ============
     return jsonify(User.query.get_or_404(id).to_dict())
 
 
@@ -24,7 +25,9 @@ def get_users():
 @bp.route('/users/<int:id>/followers', methods=['GET'])
 @token_auth.login_required
 def get_followers(id):
+    # ============ STATUS CODE ============
     user = User.query.get_or_404(id)
+    # ============ STATUS CODE ============
     page = request.args.get('page', 1, type=int)
     per_page = min(request.args.get('per_page', 10, type=int), 100)
     data = User.to_collection_dict(user.followers, page, per_page,
@@ -35,7 +38,9 @@ def get_followers(id):
 @bp.route('/users/<int:id>/followed', methods=['GET'])
 @token_auth.login_required
 def get_followed(id):
+    # ============ STATUS CODE ============
     user = User.query.get_or_404(id)
+    # ============ STATUS CODE ============
     page = request.args.get('page', 1, type=int)
     per_page = min(request.args.get('per_page', 10, type=int), 100)
     data = User.to_collection_dict(user.followed, page, per_page,
@@ -57,7 +62,9 @@ def create_user():
     db.session.add(user)
     db.session.commit()
     response = jsonify(user.to_dict())
+    # ============ STATUS CODE ============
     response.status_code = 201
+    # ============ STATUS CODE ============
     response.headers['Location'] = url_for('api.get_user', id=user.id)
     return response
 
@@ -65,9 +72,12 @@ def create_user():
 @bp.route('/users/<int:id>', methods=['PUT'])
 @token_auth.login_required
 def update_user(id):
+    # ============ STATUS CODE ============
     if token_auth.current_user().id != id:
         abort(403)
+    # ============ STATUS CODE ============
     user = User.query.get_or_404(id)
+    # ============ STATUS CODE ============
     data = request.get_json() or {}
     if 'username' in data and data['username'] != user.username and \
             User.query.filter_by(username=data['username']).first():
@@ -84,7 +94,7 @@ def update_user(id):
 def testroute(search_term):
     print(f"== SEARCH API MADE IT! search_term: {search_term} ==")
     # test_data = KanjiData.query.filter_by(Order=200).first()
-    test_data = KanjiData.query.all()
+    test_data = User.query.get_or_404(1)
     # print("test_data\n", test_data)
     # test_data = [
     #     [44, '由', ['a','',''], ['bar','field','',''], 2],
