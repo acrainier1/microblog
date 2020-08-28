@@ -242,12 +242,12 @@ def kanji(search_term):
     """
     result = KanjiData.query.filter_by(Order=int(search_term)).first()
     print("=== result ===\n", result.Kanji)
-    # if result:
-    #     nested = nest_kanji_result(result)
-    #     nested[4] = sql_query4(nested[5])
-    # print("nested\n",nested)
-    # if nested:
-    #     return jsonify(nested)
+    if result:
+        nested = nest_kanji_result(result)
+        nested[4] = sql_query4(nested[5])
+    print("nested\n",nested)
+    if nested:
+        return jsonify(nested)
     return jsonify([[0], [], [], ["NO_KANJI_DATA"], [], [], [], [], [], []])
 
 
@@ -400,12 +400,12 @@ def sql_query4(radicals):
     """
     bushus = []
     for radical in radicals:
-        bushu1 = KanjiData.query.filter_by(Meaning1=radical).first()[0].Kanji
-        bushu2 = KanjiData.query.filter_by(Meaning2=radical).first()[0].Kanji
-        bushu3 = KanjiData.query.filter_by(Meaning3=radical).first()[0].Kanji
+        bushu1 = KanjiData.query.filter_by(Meaning1=radical).first()
+        bushu2 = KanjiData.query.filter_by(Meaning2=radical).first()
+        bushu3 = KanjiData.query.filter_by(Meaning3=radical).first()
         for bushu in [bushu1, bushu2, bushu3]:
             if bushu:
-                bushus.append(bushu) 
+                bushus.append(bushu.Kanji) 
     return bushus
 
 
@@ -434,35 +434,35 @@ def nest_kanji_result(result):
         Some responses are semantically related so multiple columns 
         will be further nested into a list
     """
+    r = result
     nested_result = []
-    with result as r:
-        # row[0:2] - Appends ORDER, KANJI, and TYPE
-        nested_result.append(r.Order)
-        nested_result.append(r.Kanji)
-        nested_result.append(r.Type)
+    # row[0:2] - Appends ORDER, KANJI, and TYPE
+    nested_result.append([r.Order])
+    nested_result.append([r.Kanji])
+    nested_result.append([r.Type])
 
-        # row[3] - Appends nested list of MEANINGS and checks for empty columns
-        meanings = list(filter(None, [r.Meaning1, r.Meaning2, r.Meaning3]   ))
-        nested_result.append(meanings)
+    # row[3] - Appends nested list of MEANINGS and checks for empty columns
+    meanings = list(filter(None, [r.Meaning1, r.Meaning2, r.Meaning3]))
+    nested_result.append(meanings)
 
-        # row[4] - Empty list for BUSHU added in calling function
-        nested_result.append([])
+    # row[4] - Empty list for BUSHU added in calling function
+    nested_result.append([])
 
-        # row[5] - nested list of RADICALS and checks for empty columns
-        radicals = list(filter(None, [r.Radical1, r.Radical2, r.Radical3, r.Radical4]))
-        nested_result.append(radicals)
+    # row[5] - nested list of RADICALS and checks for empty columns
+    radicals = list(filter(None, [r.Radical1, r.Radical2, r.Radical3, r.Radical4]))
+    nested_result.append(radicals)
 
-        # row[6] - Appends nested list of ONYOMI and checks for empty columns
-        onyomi = list(filter(None, result[11:13]))
-        nested_result.append(onyomi)
+    # row[6] - Appends nested list of ONYOMI and checks for empty columns
+    onyomi = list(filter(None, [r.Onyomi_Reading1, r.Onyomi_Reading2]))
+    nested_result.append(onyomi)
 
-        # row[7] - Appends nested list of KUNYOMI and checks for empty columns
-        kunyomi = list(filter(None, result[13:15]))
-        nested_result.append(kunyomi)
+    # row[7] - Appends nested list of KUNYOMI and checks for empty columns
+    kunyomi = list(filter(None, [r.Kunyomi_Reading1, r.Kunyomi_Reading2]))
+    nested_result.append(kunyomi)
 
-        # row[8:9] - Appends MNEMONIC and NOTES
-        nested_result.append([result[15]])
-        nested_result.append([result[16]])
+    # row[8:9] - Appends MNEMONIC and NOTES
+    nested_result.append([r.Mnemonic])
+    nested_result.append([r.Notes])
 
     return nested_result
 
