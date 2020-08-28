@@ -90,32 +90,34 @@ def update_user(id):
     return jsonify(user.to_dict())
 
 
-@bp.route('/test/<search_term>', methods=['GET'])
-def testroute(search_term):
-    print(f"== SEARCH API MADE IT! search_term: {search_term} ==")
-    # test_data = KanjiData.query.filter_by(Order=200).first()
-    test_data = KanjiData.query.all()[55]
-    # row = test_data[2]
-    print("test_data\n", test_data)
-    # test_data = [
-    #     [44, '由', ['a','',''], ['bar','field','',''], 2],
-    #     [45, '由', ['b','',''], ['bar','field','',''], 3],
-    #     [46, '由', ['c','',''], ['bar','field','',''], 3],
-    #     [47, '由', ['d','',''], ['bar','field','',''], 3]
-    # ]
-    # return jsonify(test_data)
-    return jsonify({"Kanji" : test_data.Kanji})
 
+@bp.route('/postcontactform/<subject>/<name>/<email>/<message>/<page>/<card>', methods=['POST'])
+def postContactForm(subject, name, email, message, page, card):
+    # with sqlite3.connect(DBPATH2) as conn:
+    #     cursor = conn.cursor()
+    #     INSERT_SQL = """ 
+    #           INSERT INTO user_messages
+                #     (Subject,
+                #     Name,
+                #     Email,
+                #     Message,
+                #     Page, Card)
 
-@bp.route('/search/<search_term>', methods=['GET'])
-def getsearch(search_term):
-    # print(f"== SEARCH API MADE IT! search_term: {search_term} ==")
-    search_data = [
-        [43, '由', ['reason','',''], ['bar','field','',''], 0],
-        [44, '由', ['a','',''], ['bar','field','',''], 2],
-        [45, '由', ['b','',''], ['bar','field','',''], 3],
-        [46, '由', ['c','',''], ['bar','field','',''], 3],
-        [47, '由', ['d','',''], ['bar','field','',''], 3]
-    ]
-    # print("search_data\n", search_data)
-    return jsonify(search_data)
+                # VALUES (
+                #     :subject,
+                #     :name,
+                #     :email,
+                #     :message,
+                #     :page,
+                #     :card);
+    #     """
+    #     values = {
+    #         "subject": subject,
+    #         "name": name,
+    #         "email": email,
+    #         "message": message,
+    #         "page": page,
+    #         "card": card
+    #     }
+    #     cursor.execute(INSERT_SQL, values)
+    return jsonify({"status": "success"})
