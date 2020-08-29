@@ -249,24 +249,19 @@ def kanji(search_term):
     return jsonify([[0], [], [], ["NO_KANJI_DATA"], [], [], [], [], [], []])
 
 
-@bp.route('/kanjiset/<search_term>', methods=['GET'])
+@bp.route('/kanjiset/<int:search_term>', methods=['GET'])
 def kanjiset(search_term):
-    search_term = int(search_term)
-    with sqlite3.connect(DBPATH) as conn:
-        cursor = conn.cursor()
-        nested_results_query = {}
-        SQL = f""" SELECT * FROM [kanjidata]
-                    WHERE [Order1]
-                    BETWEEN {search_term} AND {search_term + 99} """
-        results = cursor.execute(SQL).fetchall()
-        if results:
-            for result in results:
-                nested = nest_kanji_result(result)
-                nested.append(add_bushu(nested[4]))
-                nested_results_query[str(result[0])] = nested
-        if nested_results_query:
-            return jsonify(nested_results_query)
-        return Response({"NO_KEYS":["NO_KANJI_DATA"]}, content_type="application/json; charset=utf-8")
+    results = KanjiData.query.filter(
+        KanjiData.Order.between(search_term, search_term+99))
+    nested_results = []
+    if results:
+        for result in results:
+            nested = nest_kanji_result(result)
+            nested[4] = add_bushu(nested[5])
+            nested_results.append(nested)
+    if nested_results:
+        return jsonify(nested_results)
+    return jsonify([])
 
 
 @bp.route('/test/<search_term>', methods=['GET'])
