@@ -1,3 +1,15 @@
 {
-    "python.pythonPath": "/home/acanizales1/microblog/venv/bin/python3.8"
+    "python.pythonPath": "/home/acanizales1/microblog/venv/bin/python3.8",
+
+    "editor.tokenColorCustomizations": {
+        "[Visual Studio Dark]": {
+            "comments": "#6e8b83",
+            "textMateRules": [{
+                "scope": "meta.block",
+                "settings": {
+                    "foreground": "#ffffff"
+                }
+            }]
+        }
+    },
 }
