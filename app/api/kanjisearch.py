@@ -1,18 +1,17 @@
 """ 
     =============================================
     =============================================
-    <<<<<<<<< README: TABLE OF CONTENTS >>>>>>>>>
+    <<<<<<<<<<<<<<<<<< README >>>>>>>>>>>>>>>>>>>
     =============================================
     =============================================
 
+            TABLE OF CONTENTS           Line No.
 
-    - 1 -  PROGRAM STRUCTURE
-    - 2 -  IMPORTS & SETUP
-    - 3 -  FLASK ROUTES
-    - 4 -  SQL QUERIES
-    - 5 -  DATA STRUCTURING
-
-
+    - 1 -   PROGRAM STRUCTURE           25
+    - 2 -   IMPORTS & SETUP             100
+    - 3 -   FLASK ROUTES                125
+    - 4 -   SQL QUERIES                 350
+    - 5 -   HELPER FUNCTIONS            475
 
 
 
@@ -34,7 +33,7 @@
 
         SQL Query:          main_query(search_term, columns1)
                             main_query(kunyomi, columns2)
-                            sql_query2(search_term)
+                            derivative_kanji_query(search_term)
 
         Data Structuring:   nest_search_result(result)
 
@@ -53,7 +52,7 @@
         Flask Route:        @bp.route('/getbyradicals/<search_term>')
                             getsearch(search_term)
 
-        SQL Query:          sql_query2(search_term)
+        SQL Query:          derivative_kanji_query(search_term)
 
         Data Structuring:   nest_search_result(result)
 
@@ -77,15 +76,15 @@
 
         Data Structuring:   nest_kanji_result(result)
 
-
-    (6) CONTACT FORM DATA
-        Flask Route:        @bp.route('/postcontactform/<subject>/<name>/
-                                        <email>/<message>/<section>/<card>')
-                            postcontactform(subject, name, email, message, page, card)
-
-        SQL Query:         Query is defined within function
-
 """
+
+
+
+
+
+
+
+
 
 
 
@@ -105,10 +104,22 @@
 """
 from flask import jsonify, request
 from sqlalchemy.sql import select
+import copy
+
 from app import db
 from app.models import User, KanjiData
 from app.api import bp
 from app.api.errors import bad_request
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -120,65 +131,74 @@ def search(search_term):
         and returns list of all derivatives broken down by derivation depth level.
         The string search term term can be one of many things: an order number, 
         a kanji, a meaning, a radical, or a reading.
+        The search function has three parts: (1) ORDER # and ONYOMI SEARCH, 
+        (2) KUNYOMI SEARCH, (3) KANJI AND DERIVATIVES SEARCH.
 
         PARAMETERS searchTerm: string
 
         RETURNS searchData: array
         DATA STRUCTURE of searchData and uniqueResults:
-        Initialized as an object to prevent duplicates when new entries are
-        added and then returned as a jagged array
+            Initialized as an object to prevent duplicates when new entries are
+            added. Ultimately, returned as an array.
 
         key: integer : value: array
             { 
-                Order: [Order #, Kanji, [...meanings], [...radicals], heading/depth], 
+                Order: [Order #, Kanji, [...meanings], [...radicals], Heading/Depth], 
                 Order: [...], 
                 ...
             }
         Example:
             { 
-                43: [43, '由', ['reason','',''], ['bar','field','',''], 3], 
-                57: [...], 
-                ...
+                57Onyomi_Reading1: [[51], ['大'], ['big', '', ''], 'Onyomi']
+                43: [43, '由', ['reason','',''], ['bar','field','',''], 3]
             }
 
-        If there is data found, returned as a jagged array
+        If there is data found, returned as an array
             [
-                [Order #, Kanji, [...meanings], [...radicals], heading/depth], 
+                [Order #, Kanji, [...meanings], [...radicals], Heading/Depth], 
                 [...],
                 ...
             ]
         Example:
             [
+                [[51], ['大'], ['big', '', ''], 'Onyomi']
                 [43, '由', ['reason','',''], ['bar','field','',''], 3]
             ]
 
         If there is no data found, returned as an array with boiler plate
     """
 
-    """ Searches only a few columns because special cases and extra
+    search_term = search_term.strip()
+
+    """ (1) ORDER # and ONYOMI SEARCH
+        Searches only a few columns because special cases and extra
         functionality are taken care of by search queries below 
     """
     columns1 = ["Order", "Onyomi_Reading1", "Onyomi_Reading2"]
     nested_results = main_query(search_term, columns1)
 
 
-    # """ Searches for kunyomi with period "." between each letter because 
-    #     Kunyomi_Reading1 and Kunyomi_Reading2 columns sometimes have
-    #     a "." in the entry string in an unpredictable place. Therefore, 
-    #     checking all possible "." occurences is necessary to get result.
-    # """
-    # columns2 = ["Kunyomi_Reading1", "Kunyomi_Reading2"]
-    # period_kunyomis = [search_term[:i] + "." + search_term[i:] for i in range(1, len(search_term))]
-    # period_kunyomis.append(search_term)
-    # for kunyomi in period_kunyomis:
-    #     nested_results.update(main_query(kunyomi, columns2))
+    """ (2) KUNYOMI SEARCH
+        Searches for kunyomi with period "." between each letter because 
+        Kunyomi_Reading1 and Kunyomi_Reading2 columns sometimes have
+        a "." in the entry string in an unpredictable place. Therefore, 
+        checking all possible "." occurences is necessary to get result.
+    """
+    columns2 = ["Kunyomi_Reading1", "Kunyomi_Reading2"]
+    period_kunyomis = [search_term[:i] + "." + search_term[i:] for i in range(1, len(search_term))]
+    period_kunyomis.append(search_term)
+    for kunyomi in period_kunyomis:
+        nested_results.update(main_query(kunyomi, columns2))
 
-    # """ Searches for all derivative kanji of search term """
-    # nested_results.update(sql_query2(search_term))
-    print("=== /search\n", nested_results)
+
+    """ (3) KANJI AND DERIVATIVES SEARCH
+        Searches for all derivative kanji of search term 
+    """
+    nested_results.update(derivative_kanji_query(search_term))
+    # print("=== /search\n", nested_results)
 
     if nested_results:
-        return jsonify(list(nested_results.values))
+        return jsonify(list(nested_results.values()))
     return jsonify([ ['', '', [], [], 'NO_DATA'] ])
 
 
@@ -204,10 +224,10 @@ def byradicals(delimiter, search_term):
 
     """ Searches for all derivative Kanji of search term 
         and finds the INTERSECTION of query results """
-    intersection_of_results = sql_query2(radicals[0])
+    intersection_of_results = derivative_kanji_query(radicals[0])
     for radical in radicals[1:]:
         nested_query_results1 = copy.deepcopy(intersection_of_results)
-        nested_query_results2 = sql_query2(radical)
+        nested_query_results2 = derivative_kanji_query(radical)
         intersection_of_results = {}
         for k,v in nested_query_results2.items():
             if k in nested_query_results1.keys():
@@ -295,6 +315,42 @@ def testroute(search_term):
     return jsonify({"Kanji" : test_data.Kanji})
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 """
     =============================================
     <<<<<<<<<<<< - 4 - SQL QUERIES  >>>>>>>>>>>>>
@@ -307,68 +363,71 @@ def main_query(search_term, columns):
     """
     nested_results = {}
     for column in columns:
-        print(search_term)
         results = KanjiData.query.filter(getattr(KanjiData, column) == search_term)
         if results:
             for result in results:
                 nested = nest_search_result(result)
+                nested.append(add_bushu(nested[2]))
                 # keeps only 'Onyomi' or 'Kunyomi' part of column name
                 if column[-1].isnumeric():
-                    nested.append(column[:-10])
+                    nested.append(column[:-9])
                 else:
                     nested.append(column)
-                nested_results[str(result.Order)+column] = nested
-                # nested_results.append(nested)
+                nested_results[str(result.Order) + column] = nested
+                # concatenating column to Order preserves this result if
+                # a duplicate is found later in the derivative search
+                # search results should display it twice if found as both 
+                # an On/Kunyomi reading and a derivative kanji
     return nested_results
 
 
-def sql_query2(search_term):
-    """ This sql query2 searches based on columns below 
-        that DO require deep searches of kanji derived 
-        from search term """
-    with sqlite3.connect(DBPATH) as conn:
-        cursor = conn.cursor()
-        nested_results_query2 = {}
-        for column in ["[Kanji1]", "[Meaning1]", "[Meaning2]", "[Meaning3]"]:
-            SQL = f"SELECT * FROM [kanjidata] WHERE {column}=? COLLATE NOCASE "
-            results = cursor.execute(SQL, (search_term.strip(),)).fetchall()
-            if results:
-                for result in results:
-                    nested = nest_search_result(result)
-                    nested_results_query2[str(result[0])] = nested
-                """ `depth` variable provides derivation level. Initialize at 0 
-                    because the kanji from search_term is at the zeroeth. 
-                    From it, while loop below will search for its descendants
-                    For example: 一 0 > 三 1 > 王 2 > 玉 3 > 国 4 etc. """
-                depth = 0
-                deep_copy = copy.deepcopy(nested_results_query2)
-                for k,v in nested_results_query2.items():
-                    v.append(depth)
+def derivative_kanji_query(search_term):
+    """ This searches based on columns below that DO require 
+        deep searches of kanji derived from search term
+    """
+    nested_results = {}
+    for column in ["Kanji", "Meaning1", "Meaning2", "Meaning3"]:
+        result = KanjiData.query.filter(getattr(KanjiData, column) == search_term).first()
+        if result:
+            # print("Result", result)
+            nested = nest_search_result(result)
+            nested_results[result.Order] = nested
+            # print("nested results", nested_results)
 
-                c = 1
-                while c > 0 or depth < 25:
-                    depth += 1
-                    c = 0
-                    temp = {}
-                    for key, value in deep_copy.items(): # value[2] is list of Meanings
-                        for meaning in value[2]:
-                            # because if meaning == empty string, infinite while loop
-                            if meaning:
-                                # Searches all kanji again effectively making this recursive
-                                # print("meaning===\n", meaning) # use this to test for infinite loops
-                                for radical in ["[Radical1]", "[Radical2]", "[Radical3]", "[Radical4]"]:
-                                    SQL = f"""SELECT * FROM [kanjidata] 
-                                                WHERE {radical}=? COLLATE NOCASE """
-                                    results = cursor.execute(SQL, (meaning.strip(),)).fetchall()
-                                    if results:
-                                        for result in results:
-                                            nested = nest_search_result(result)
-                                            temp[str(result[0])] = nested
-                                            temp[str(result[0])].append(depth)
-                                        c += 1 # c == 0 is break condition for loop or recursion
-                    deep_copy = copy.deepcopy(temp)
-                    nested_results_query2.update(temp)
-    return nested_results_query2
+            """ `depth` variable provides derivation level. Initialize at 0 
+                because the kanji from search_term is at the zeroeth. 
+                From it, the while loop below will search for its descendants
+                For example: 一 0 > 三 1 > 王 2 > 玉 3 > 国 4 etc.
+            """
+            depth = 0
+            deep_copy = copy.deepcopy(nested_results)
+            for k,v in nested_results.items():
+                v.append(depth)
+            
+            loop = True
+            while loop:
+                depth += 1
+                loop = False # if loop never updates to True, while loop stops
+                temp = {}
+                for key, value in deep_copy.items():
+                    # value[2] is list of Meanings
+                    for meaning in value[2]:
+                        # because if meaning == empty string, infinite while loop
+                        if meaning:
+                            # Searches all kanji again effectively making this recursive
+                            # print("meaning===\n", meaning) # to test for infinite loops
+                            for radical in ["Radical1", "Radical2", "Radical3", "Radical4"]:
+                                results = KanjiData.query.filter(getattr(KanjiData, radical) == meaning.strip())
+                                if results:
+                                    for result in results:
+                                        nested = nest_search_result(result)
+                                        temp[result.Order] = nested
+                                        temp[result.Order].append(depth)
+                                    loop = True
+                deep_copy = copy.deepcopy(temp)
+                nested_results.update(temp)
+            break
+    return nested_results
 
 
 def sql_query3(search_term, columns):
@@ -418,9 +477,12 @@ def add_bushu(radicals):
 
 
 
+
+
+
 """
     =============================================
-    <<<<<<<<<< - 5 - DATA STRUCTURING  >>>>>>>>>>
+    <<<<<<<<<< - 5 - HELPER FUNCTIONS  >>>>>>>>>>
     =============================================
 """
 
@@ -431,8 +493,8 @@ def nest_search_result(result):
     r = result
     nested_result = []
     # Appends ORDER, KANJI, and MEANINGS
-    nested_result.append([r.Order])
-    nested_result.append([r.Kanji])
+    nested_result.append(r.Order)
+    nested_result.append(r.Kanji)
     nested_result.append([r.Meaning1, r.Meaning2, r.Meaning3])
 
     return nested_result
