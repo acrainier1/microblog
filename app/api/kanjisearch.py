@@ -165,7 +165,7 @@ def search(search_term):
 
         If there is no data found, returned as an array with boiler plate
     """
-
+    print(search_term, "@bp.route('/search/<search_term>', methods=['GET'])")
     search_term = search_term.strip()
 
     """ (1) ORDER # and ONYOMI SEARCH
@@ -199,13 +199,14 @@ def search(search_term):
     return jsonify([ ['', '', [], [], 'NO_DATA'] ])
 
 
-
-
-
 @bp.route('/byradicals/<delimiter>/<search_term>', methods=['GET'])
 def byradicals(delimiter, search_term):
-    """ Searches only a few columns because special cases and extra
-        functionality are taken care of by search queries below """
+    """ DESCRIPTION
+        Searches only a few columns because special cases and extra
+        functionality are taken care of by search queries below
+    """
+
+    print(search_term, "@bp.route('/byradicals/<delimiter>/<search_term>', methods=['GET'])")
     # columns = ["[Order1]",
     #            "[Type1]",
     #            "[Radical1]", "[Radical2]", "[Radical3]", "[Radical4]",
@@ -274,6 +275,8 @@ def kanji(search_term):
         To test CJK characters with curl in terminal use:
         search_term = search_term.encode('iso-8859-1').decode('utf8')
     """
+
+    print(search_term, "@bp.route('/kanji/<search_term>', methods=['GET'])")
     result = KanjiData.query.filter_by(Order=int(search_term)).first()
     if result:
         nested = nest_kanji_result(result)
@@ -285,6 +288,8 @@ def kanji(search_term):
 
 @bp.route('/kanjiset/<int:search_term>', methods=['GET'])
 def kanjiset(search_term):
+    print(search_term, "@bp.route('/kanjiset/<int:search_term>', methods=['GET'])")
+
     results = KanjiData.query.filter(
         KanjiData.Order.between(search_term, search_term+99))
     nested_results = []
@@ -300,7 +305,7 @@ def kanjiset(search_term):
 
 @bp.route('/test/<search_term>', methods=['GET'])
 def testroute(search_term):
-    print(f"== SEARCH API MADE IT! search_term: {search_term} ==")
+    print(search_term, "@bp.route('/test/<search_term>', methods=['GET'])")
     test_data = [
         [1, '由', ['a','',''], ['bar','field','',''], 2],
         [2, '由', ['b','',''], ['bar','field','',''], 3],
