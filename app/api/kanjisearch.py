@@ -165,7 +165,7 @@ def search(search_term):
 
         If there is no data found, returned as an array with boiler plate
     """
-    print(search_term, "@bp.route('/search/<search_term>', methods=['GET'])")
+    print("search_term:", search_term, "@bp.route('/search/<search_term>', methods=['GET'])")
     search_term = search_term.strip()
 
     """ (1) ORDER # and ONYOMI SEARCH
@@ -276,7 +276,7 @@ def kanji(search_term):
         search_term = search_term.encode('iso-8859-1').decode('utf8')
     """
 
-    print(search_term, "@bp.route('/kanji/<search_term>', methods=['GET'])")
+    print("search_term:", search_term, "@bp.route('/kanji/<search_term>', methods=['GET'])")
     result = KanjiData.query.filter_by(Order=int(search_term)).first()
     if result:
         nested = nest_kanji_result(result)
@@ -288,7 +288,7 @@ def kanji(search_term):
 
 @bp.route('/kanjiset/<int:search_term>', methods=['GET'])
 def kanjiset(search_term):
-    print(search_term, "@bp.route('/kanjiset/<int:search_term>', methods=['GET'])")
+    print("search_term:", search_term, "@bp.route('/kanjiset/<int:search_term>', methods=['GET'])")
 
     results = KanjiData.query.filter(
         KanjiData.Order.between(search_term, search_term+99))
@@ -305,7 +305,7 @@ def kanjiset(search_term):
 
 @bp.route('/test/<search_term>', methods=['GET'])
 def testroute(search_term):
-    print(search_term, "@bp.route('/test/<search_term>', methods=['GET'])")
+    print("search_term:", search_term, "@bp.route('/test/<search_term>', methods=['GET'])")
     test_data = [
         [1, '由', ['a','',''], ['bar','field','',''], 2],
         [2, '由', ['b','',''], ['bar','field','',''], 3],
@@ -365,6 +365,7 @@ def main_query(search_term, columns):
     nested_results = {}
     for column in columns:
         results = KanjiData.query.filter(getattr(KanjiData, column) == search_term)
+        print("===== RESULTS\n", results)
         if results:
             for result in results:
                 nested = nest_search_result(result)
