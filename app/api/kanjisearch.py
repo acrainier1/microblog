@@ -364,6 +364,7 @@ def main_query(search_term, columns):
     """
     nested_results = {}
     for column in columns:
+        print("+++++COLUMN", column)
         results = KanjiData.query.filter(getattr(KanjiData, column) == search_term)
         if results:
             for result in results:
