@@ -172,7 +172,8 @@ def search(search_term):
         Searches only a few columns because special cases and extra
         functionality are taken care of by search queries below 
     """
-    columns1 = ["Order", "Onyomi_Reading1", "Onyomi_Reading2"]
+    # columns1 = ["Order", "Onyomi_Reading1", "Onyomi_Reading2"]
+    columns1 = ["Onyomi_Reading1", "Onyomi_Reading2"]
     nested_results = main_query(search_term, columns1)
 
 
