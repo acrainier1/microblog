@@ -122,10 +122,6 @@ from app.api.errors import bad_request
 
 
 
-basedir = os.path.abspath(os.path.dirname(__file__))
-DATABASE_URL = Config.SQLALCHEMY_DATABASE_URI
-
-
 @bp.route('/search/<search_term>', methods=['GET'])
 def search(search_term):
     """ DESCRIPTION
@@ -384,10 +380,13 @@ def main_query(search_term, columns):
 def derivative_kanji_query(search_term):
 
     start = time.time()
-
-    # conn = psycopg2.connect(DATABASE_URL, sslmode='require')
-    conn = sqlite3.connect("/home/acanizales1/microblog/app.db")
-    print("DATABASE_URL:", DATABASE_URL)
+    DATABASE_URL = os.environ.get('DATABASE_URL')
+    if DATABASE_URL:
+        print("===== yES POSTGRES DATABASE_URL:", DATABASE_URL)
+        conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+    else:
+        print("===== nO POSTGRES DATABASE_URL:", DATABASE_URL)
+        conn = sqlite3.connect( "/home/acanizales1/microblog/app.db")
     cursor = conn.cursor()
     
 
