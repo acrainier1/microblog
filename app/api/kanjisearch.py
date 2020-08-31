@@ -192,7 +192,7 @@ def search(search_term):
     """ (3) KANJI AND DERIVATIVES SEARCH
         Searches for all derivative kanji of search term 
     """
-    nested_results.update(derivative_kanji_query(search_term))
+    # nested_results.update(derivative_kanji_query(search_term))
 
     if nested_results:
         return jsonify(list(nested_results.values()))
@@ -387,14 +387,13 @@ def derivative_kanji_query(search_term):
     start = time.time()
     DATABASE_URL = os.environ.get('DATABASE_URL')
     if DATABASE_URL:
-        print("===== yES POSTGRES DATABASE_URL:", DATABASE_URL)
+        print("===== YES POSTGRES DATABASE_URL:", DATABASE_URL)
         conn = psycopg2.connect(DATABASE_URL, sslmode='require')
     else:
-        print("===== nO POSTGRES DATABASE_URL:", DATABASE_URL)
+        print("===== NO POSTGRES DATABASE_URL:", DATABASE_URL)
         conn = sqlite3.connect( "/home/acanizales1/microblog/app.db")
     cursor = conn.cursor()
     
-
     """ This searches based on columns below that DO require 
         deep searches of kanji derived from search term
     """
