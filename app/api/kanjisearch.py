@@ -365,9 +365,9 @@ def main_query(search_term, columns):
     nested_results = {}
     for column in columns:
         results = KanjiData.query.filter(getattr(KanjiData, column) == search_term)
-        print("===== RESULTS\n", results)
         if results:
             for result in results:
+                print("===== RESULT\n", column, result)
                 nested = nest_search_result(result)
                 nested.append(add_bushu(nested[2]))
                 # keeps only 'Onyomi' or 'Kunyomi' part of column name
