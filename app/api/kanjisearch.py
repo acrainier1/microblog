@@ -168,11 +168,10 @@ def search(search_term):
     print("search_term:", search_term, "@bp.route('/search/<search_term>', methods=['GET'])")
     search_term = search_term.strip()
 
-    """ (1) ORDER # and ONYOMI SEARCH
+    """ (1) ORDER NUMBER
         Searches only a few columns because special cases and extra
         functionality are taken care of by search queries below 
     """
-    # columns1 = ["Order", "Onyomi_Reading1", "Onyomi_Reading2"]
     columns1 = ["Onyomi_Reading1", "Onyomi_Reading2"]
     nested_results = main_query(search_term, columns1)
 
@@ -193,7 +192,7 @@ def search(search_term):
     """ (3) KANJI AND DERIVATIVES SEARCH
         Searches for all derivative kanji of search term 
     """
-    # nested_results.update(derivative_kanji_query(search_term))
+    nested_results.update(derivative_kanji_query(search_term))
 
     if nested_results:
         return jsonify(list(nested_results.values()))
@@ -322,38 +321,6 @@ def testroute(search_term):
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 """
     =============================================
     <<<<<<<<<<<< - 4 - SQL QUERIES  >>>>>>>>>>>>>
@@ -363,25 +330,50 @@ def main_query(search_term, columns):
     """ This query searches based on columns below that DO NOT
         require deep searches of kanji derived from search term.
     """
+    # results = KanjiData.query.filter(getattr(KanjiData, column) == search_term)
+    DATABASE_URL = os.environ.get('DATABASE_URL')
+    if DATABASE_URL:
+        conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+        collocation = "case_insensitive"
+    else:
+        conn = sqlite3.connect( "/home/acanizales1/microblog/app.db")
+        collocation = "NOCASE"
+    cursor = conn.cursor()
+
     nested_results = {}
-    for column in columns:
-        print("+++++COLUMN", column)
-        results = KanjiData.query.filter(getattr(KanjiData, column) == search_term)
-        if results:
-            for result in results:
-                print("===== RESULT\n", column, result)
-                nested = nest_search_result(result)
-                nested.append(add_bushu(nested[2]))
-                # keeps only 'Onyomi' or 'Kunyomi' part of column name
-                if column[-1].isnumeric():
+    if search_term.isnumeric():
+        query_order = f""" SELECT * FROM kanji_data WHERE "Order"=? """
+        result = cursor.execute(query_order, (search_term,)).fetchone()
+        if result:
+            nested = nest_query_result(result)
+            nested.append(add_bushu(nested[2]))
+            nested.append("Order")
+            nested_results[str(result[0]) + "Order"] = nested
+            # concatenating Order # and column preserves this result if
+            # a duplicate is found later in the derivative search
+            # search results should display it twice if found as both 
+            # an On/Kunyomi reading and a derivative kanji
+    else:
+        for column in columns:
+            query_column = f"""
+                SELECT * 
+                    FROM kanji_data 
+                    WHERE {column}=? 
+                    COLLATE {collocation}
+            """
+            results = cursor.execute(query_column, (search_term,)).fetchall()
+            if results:
+                for result in results:
+                    nested = nest_query_result(result)
+                    nested.append(add_bushu(nested[2]))
+                    # keeps only 'Onyomi' or 'Kunyomi' part of column name
                     nested.append(column[:-9])
-                else:
-                    nested.append(column)
-                nested_results[str(result.Order) + column] = nested
-                # concatenating column to Order preserves this result if
-                # a duplicate is found later in the derivative search
-                # search results should display it twice if found as both 
-                # an On/Kunyomi reading and a derivative kanji
+                    # if column[-1].isnumeric():
+                    #     nested.append(column[:-9])
+                    # else:
+                    #     nested.append(column)
+                    nested_results[str(result[0]) + column] = nested
+    cursor.close()
     return nested_results
 
 
@@ -392,9 +384,11 @@ def derivative_kanji_query(search_term):
     if DATABASE_URL:
         print("===== YES POSTGRES DATABASE_URL:", DATABASE_URL)
         conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+        collocation = "case_insensitive"
     else:
         print("===== NO POSTGRES DATABASE_URL:", DATABASE_URL)
         conn = sqlite3.connect( "/home/acanizales1/microblog/app.db")
+        collocation = "NOCASE"
     cursor = conn.cursor()
     
     """ This searches based on columns below that DO require 
@@ -402,7 +396,6 @@ def derivative_kanji_query(search_term):
     """
     nested_results = {}
     for column in ["Kanji", "Meaning1", "Meaning2", "Meaning3"]:
-        # result = KanjiData.query.filter(getattr(KanjiData, column) == search_term).first()
         kanji_meaning_query = select([KanjiData]).where(getattr(KanjiData, column) == search_term)
         result = db.session.execute(kanji_meaning_query).fetchone()
         if result:
@@ -432,11 +425,16 @@ def derivative_kanji_query(search_term):
                             # Searches all kanji again effectively making this recursive
                             # print("meaning===\n", meaning) # to test for infinite loops
                             for radical in ["Radical1", "Radical2", "Radical3", "Radical4"]:                                                               
-                                SQL = f"SELECT * FROM kanji_data WHERE {radical}=? "
+                                SQL = f"""
+                                    SELECT * 
+                                        FROM kanji_data 
+                                        WHERE {radical}=? 
+                                        COLLATE {collocation}
+                                """
                                 results = cursor.execute(SQL, (meaning.strip(),)).fetchall()
                                 if results:
                                     for result in results:
-                                        nested = nest_derivative_result(result)
+                                        nested = nest_query_result(result)
                                         temp[result[0]] = nested
                                         temp[result[0]].append(depth)
                                     loop = True
@@ -504,7 +502,7 @@ def add_bushu(radicals):
     <<<<<<<<<< - 5 - HELPER FUNCTIONS  >>>>>>>>>>
     =============================================
 """
-def nest_derivative_result(result):
+def nest_query_result(result):
     """ DESCRIPTION
         This is the search display data. nest_search_result appends 
         the "columns" of json response as list within a larger list.
@@ -586,6 +584,29 @@ def punctuate_kunyomi(search_term):
     kunyomis = [search_term[:i] + "." + search_term[i:] for i in range(1, len(search_term))]
     kunyomis.append(search_term)
     return kunyomis
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
