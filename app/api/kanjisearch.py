@@ -189,10 +189,10 @@ def search(search_term):
     #     nested_results.update(main_query(kunyomi, columns2))
 
 
-    """ (3) KANJI AND DERIVATIVES SEARCH
-        Searches for all derivative kanji of search term 
-    """
-    nested_results.update(derivative_kanji_query(search_term))
+    # """ (3) KANJI AND DERIVATIVES SEARCH
+    #     Searches for all derivative kanji of search term 
+    # """
+    # nested_results.update(derivative_kanji_query(search_term))
 
     if nested_results:
         return jsonify(list(nested_results.values()))
@@ -355,26 +355,28 @@ def main_query(search_term, columns):
             # a duplicate is found later in the derivative search
             # search results should display it twice if found as both 
             # an On/Kunyomi reading and a derivative kanji
-    # else:
-    #     for column in columns:
-    #         query_column = f"""
-    #             SELECT * 
-    #                 FROM kanji_data 
-    #                 WHERE {column}=? 
-    #         """
-    #         # COLLATE {collocation}
-    #         results = cursor.execute(query_column, (search_term,)).fetchall()
-    #         if results:
-    #             for result in results:
-    #                 nested = nest_query_result(result)
-    #                 nested.append(add_bushu(nested[2]))
-    #                 # keeps only 'Onyomi' or 'Kunyomi' part of column name
-    #                 nested.append(column[:-9])
-    #                 # if column[-1].isnumeric():
-    #                 #     nested.append(column[:-9])
-    #                 # else:
-    #                 #     nested.append(column)
-    #                 nested_results[str(result[0]) + column] = nested
+    else:
+        for column in columns:
+            query_column = f"""
+                SELECT * 
+                    FROM kanji_data 
+                    WHERE {column}=? 
+            """
+            # COLLATE {collocation}
+            # results = cursor.execute(query_column, (search_term,)).fetchall()
+            res = cursor.execute(query_order)
+            result = cursor.fetchall()
+            if results:
+                for result in results:
+                    nested = nest_query_result(result)
+                    nested.append(add_bushu(nested[2]))
+                    # keeps only 'Onyomi' or 'Kunyomi' part of column name
+                    nested.append(column[:-9])
+                    # if column[-1].isnumeric():
+                    #     nested.append(column[:-9])
+                    # else:
+                    #     nested.append(column)
+                    nested_results[str(result[0]) + column] = nested
     cursor.close()
     return nested_results
 
