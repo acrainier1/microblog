@@ -189,10 +189,10 @@ def search(search_term):
     #     nested_results.update(main_query(kunyomi, columns2))
 
 
-    # """ (3) KANJI AND DERIVATIVES SEARCH
-    #     Searches for all derivative kanji of search term 
-    # """
-    # nested_results.update(derivative_kanji_query(search_term))
+    """ (3) KANJI AND DERIVATIVES SEARCH
+        Searches for all derivative kanji of search term 
+    """
+    nested_results.update(derivative_kanji_query(search_term))
 
     if nested_results:
         return jsonify(list(nested_results.values()))
