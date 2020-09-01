@@ -173,7 +173,7 @@ def search(search_term):
         functionality are taken care of by search queries below 
     """
     columns1 = ["Onyomi_Reading1", "Onyomi_Reading2"]
-    nested_results = main_query(search_term, columns1)
+    search_data = main_query(search_term, columns1)
 
 
     # """ (2) KUNYOMI SEARCH
@@ -186,16 +186,16 @@ def search(search_term):
     # columns2 = ["Kunyomi_Reading1", "Kunyomi_Reading2"]
     # kunyomis = punctuate_kunyomi(search_term)
     # for kunyomi in kunyomis:
-    #     nested_results.update(main_query(kunyomi, columns2))
+    #     search_data.update(main_query(kunyomi, columns2))
 
 
     # """ (3) KANJI AND DERIVATIVES SEARCH
     #     Searches for all derivative kanji of search term 
     # """
-    # nested_results.update(derivative_kanji_query(search_term))
+    # search_data.update(derivative_kanji_query(search_term))
 
     if nested_results:
-        return jsonify(list(nested_results.values()))
+        return jsonify(list(search_data.values()))
     return jsonify([ ['', '', [], [], 'NO_DATA'] ])
 
 
@@ -340,7 +340,7 @@ def main_query(search_term, columns):
         collocation = "NOCASE"
     cursor = conn.cursor()
 
-    nested_results = {}
+    search_data = {}
     if search_term.isnumeric():
         query_order = f""" SELECT * FROM kanji_data WHERE "Order"={search_term} """
         res = cursor.execute(query_order)
@@ -350,17 +350,18 @@ def main_query(search_term, columns):
             nested = nest_query_result(result)
             nested.append(add_bushu(nested[2]))
             nested.append("Order")
-            nested_results[str(result[0]) + "Order"] = nested
+            search_data[str(result[0]) + "Order"] = nested
             # concatenating Order # and column preserves this result if
             # a duplicate is found later in the derivative search
             # search results should display it twice if found as both 
             # an On/Kunyomi reading and a derivative kanji
     else:
         for column in columns:
-            query_column = f""" SELECT * FROM kanji_data WHERE {column}={search_term} """
+            query_columns = f""" SELECT * FROM kanji_data WHERE {column}={search_term} """
+            print(query_columns)
             # COLLATE {collocation}
             # results = cursor.execute(query_column, (search_term,)).fetchall()
-            res = cursor.execute(query_column)
+            res = cursor.execute(query_columns)
             result = cursor.fetchall()
             if results:
                 for result in results:
@@ -372,9 +373,9 @@ def main_query(search_term, columns):
                     #     nested.append(column[:-9])
                     # else:
                     #     nested.append(column)
-                    nested_results[str(result[0]) + column] = nested
+                    search_data[str(result[0]) + column] = nested
     cursor.close()
-    return nested_results
+    return search_data
 
 
 def derivative_kanji_query(search_term):
