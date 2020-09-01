@@ -359,8 +359,8 @@ def main_query(search_term, columns):
                 SELECT * 
                     FROM kanji_data 
                     WHERE {column}=? 
-                    COLLATE {collocation}
             """
+            # COLLATE {collocation}
             results = cursor.execute(query_column, (search_term,)).fetchall()
             if results:
                 for result in results:
