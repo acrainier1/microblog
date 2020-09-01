@@ -134,12 +134,12 @@ def search(search_term):
 
         PARAMETERS searchTerm: string
 
-        RETURNS searchData: array
-        DATA STRUCTURE of searchData and uniqueResults:
+        RETURNS search_data: array
+        DATA STRUCTURE of search_data:
             Initialized as an object to prevent duplicates when new entries are
             added. Ultimately, returned as an array.
 
-        key: integer : value: array
+        KEY: integer : VALUE: array
             { 
                 Order: [Order #, Kanji, [...meanings], [...radicals], Heading/Depth], 
                 Order: [...], 
@@ -151,7 +151,7 @@ def search(search_term):
                 43: [43, '由', ['reason','',''], ['bar','field','',''], 3]
             }
 
-        If there is data found, returned as an array
+        If there is data found, returned as an array or arrays
             [
                 [Order #, Kanji, [...meanings], [...radicals], Heading/Depth], 
                 [...],
@@ -194,7 +194,7 @@ def search(search_term):
     # """
     # search_data.update(derivative_kanji_query(search_term))
 
-    if nested_results:
+    if search_data:
         return jsonify(list(search_data.values()))
     return jsonify([ ['', '', [], [], 'NO_DATA'] ])
 
