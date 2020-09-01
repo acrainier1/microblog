@@ -357,11 +357,7 @@ def main_query(search_term, columns):
             # an On/Kunyomi reading and a derivative kanji
     else:
         for column in columns:
-            query_column = f"""
-                SELECT * 
-                    FROM kanji_data 
-                    WHERE {column}=? 
-            """
+            query_column = f""" SELECT * FROM kanji_data WHERE {column}={search_term} """
             # COLLATE {collocation}
             # results = cursor.execute(query_column, (search_term,)).fetchall()
             res = cursor.execute(query_column)
