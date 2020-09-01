@@ -342,7 +342,7 @@ def main_query(search_term, columns):
 
     nested_results = {}
     if search_term.isnumeric():
-        query_order = f""" SELECT * FROM kanji_data WHERE "Order"=? """
+        query_order = f""" SELECT * FROM kanji_data WHERE "Order"=3 """
         result = cursor.execute(query_order, (search_term,)).fetchone()
         if result:
             nested = nest_query_result(result)
