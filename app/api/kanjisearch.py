@@ -427,13 +427,15 @@ def derivative_kanji_query(search_term):
                             # Searches all kanji again effectively making this recursive
                             # print("meaning===\n", meaning) # to test for infinite loops
                             for radical in ["Radical1", "Radical2", "Radical3", "Radical4"]:                                                               
-                                SQL = f"""
+                                query_derivatives = f"""
                                     SELECT * 
                                         FROM kanji_data 
-                                        WHERE {radical}=? 
+                                        WHERE {radical}={meaning.strip()}
                                         COLLATE {collocation}
                                 """
-                                results = cursor.execute(SQL, (meaning.strip(),)).fetchall()
+                                # result = cursor.execute(SQL, (meaning.strip(),)).fetchall()
+                                res = cursor.execute(query_derivatives)
+                                result = cursor.fetchall()
                                 if results:
                                     for result in results:
                                         nested = nest_query_result(result)
