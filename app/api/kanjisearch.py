@@ -364,7 +364,7 @@ def main_query(search_term, columns):
             """
             # COLLATE {collocation}
             # results = cursor.execute(query_column, (search_term,)).fetchall()
-            res = cursor.execute(query_order)
+            res = cursor.execute(query_column)
             result = cursor.fetchall()
             if results:
                 for result in results:
