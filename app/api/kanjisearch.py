@@ -199,7 +199,7 @@ def search(search_term):
     search_data.update(derivative_kanji_query(search_term))
 
     if search_data:
-        search_data = sort_data(search_data)
+        # search_data = sort_data(search_data)
         return jsonify(list(search_data.values()))
     return NO_DATA
 
