@@ -342,7 +342,11 @@ def main_query(search_term, columns):
 
     search_data = {}
     if search_term.isnumeric():
-        query_order = f""" SELECT * FROM kanji_data WHERE "Order"={search_term} """
+        query_order = f"""
+            SELECT *
+                FROM kanji_data
+                WHERE "Order"={search_term}
+        """
         res = cursor.execute(query_order)
         # res = cursor.execute(query_order, (search_term,))
         result = cursor.fetchone()
@@ -358,12 +362,16 @@ def main_query(search_term, columns):
     else:
         for column in columns:
             # query_columns = f""" SELECT * FROM kanji_data WHERE {column}="{search_term}" """
-            query_columns = f""" SELECT * FROM kanji_data WHERE "Onyomi_Reading1"='TAI' """
+            query_columns = f"""
+                SELECT *
+                    FROM kanji_data
+                    WHERE "Onyomi_Reading1"='TAI'
+            """
             print(query_columns)
             # COLLATE {collocation}
             # results = cursor.execute(query_column, (search_term,)).fetchall()
             res = cursor.execute(query_columns)
-            result = cursor.fetchall()
+            results = cursor.fetchall()
             if results:
                 for result in results:
                     nested = nest_query_result(result)
