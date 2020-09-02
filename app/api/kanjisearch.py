@@ -355,7 +355,7 @@ def main_search_query(search_term, columns):
         result = cursor.fetchone()
         if result:
             nested = nest_query_result(result)
-            nested.append(add_bushu(nested[2]))
+            # nested.append(add_bushu(nested[2]))
             nested.append("Order")
             search_data[str(result[0]) + "Order"] = nested
             # concatenating Order # and column preserves this result if
@@ -376,7 +376,7 @@ def main_search_query(search_term, columns):
             if results:
                 for result in results:
                     nested = nest_query_result(result)
-                    nested.append(add_bushu(nested[2]))
+                    # nested.append(add_bushu(nested[2]))
                     nested.append(column[:-9]) # only 'Onyomi' or 'Kunyomi' part of column name
                     search_data[str(result[0]) + column] = nested
     cursor.close()
