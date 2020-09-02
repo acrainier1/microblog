@@ -616,7 +616,7 @@ def scrub_chars(search_term):
 
 def sort_data(search_data):
     for datum in search_data:
-        print(datum)
+        print(datum[0])
     
     return search_data
 
