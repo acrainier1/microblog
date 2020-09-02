@@ -598,9 +598,8 @@ def scrub_chars(search_term):
     search_term = search_term.strip()
     # disallowed_chars = ['"', "'", "^"]
     disallowed_chars = [
-        '"', # double quotes
-        "'", # single quotes
-        # back slash, keep in its own line!
+        '"',
+        "'",
         "`", "~", "!", "@", "%", "%", "^", "&", "(", ")", "_", "+", "=",
         "{", "}", "[", "]", "|", "/", ":", ";", "<", ">", ",", "?"
     ]
