@@ -425,8 +425,7 @@ def derivative_kanji_query(search_term):
                 continue_search = False 
                 depth += 1
                 temp = {}
-                for key, value in deep_copy.items():
-                    # value[2] is list of Meanings
+                for value in deep_copy.values():
                     for meaning in value[2]:
                         # because if meaning == empty string, infinite while loop
                         if meaning:
@@ -450,12 +449,13 @@ def derivative_kanji_query(search_term):
                                     continue_search = True
                 deep_copy = copy.deepcopy(temp)
                 nested_results.update(temp)
-            break # if column match found
-    cursor.close()
+            cursor.close()
+            return nested_results
+            # break # if column match found
+    # cursor.close()
     # end = time.time()
     # print("TIME TO EXCECUTE:", str(end - start))
-    return nested_results
-
+    
 
 def suggestions_query(search_term, columns):
     with sqlite3.connect(DBPATH) as conn:

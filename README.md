@@ -20,12 +20,12 @@ Bash command for using requirements.txt:
 
     ==== Login
 
-    kanjiremastered
-
-    ~$
+    
+    <!-- in local terminal -->
     sudo -i -u postgres     # start psql
-    sudo -u kanjiremastered psql   # start psql directly
+    sudo -u 'linix-username' psql   # start psql directly
 
+    <!-- Inside postgres -->
     postgres=#
     \q                      # quit
     \conninfo               # check connection info
@@ -38,32 +38,38 @@ Bash command for using requirements.txt:
 
 ===== HEROKU POSTGRESQL =====
 
-    ==== To update postgresql kanji data table on Herko:
-    <!-- in local terminal -->
-    (1) heroke pg:pqsl
+    ==== To update postgresql kanji data table on Heroku:
 
-    <!-- Inside postgres -->
-    (2) TRUNCATE TABLE kanji_data; \q
+    (1) <!-- in local terminal -->
+    heroke pg:pqsl
 
-    <!-- in local terminal -->
-    (3) heroku run bash;
+    (2) <!-- Inside postgres -->
+    TRUNCATE TABLE kanji_data; \q
 
-    <!-- in Heroku terminal -->
-    (4) python3 db_tools.py; exit;
-
-
-    ==== To update postgresql schema on Herko:
-
+    (3) <!-- in local terminal -->
     heroku run bash
 
+    (4) <!-- in Heroku terminal -->
+    python3 db_tools.py; exit;
+
+
+    ==== To update postgresql schema on Heroku:
+
+    (1) <!-- in local terminal -->
+    heroku run bash
+
+    (2) <!-- in Heroku terminal -->
     flask db migrate -m "update DB"; flask db upgrade;
 
     <!-- if error above, update migration version manually -->
 
+    (1) <!-- in local terminal -->
     heroku pg:psql;
 
-    SELECT * FROM alembic_version; <!-- gets revision's old_version_# -->
+    (2) <!-- in Heroku terminal -->
+    SELECT * FROM alembic_version; 
 
+    (3) <!-- use above result to get revision's 'old_version_#' -->
     UPDATE alembic_version SET version_num = 'new_version_#' WHERE version_num = 'old_version_#';
 
 
