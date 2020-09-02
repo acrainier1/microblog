@@ -435,6 +435,7 @@ def derivative_kanji_query(search_term):
                         meaning = meaning.strip()
                         # print("meaning===\n", meaning) # to test for infinite loops
                         # Searches all kanji again effectively making this recursive
+                        st = time.time()
                         query_derivatives = f"""
                             SELECT * 
                                 FROM kanji_data 
@@ -445,6 +446,8 @@ def derivative_kanji_query(search_term):
                         """
                         res = cursor.execute(query_derivatives)
                         results = cursor.fetchall()
+                        en = time.time()
+                        print("TIME TO EXCECUTE QUERY:", str(en - st))
                         if results:
                             for result in results:
                                 nested = nest_query_result(result)
@@ -614,9 +617,9 @@ def scrub_chars(search_term):
 
 
 def sort_data(search_data):
-    print(search_data)
-    # for datum in search_data:
-    #     print(datum)
+    # print(search_data)
+    for value in search_data.values:
+        print(value)
 
     return search_data
 
