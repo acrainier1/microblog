@@ -596,13 +596,15 @@ def punctuate_kunyomi(search_term):
 
 def scrub_chars(search_term):
     search_term = search_term.strip()
-    disallowed_chars = ['"', "'", "^"]
-    # disallowed_chars = [
-    #     '"', # double quotes
-    #     "'", # single quotes
-    #     "`", "~", "!", "@", "%", "%", "^", "&", "(", ")", "_", "+", "=",
-    #     "{", "}", "[", "]", "|", "\", "/", ":", ";", "<", ">", ",", "?"
-    # ]
+    # disallowed_chars = ['"', "'", "^"]
+    disallowed_chars = [
+        '"', # double quotes
+        "'", # single quotes
+        # back slash, keep in its own line!
+        "\",
+        "`", "~", "!", "@", "%", "%", "^", "&", "(", ")", "_", "+", "=",
+        "{", "}", "[", "]", "|", "/", ":", ";", "<", ">", ",", "?"
+    ]
     for char in disallowed_chars:
         if char in search_term:
             return "DUMMY_SEARCH_TEXT"
