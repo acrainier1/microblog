@@ -345,7 +345,7 @@ def main_search_query(search_term, columns):
     cursor = conn.cursor()
 
     search_data = {}
-    if search_term.isnumeric():
+    if search_term.isdigit():
         query_order = f"""
             SELECT *
                 FROM kanji_data
@@ -432,20 +432,25 @@ def derivative_kanji_query(search_term):
                             meaning = meaning.strip()
                             # print("meaning===\n", meaning) # to test for infinite loops
                             # Searches all kanji again effectively making this recursive
-                            for radical in ["Radical1", "Radical2", "Radical3", "Radical4"]:                                                               
-                                query_derivatives = f"""
-                                    SELECT * 
-                                        FROM kanji_data 
-                                        WHERE "{radical}"='{meaning}'
-                                """
-                                res = cursor.execute(query_derivatives)
-                                results = cursor.fetchall()
-                                if results:
-                                    for result in results:
-                                        nested = nest_query_result(result)
-                                        temp[result[0]] = nested
-                                        temp[result[0]].append(depth)
-                                    continue_search = True
+                            # for radical in ["Radical1", "Radical2", "Radical3", "Radical4"]:                                                               
+                            # WHERE "{radical}"='{meaning}'
+                            query_derivatives = f"""
+                                SELECT * 
+                                    FROM kanji_data 
+                                    WHERE ("Radical1"='{meaning}')
+                                    OR ("Radical12"='{meaning}')
+                                    OR ("Radical3"='{meaning}')
+                                    OR ("Radical4"='{meaning}')
+                            """
+                            res = cursor.execute(query_derivatives)
+                            results = cursor.fetchall()
+                            if results:
+                                for result in results:
+                                    nested = nest_query_result(result)
+                                    temp[result[0]] = nested
+                                    temp[result[0]].append(depth)
+                                continue_search = True
+                            # end for
                 deep_copy = copy.deepcopy(temp)
                 nested_results.update(temp)
             cursor.close()
