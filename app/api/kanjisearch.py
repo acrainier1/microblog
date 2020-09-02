@@ -369,7 +369,6 @@ def main_search_query(search_term, columns):
                     WHERE "{column}"='{search_term}'
                     COLLATE {collocation}
             """
-            print(query_columns)
             res = cursor.execute(query_columns)
             results = cursor.fetchall()
             if results:
@@ -429,13 +428,14 @@ def derivative_kanji_query(search_term):
                     for meaning in value[2]:
                         # because if meaning == empty string, infinite while loop
                         if meaning:
-                            # Searches all kanji again effectively making this recursive
+                            meaning = meaning.strip()
                             # print("meaning===\n", meaning) # to test for infinite loops
+                            # Searches all kanji again effectively making this recursive
                             for radical in ["Radical1", "Radical2", "Radical3", "Radical4"]:                                                               
                                 query_derivatives = f"""
                                     SELECT * 
                                         FROM kanji_data 
-                                        WHERE "{radical}"='{meaning.strip()}'
+                                        WHERE "{radical}"='{meaning}'
                                         COLLATE {collocation}
                                 """
                                 res = cursor.execute(query_derivatives)
