@@ -601,7 +601,6 @@ def scrub_chars(search_term):
         '"', # double quotes
         "'", # single quotes
         # back slash, keep in its own line!
-        "\",
         "`", "~", "!", "@", "%", "%", "^", "&", "(", ")", "_", "+", "=",
         "{", "}", "[", "]", "|", "/", ":", ";", "<", ">", ",", "?"
     ]
