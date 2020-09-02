@@ -449,7 +449,7 @@ def derivative_kanji_query(search_term):
                         results = cursor.fetchall()
                         en = time.time()
                         total_query_time += (en - st)
-                        print("TIME TO EXCECUTE QUERY:", str(en - st))
+                        # print("TIME TO EXCECUTE QUERY:", str(en - st))
                         if results:
                             for result in results:
                                 nested = nest_query_result(result)
