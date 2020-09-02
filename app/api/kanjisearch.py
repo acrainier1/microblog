@@ -355,7 +355,6 @@ def main_search_query(search_term, columns):
         result = cursor.fetchone()
         if result:
             nested = nest_query_result(result)
-            # nested.append(add_bushu(nested[2]))
             nested.append("Order")
             search_data[str(result[0]) + "Order"] = nested
             # concatenating Order # and column preserves this result if
@@ -376,7 +375,6 @@ def main_search_query(search_term, columns):
             if results:
                 for result in results:
                     nested = nest_query_result(result)
-                    # nested.append(add_bushu(nested[2]))
                     nested.append(column[:-9]) # only 'Onyomi' or 'Kunyomi' part of column name
                     search_data[str(result[0]) + column] = nested
     cursor.close()
@@ -412,6 +410,8 @@ def derivative_kanji_query(search_term):
                 because the kanji from search_term is at the zeroeth. 
                 From it, the while loop below will search for its descendants
                 For example: 一 0 > 三 1 > 王 2 > 玉 3 > 国 4 etc.
+                Append `depth` after deep copy so deep copy does not have a
+                depth in case duplicates are found later.
             """
             depth = 0
             deep_copy = copy.deepcopy(nested_results)
@@ -421,7 +421,7 @@ def derivative_kanji_query(search_term):
             loop = True
             while loop:
                 depth += 1
-                loop = False # if loop never updates to True, while loop stops
+                loop = False # if loop doesn't update to True, while loop stops
                 temp = {}
                 for key, value in deep_copy.items():
                     # value[2] is list of Meanings
@@ -434,10 +434,9 @@ def derivative_kanji_query(search_term):
                                 query_derivatives = f"""
                                     SELECT * 
                                         FROM kanji_data 
-                                        WHERE {radical}={meaning.strip()}
+                                        WHERE "{radical}"='{meaning.strip()}'
                                         COLLATE {collocation}
                                 """
-                                # result = cursor.execute(SQL, (meaning.strip(),)).fetchall()
                                 res = cursor.execute(query_derivatives)
                                 result = cursor.fetchall()
                                 if results:
@@ -596,9 +595,8 @@ def punctuate_kunyomi(search_term):
 
 def scrub_chars(search_term):
     search_term = search_term.strip()
-    # disallowed_chars = ['"', "'", "^"]
     disallowed_chars = [
-        '"', "'", 
+        '"', "'", "\",
         "`", "~", "!", "@", "%", "%", "^", "&", "(", ")", "_", "+", "=", 
         "{", "}", "[", "]", "|", "/", ":", ";", "<", ">", ",", "?"
     ]
