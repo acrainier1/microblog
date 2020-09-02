@@ -31,8 +31,8 @@
         Flask Route:        @bp.route('/getsearch/<search_term>')
                             getsearch(search_term)
 
-        SQL Query:          main_query(search_term, columns1)
-                            main_query(kunyomi, columns2)
+        SQL Query:          main_search_query(search_term, columns1)
+                            main_search_query(kunyomi, columns2)
                             derivative_kanji_query(search_term)
 
         Data Structuring:   nest_search_result(result)
@@ -168,12 +168,12 @@ def search(search_term):
     print("search_term:", search_term, "@bp.route('/search/<search_term>', methods=['GET'])")
     search_term = search_term.strip()
 
-    """ (1) ORDER NUMBER
+    """ (1) ORDER NUMBER & ONYOMI SEARCH
         Searches only a few columns because special cases and extra
         functionality are taken care of by search queries below 
     """
     columns1 = ["Onyomi_Reading1", "Onyomi_Reading2"]
-    search_data = main_query(search_term, columns1)
+    search_data = main_search_query(search_term, columns1)
 
 
     # """ (2) KUNYOMI SEARCH
@@ -186,13 +186,13 @@ def search(search_term):
     # columns2 = ["Kunyomi_Reading1", "Kunyomi_Reading2"]
     # kunyomis = punctuate_kunyomi(search_term)
     # for kunyomi in kunyomis:
-    #     search_data.update(main_query(kunyomi, columns2))
+    #     search_data.update(main_search_query(kunyomi, columns2))
 
 
-    # """ (3) KANJI AND DERIVATIVES SEARCH
-    #     Searches for all derivative kanji of search term 
-    # """
-    # search_data.update(derivative_kanji_query(search_term))
+    """ (3) KANJI AND DERIVATIVES SEARCH
+        Searches for all derivative kanji of search term 
+    """
+    search_data.update(derivative_kanji_query(search_term))
 
     if search_data:
         return jsonify(list(search_data.values()))
@@ -326,7 +326,7 @@ def testroute(search_term):
     <<<<<<<<<<<< - 4 - SQL QUERIES  >>>>>>>>>>>>>
     =============================================
 """
-def main_query(search_term, columns):
+def main_search_query(search_term, columns):
     """ This query searches based on columns below that DO NOT
         require deep searches of kanji derived from search term.
     """
@@ -348,7 +348,6 @@ def main_query(search_term, columns):
                 WHERE "Order"={search_term}
         """
         res = cursor.execute(query_order)
-        # res = cursor.execute(query_order, (search_term,))
         result = cursor.fetchone()
         if result:
             nested = nest_query_result(result)
@@ -368,8 +367,6 @@ def main_query(search_term, columns):
                     COLLATE {collocation}
             """
             print(query_columns)
-            # COLLATE {collocation}
-            # results = cursor.execute(query_column, (search_term,)).fetchall()
             res = cursor.execute(query_columns)
             results = cursor.fetchall()
             if results:
@@ -378,10 +375,6 @@ def main_query(search_term, columns):
                     nested.append(add_bushu(nested[2]))
                     # keeps only 'Onyomi' or 'Kunyomi' part of column name
                     nested.append(column[:-9])
-                    # if column[-1].isnumeric():
-                    #     nested.append(column[:-9])
-                    # else:
-                    #     nested.append(column)
                     search_data[str(result[0]) + column] = nested
     cursor.close()
     return search_data
@@ -628,34 +621,8 @@ def punctuate_kunyomi(search_term):
     =============================================
 """
 
-
-
-# @bp.route('/suggestions/<search_term>', methods=['GET'])
-# def suggestions(search_term):
-#     """ Searches all columns except Mnemonic sentence and Notes """
-#     columns1 = ["0[Order1]", "0[Kanji1]",
-#                 "1[Meaning1]", "1[Meaning2]", "1[Meaning3]",
-#                 "2[Radical1]", "2[Radical2]", "2[Radical3]", "2[Radical4]",
-#                 "3[Onyomi Reading1]", "3[Onyomi Reading2]"]
-#     nested_results = sql_query3(search_term, columns1)
-
-#     """ Searches for kunyomi with period "." between each letter because 
-#         Kunyomi Reading1 and Kunyomi Reading2 columns sometimes have
-#         a "." in the entry string in an unpredictable place. Therefore, 
-#         checking all possible "." occurences is necessary to get result """
-#     columns2 = ["4[Kunyomi Reading1]", "4[Kunyomi Reading2]"]
-#     period_kunyomis = [search_term[:i] + "." + search_term[i:] for i in range(1, len(search_term))]
-#     period_kunyomis.append(search_term)
-#     for kunyomi in period_kunyomis:
-#         nested_results.update(sql_query3(kunyomi, columns2))
-
-#     if nested_results:
-#         return jsonify(nested_results)
-#     return jsonify({"NO_KEYS":["", "", ["", "", ""], ""]})
-
-
-
-
-
-
-
+# from main_search_query
+# if column[-1].isnumeric():
+#     nested.append(column[:-9])
+# else:
+#     nested.append(column)
