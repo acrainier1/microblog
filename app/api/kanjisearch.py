@@ -168,7 +168,7 @@ def search(search_term):
     print("search_term:", search_term, "@bp.route('/search/<search_term>', methods=['GET'])")
 
     NO_DATA = jsonify([ ['', '', [], [], 'NO_DATA'] ])
-    search_term = scrub_chars(search_term)
+    # search_term = scrub_chars(search_term)
     # search_term = search_term.strip()
     
 
@@ -408,21 +408,21 @@ def derivative_kanji_query(search_term):
 
             """ `depth` variable provides derivation level. Initialize at 0 
                 because the kanji from search_term is at the zeroeth. 
-                From it, the while loop below will search for its descendants
+                From it, the while continue_search below will search for its descendants
                 For example: 一 0 > 三 1 > 王 2 > 玉 3 > 国 4 etc.
                 Append `depth` after deep copy so deep copy does not have a
                 depth in case duplicates are found later.
             """
             depth = 0
             deep_copy = copy.deepcopy(nested_results)
-            # for k,v in nested_results.items():
             for value in nested_results.values():
                 value.append(depth)
             
-            loop = True
-            while loop:
+            continue_search = True
+            while continue_search:
+                # if continue_search doesn't update to True, loop stops
+                continue_search = False 
                 depth += 1
-                loop = False # if loop doesn't update to True, while loop stops
                 temp = {}
                 for key, value in deep_copy.items():
                     # value[2] is list of Meanings
@@ -445,7 +445,7 @@ def derivative_kanji_query(search_term):
                                         nested = nest_query_result(result)
                                         temp[result[0]] = nested
                                         temp[result[0]].append(depth)
-                                    loop = True
+                                    continue_search = True
                 deep_copy = copy.deepcopy(temp)
                 nested_results.update(temp)
             break # if column match found
