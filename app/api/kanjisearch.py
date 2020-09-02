@@ -599,7 +599,7 @@ def scrub_search_term(search_term):
     disallowed_chars = [
         '"', # double quotes
         "'", # single quotes
-        "`", "~", "!", "@", "%", "^", "&", "(", ")", "-", "_", "+", "=",
+        "`", "~", "!", "@", "%", "%", "^", "&", "(", ")", "_", "+", "=",
         "{", "}", "[", "]", "|", "\", "/", ":", ";", "<", ">", ",", "?"
     ]
     for char in disallowed_chars:
