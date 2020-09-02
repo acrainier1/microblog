@@ -42,8 +42,8 @@
         Flask Route:        @bp.route('/getsuggestions/<search_term>')
                             getsuggestions(search_term)
 
-        SQL Query:          sql_query3(search_term, columns1)
-                            sql_query3(kunyomi, columns2)
+        SQL Query:          suggestions_query(search_term, columns1)
+                            suggestions_query(kunyomi, columns2)
 
         Data Structuring:   nest_search_result(result)
 
@@ -383,7 +383,7 @@ def main_search_query(search_term, columns):
 
 def derivative_kanji_query(search_term):
 
-    start = time.time()
+    # start = time.time()
     DATABASE_URL = os.environ.get('DATABASE_URL')
     if DATABASE_URL:
         print("===== YES POSTGRES DATABASE_URL:", DATABASE_URL)
@@ -449,12 +449,12 @@ def derivative_kanji_query(search_term):
                 nested_results.update(temp)
             break # if column match found
     cursor.close()
-    end = time.time()
-    print("TIME TO EXCECUTE:", str(end - start))
+    # end = time.time()
+    # print("TIME TO EXCECUTE:", str(end - start))
     return nested_results
 
 
-def sql_query3(search_term, columns):
+def suggestions_query(search_term, columns):
     with sqlite3.connect(DBPATH) as conn:
         cursor = conn.cursor()
         nested_results = {}
@@ -596,7 +596,7 @@ def punctuate_kunyomi(search_term):
 def scrub_chars(search_term):
     search_term = search_term.strip()
     disallowed_chars = [
-        '"', "'", "\",
+        # '"', "'", "\",
         "`", "~", "!", "@", "%", "%", "^", "&", "(", ")", "_", "+", "=", 
         "{", "}", "[", "]", "|", "/", ":", ";", "<", ">", ",", "?"
     ]
