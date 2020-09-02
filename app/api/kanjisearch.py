@@ -199,6 +199,7 @@ def search(search_term):
     search_data.update(derivative_kanji_query(search_term))
 
     if search_data:
+        search_data = sort_data(search_data)
         return jsonify(list(search_data.values()))
     return NO_DATA
 
@@ -381,7 +382,6 @@ def main_search_query(search_term, columns):
 
 
 def derivative_kanji_query(search_term):
-
     start = time.time()
     DATABASE_URL = os.environ.get('DATABASE_URL')
     if DATABASE_URL:
@@ -393,14 +393,8 @@ def derivative_kanji_query(search_term):
         conn = sqlite3.connect( "/home/acanizales1/microblog/app.db")
         collocation = "NOCASE"
     cursor = conn.cursor()
-    
-    """ This searches based on columns below that DO require 
-        deep searches of kanji derived from search term
-    """
+
     nested_results = {}
-    # for column in ["Kanji", "Meaning1", "Meaning2", "Meaning3"]:
-    #     kanji_meaning_query = select([KanjiData]).where(getattr(KanjiData, column) == search_term)
-    #     result = db.session.execute(kanji_meaning_query).fetchone()
     query_derivatives = f"""
         SELECT * 
             FROM kanji_data 
@@ -411,7 +405,6 @@ def derivative_kanji_query(search_term):
     """
     res = cursor.execute(query_derivatives)
     result = cursor.fetchone()
-
     if result:
         nested = nest_query_result(result)
         nested_results[result[0]] = nested
@@ -443,8 +436,6 @@ def derivative_kanji_query(search_term):
                         meaning = meaning.strip()
                         # print("meaning===\n", meaning) # to test for infinite loops
                         # Searches all kanji again effectively making this recursive
-                        # for radical in ["Radical1", "Radical2", "Radical3", "Radical4"]:                                                               
-                        # WHERE "{radical}"='{meaning}'
                         query_derivatives = f"""
                             SELECT * 
                                 FROM kanji_data 
@@ -461,12 +452,10 @@ def derivative_kanji_query(search_term):
                                 temp[result[0]] = nested
                                 temp[result[0]].append(depth)
                             continue_search = True
-                        # end for
             deep_copy = copy.deepcopy(temp)
             nested_results.update(temp)
         cursor.close()
         return nested_results
-    # end for
     end = time.time()
     print("TIME TO EXCECUTE:", str(end - start))
     cursor.close()
@@ -625,6 +614,10 @@ def scrub_chars(search_term):
     return search_term
 
 
+def sort_data(search_data):
+    print(search_data)
+    
+    return search_data
 
 
 
