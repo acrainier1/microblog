@@ -439,7 +439,7 @@ def derivative_kanji_query(search_term):
                         # Searches all kanji again effectively making this recursive
                         st = time.time()
                         query_derivatives = f"""
-                            SELECT * 
+                            SELECT "Order", "Frequency", "Kanji", "Type", "Meaning1", "Meaning2", "Meaning3"
                                 FROM kanji_data 
                                 WHERE ("Radical1"='{meaning}')
                                 OR ("Radical2"='{meaning}')
