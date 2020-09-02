@@ -374,8 +374,8 @@ def main_search_query(search_term, columns):
         if results:
             for result in results:
                 nested = nest_query_result(result)
-                nested.append(column[:-9]) # only 'Onyomi' or 'Kunyomi' part of column name
-                search_data[str(result[0]) + column] = nested
+                nested.append(columns[0][:-9]) # only 'Onyomi' or 'Kunyomi' part of column name
+                search_data[str(result[0]) + column[0]] = nested
     cursor.close()
     return search_data
 
