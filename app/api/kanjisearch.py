@@ -413,8 +413,8 @@ def derivative_kanji_query(search_term):
     result = cursor.fetchone()
 
     if result:
-        nested = nest_search_result(result)
-        nested_results[result.Order] = nested
+        nested = nest_query_result(result)
+        nested_results[result[0]] = nested
 
         """ `depth` variable provides derivation level. Initialize at 0 
             because the kanji from search_term is at the zeroeth. 
