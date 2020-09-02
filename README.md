@@ -4,9 +4,11 @@ Bash command for using requirements.txt:
 
 ===== LOCAL SQLITE3 =====
 
-    ==== copy [kanjidata] to kanji_data table to emulate Heroku PGSQL
+    ==== copy [kanjidata] to EMPTY kanji_data table to match up with Heroku PGSQL
 
-    INSERT INTO kanji_data SELECT * FROM [kanjidata];
+    (1) DELETE FROM * kanji_data;
+
+    (2) INSERT INTO kanji_data SELECT * FROM [kanjidata];
 
     ==== view column names
 
@@ -36,9 +38,23 @@ Bash command for using requirements.txt:
 
 ===== HEROKU POSTGRESQL =====
 
-    ==== To update postgresql on Herko:
+    ==== To update postgresql kanji data table on Herko:
+    <!-- in local terminal -->
+    (1) heroke pg:pqsl
 
-    heroku run bash;
+    <!-- Inside postgres -->
+    (2) TRUNCATE TABLE kanji_data; \q
+
+    <!-- in local terminal -->
+    (3) heroku run bash;
+
+    <!-- in Heroku terminal -->
+    (4) python3 db_tools.py; exit;
+
+
+    ==== To update postgresql schema on Herko:
+
+    heroku run bash
 
     flask db migrate -m "update DB"; flask db upgrade;
 
@@ -54,7 +70,8 @@ Bash command for using requirements.txt:
 
 ===== Joke
 
-    ==== pip install no-migrane # a db migration tool that doesn't blow
+    ==== pip install no-migrane 
+    <!-- A database migration tool that doesn't blow -->
 
 
 

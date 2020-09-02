@@ -9,10 +9,6 @@ KANJI_DATA = 'kanjidata.csv'
 conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 cur = conn.cursor()
 
-cur.execute('SELECT * FROM "user"')
-one = cur.fetchone()
-all = cur.fetchall()
-
 
 with open(KANJI_DATA, 'r') as f:
     next(f) # Skip the header row.
