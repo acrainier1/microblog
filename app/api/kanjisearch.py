@@ -437,7 +437,6 @@ def derivative_kanji_query(search_term):
                                     SELECT * 
                                         FROM kanji_data 
                                         WHERE "{radical}"='{meaning}'
-                                        COLLATE {collocation}
                                 """
                                 res = cursor.execute(query_derivatives)
                                 results = cursor.fetchall()
