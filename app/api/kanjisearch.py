@@ -438,7 +438,7 @@ def derivative_kanji_query(search_term):
                                 SELECT * 
                                     FROM kanji_data 
                                     WHERE ("Radical1"='{meaning}')
-                                    OR ("Radical12"='{meaning}')
+                                    OR ("Radical2"='{meaning}')
                                     OR ("Radical3"='{meaning}')
                                     OR ("Radical4"='{meaning}')
                             """
