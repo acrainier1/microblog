@@ -381,7 +381,7 @@ def main_search_query(search_term, columns):
 
 
 def derivative_kanji_query(search_term):
-    start = time.time()
+    # start = time.time()
     DATABASE_URL = os.environ.get('DATABASE_URL')
     if DATABASE_URL:
         print("===== YES POSTGRES DATABASE_URL:", DATABASE_URL)
@@ -420,10 +420,11 @@ def derivative_kanji_query(search_term):
         for value in nested_results.values():
             value.append(depth)
 
+        total_query_time = 0
         continue_search = True
         while continue_search:
-            end = time.time()
-            print("TIME TO EXCECUTE DEPTH:", depth, str(end - start))
+            # end = time.time()
+            # print("TIME TO EXCECUTE DEPTH:", depth, str(end - start))
             # if continue_search doesn't update to True, loop stops
             continue_search = False 
             depth += 1
@@ -447,6 +448,7 @@ def derivative_kanji_query(search_term):
                         res = cursor.execute(query_derivatives)
                         results = cursor.fetchall()
                         en = time.time()
+                        total_query_time += (en - st)
                         print("TIME TO EXCECUTE QUERY:", str(en - st))
                         if results:
                             for result in results:
@@ -457,9 +459,10 @@ def derivative_kanji_query(search_term):
             deep_copy = copy.deepcopy(temp)
             nested_results.update(temp)
         cursor.close()
+        print("total_query_time", total_query_time)
         return nested_results
-    end = time.time()
-    print("TIME TO EXCECUTE:", str(end - start))
+    # end = time.time()
+    # print("TIME TO EXCECUTE:", str(end - start))
     cursor.close()
     return nested_results
     
