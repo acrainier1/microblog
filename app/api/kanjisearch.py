@@ -168,7 +168,7 @@ def search(search_term):
     print("search_term:", search_term, "@bp.route('/search/<search_term>', methods=['GET'])")
 
     NO_DATA = jsonify([ ['', '', [], [], 'NO_DATA'] ])
-    # search_term = scrub_chars(search_term)
+    search_term = scrub_chars(search_term)
     # search_term = search_term.strip()
     
 
@@ -382,7 +382,7 @@ def main_search_query(search_term, columns):
 
 def derivative_kanji_query(search_term):
 
-    # start = time.time()
+    start = time.time()
     DATABASE_URL = os.environ.get('DATABASE_URL')
     if DATABASE_URL:
         print("===== YES POSTGRES DATABASE_URL:", DATABASE_URL)
@@ -450,8 +450,8 @@ def derivative_kanji_query(search_term):
                 nested_results.update(temp)
             break # if column match found
     cursor.close()
-    # end = time.time()
-    # print("TIME TO EXCECUTE:", str(end - start))
+    end = time.time()
+    print("TIME TO EXCECUTE:", str(end - start))
     return nested_results
 
 
