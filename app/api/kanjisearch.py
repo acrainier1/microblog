@@ -168,7 +168,7 @@ def search(search_term):
     print("search_term:", search_term, "@bp.route('/search/<search_term>', methods=['GET'])")
 
     NO_DATA = jsonify([ ['', '', [], [], 'NO_DATA'] ])
-    search_term = scrub_search_term(search_term)
+    search_term = scrub_chars(search_term)
     # search_term = search_term.strip()
     
 
@@ -594,14 +594,15 @@ def punctuate_kunyomi(search_term):
     return kunyomis
 
 
-def scrub_search_term(search_term):
+def scrub_chars(search_term):
     search_term = search_term.strip()
-    disallowed_chars = [
-        '"', # double quotes
-        "'", # single quotes
-        "`", "~", "!", "@", "%", "%", "^", "&", "(", ")", "_", "+", "=",
-        "{", "}", "[", "]", "|", "\", "/", ":", ";", "<", ">", ",", "?"
-    ]
+    disallowed_chars = ['"', "'", "^"]
+    # disallowed_chars = [
+    #     '"', # double quotes
+    #     "'", # single quotes
+    #     "`", "~", "!", "@", "%", "%", "^", "&", "(", ")", "_", "+", "=",
+    #     "{", "}", "[", "]", "|", "\", "/", ":", ";", "<", ">", ",", "?"
+    # ]
     for char in disallowed_chars:
         if char in search_term:
             return "DUMMY_SEARCH_TEXT"
