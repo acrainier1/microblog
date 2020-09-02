@@ -193,7 +193,7 @@ def search(search_term):
         search_data.update(main_search_query(kunyomi, columns2))
 
 
-    """ (3) KANJI AND DERIVATIVES SEARCH
+    """ (3) KANJI, MEANINGS AND DERIVATIVES SEARCH
         Searches for all derivative kanji of search term 
     """
     search_data.update(derivative_kanji_query(search_term))
@@ -419,6 +419,8 @@ def derivative_kanji_query(search_term):
             
             continue_search = True
             while continue_search:
+                end = time.time()
+                print("TIME TO EXCECUTE DEPTH:", depth, str(end - start))
                 # if continue_search doesn't update to True, loop stops
                 continue_search = False 
                 depth += 1
@@ -450,8 +452,8 @@ def derivative_kanji_query(search_term):
                 nested_results.update(temp)
             break # if column match found
     cursor.close()
-    end = time.time()
-    print("TIME TO EXCECUTE:", str(end - start))
+    # end = time.time()
+    # print("TIME TO EXCECUTE:", str(end - start))
     return nested_results
 
 
