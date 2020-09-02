@@ -398,65 +398,77 @@ def derivative_kanji_query(search_term):
         deep searches of kanji derived from search term
     """
     nested_results = {}
-    for column in ["Kanji", "Meaning1", "Meaning2", "Meaning3"]:
-        kanji_meaning_query = select([KanjiData]).where(getattr(KanjiData, column) == search_term)
-        result = db.session.execute(kanji_meaning_query).fetchone()
-        if result:
-            nested = nest_search_result(result)
-            nested_results[result.Order] = nested
+    # for column in ["Kanji", "Meaning1", "Meaning2", "Meaning3"]:
+    #     kanji_meaning_query = select([KanjiData]).where(getattr(KanjiData, column) == search_term)
+    #     result = db.session.execute(kanji_meaning_query).fetchone()
+    query_derivatives = f"""
+        SELECT * 
+            FROM kanji_data 
+            WHERE ("Kanji"='{search_term}')
+            OR ("Meaning1"='{search_term}')
+            OR ("Meaning2"='{search_term}')
+            OR ("Meaning3"='{search_term}')
+    """
+    res = cursor.execute(query_derivatives)
+    result = cursor.fetchone()
 
-            """ `depth` variable provides derivation level. Initialize at 0 
-                because the kanji from search_term is at the zeroeth. 
-                From it, the while continue_search below will search for its descendants
-                For example: 一 0 > 三 1 > 王 2 > 玉 3 > 国 4 etc.
-                Append `depth` after deep copy so deep copy does not have a
-                depth in case duplicates are found later.
-            """
-            depth = 0
-            deep_copy = copy.deepcopy(nested_results)
-            for value in nested_results.values():
-                value.append(depth)
+    if result:
+        nested = nest_search_result(result)
+        nested_results[result.Order] = nested
 
-            continue_search = True
-            while continue_search:
-                end = time.time()
-                print("TIME TO EXCECUTE DEPTH:", depth, str(end - start))
-                # if continue_search doesn't update to True, loop stops
-                continue_search = False 
-                depth += 1
-                temp = {}
-                for value in deep_copy.values():
-                    for meaning in value[2]:
-                        # because if meaning == empty string, infinite while loop
-                        if meaning:
-                            meaning = meaning.strip()
-                            # print("meaning===\n", meaning) # to test for infinite loops
-                            # Searches all kanji again effectively making this recursive
-                            # for radical in ["Radical1", "Radical2", "Radical3", "Radical4"]:                                                               
-                            # WHERE "{radical}"='{meaning}'
-                            query_derivatives = f"""
-                                SELECT * 
-                                    FROM kanji_data 
-                                    WHERE ("Radical1"='{meaning}')
-                                    OR ("Radical2"='{meaning}')
-                                    OR ("Radical3"='{meaning}')
-                                    OR ("Radical4"='{meaning}')
-                            """
-                            res = cursor.execute(query_derivatives)
-                            results = cursor.fetchall()
-                            if results:
-                                for result in results:
-                                    nested = nest_query_result(result)
-                                    temp[result[0]] = nested
-                                    temp[result[0]].append(depth)
-                                continue_search = True
-                            # end for
-                deep_copy = copy.deepcopy(temp)
-                nested_results.update(temp)
-            cursor.close()
-            return nested_results
-    # print("TIME TO EXCECUTE:", str(end - start))
+        """ `depth` variable provides derivation level. Initialize at 0 
+            because the kanji from search_term is at the zeroeth. 
+            From it, the while continue_search below will search for its descendants
+            For example: 一 0 > 三 1 > 王 2 > 玉 3 > 国 4 etc.
+            Append `depth` after deep copy so deep copy does not have a
+            depth in case duplicates are found later.
+        """
+        depth = 0
+        deep_copy = copy.deepcopy(nested_results)
+        for value in nested_results.values():
+            value.append(depth)
+
+        continue_search = True
+        while continue_search:
+            end = time.time()
+            print("TIME TO EXCECUTE DEPTH:", depth, str(end - start))
+            # if continue_search doesn't update to True, loop stops
+            continue_search = False 
+            depth += 1
+            temp = {}
+            for value in deep_copy.values():
+                for meaning in value[2]:
+                    # because if meaning == empty string, infinite while loop
+                    if meaning:
+                        meaning = meaning.strip()
+                        # print("meaning===\n", meaning) # to test for infinite loops
+                        # Searches all kanji again effectively making this recursive
+                        # for radical in ["Radical1", "Radical2", "Radical3", "Radical4"]:                                                               
+                        # WHERE "{radical}"='{meaning}'
+                        query_derivatives = f"""
+                            SELECT * 
+                                FROM kanji_data 
+                                WHERE ("Radical1"='{meaning}')
+                                OR ("Radical2"='{meaning}')
+                                OR ("Radical3"='{meaning}')
+                                OR ("Radical4"='{meaning}')
+                        """
+                        res = cursor.execute(query_derivatives)
+                        results = cursor.fetchall()
+                        if results:
+                            for result in results:
+                                nested = nest_query_result(result)
+                                temp[result[0]] = nested
+                                temp[result[0]].append(depth)
+                            continue_search = True
+                        # end for
+            deep_copy = copy.deepcopy(temp)
+            nested_results.update(temp)
+        cursor.close()
+        return nested_results
+    # end for
     end = time.time()
+    print("TIME TO EXCECUTE:", str(end - start))
     cursor.close()
     return nested_results
     
