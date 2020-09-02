@@ -439,7 +439,7 @@ def derivative_kanji_query(search_term):
                                         COLLATE {collocation}
                                 """
                                 res = cursor.execute(query_derivatives)
-                                result = cursor.fetchall()
+                                results = cursor.fetchall()
                                 if results:
                                     for result in results:
                                         nested = nest_query_result(result)
