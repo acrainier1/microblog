@@ -402,7 +402,6 @@ def derivative_kanji_query(search_term):
         kanji_meaning_query = select([KanjiData]).where(getattr(KanjiData, column) == search_term)
         result = db.session.execute(kanji_meaning_query).fetchone()
         if result:
-            print("result", result)
             nested = nest_search_result(result)
             nested_results[result.Order] = nested
 
@@ -452,9 +451,9 @@ def derivative_kanji_query(search_term):
                 nested_results.update(temp)
             cursor.close()
             return nested_results
-    # cursor.close()
-    # end = time.time()
     # print("TIME TO EXCECUTE:", str(end - start))
+    end = time.time()
+    cursor.close()
     return nested_results
     
 
