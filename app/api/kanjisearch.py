@@ -180,17 +180,17 @@ def search(search_term):
     search_data = main_search_query(search_term, columns1)
 
 
-    # """ (2) KUNYOMI SEARCH
-    #     Searches for kunyomi with period "." between each letter because 
-    #     Kunyomi_Reading1 and Kunyomi_Reading2 columns sometimes have a
-    #     "." in the entry string in an unpredictable place. Thus, checking 
-    #     all possible occurences of "." and without it is necessary to get
-    #     result.
-    # """
-    # columns2 = ["Kunyomi_Reading1", "Kunyomi_Reading2"]
-    # kunyomis = punctuate_kunyomi(search_term)
-    # for kunyomi in kunyomis:
-    #     search_data.update(main_search_query(kunyomi, columns2))
+    """ (2) KUNYOMI SEARCH
+        Searches for kunyomi with period "." between each letter because 
+        Kunyomi_Reading1 and Kunyomi_Reading2 columns sometimes have a
+        "." in the entry string in an unpredictable place. Thus, checking 
+        all possible occurences of "." and without it is necessary to get
+        result.
+    """
+    columns2 = ["Kunyomi_Reading1", "Kunyomi_Reading2"]
+    kunyomis = punctuate_kunyomi(search_term)
+    for kunyomi in kunyomis:
+        search_data.update(main_search_query(kunyomi, columns2))
 
 
     """ (3) KANJI AND DERIVATIVES SEARCH
