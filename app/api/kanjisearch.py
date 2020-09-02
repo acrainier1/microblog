@@ -365,12 +365,8 @@ def main_query(search_term, columns):
                 SELECT *
                     FROM kanji_data
                     WHERE "{column}"='{search_term}'
+                    COLLATE {collocation}
             """
-            # query_columns = f"""
-            #     SELECT *
-            #         FROM kanji_data
-            #         WHERE "Onyomi_Reading1"='TAI'
-            # """
             print(query_columns)
             # COLLATE {collocation}
             # results = cursor.execute(query_column, (search_term,)).fetchall()
