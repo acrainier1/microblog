@@ -401,6 +401,7 @@ def derivative_kanji_query(search_term):
     for column in ["Kanji", "Meaning1", "Meaning2", "Meaning3"]:
         kanji_meaning_query = select([KanjiData]).where(getattr(KanjiData, column) == search_term)
         result = db.session.execute(kanji_meaning_query).fetchone()
+        print("result", result)
         if result:
             nested = nest_search_result(result)
             nested_results[result.Order] = nested
@@ -416,7 +417,7 @@ def derivative_kanji_query(search_term):
             deep_copy = copy.deepcopy(nested_results)
             for value in nested_results.values():
                 value.append(depth)
-            
+
             continue_search = True
             while continue_search:
                 end = time.time()
