@@ -415,8 +415,9 @@ def derivative_kanji_query(search_term):
             """
             depth = 0
             deep_copy = copy.deepcopy(nested_results)
-            for k,v in nested_results.items():
-                v.append(depth)
+            # for k,v in nested_results.items():
+            for value in nested_results.values():
+                value.append(depth)
             
             loop = True
             while loop:
@@ -599,8 +600,8 @@ def scrub_chars(search_term):
         '"', "'",
         "`", "~", "!", "@", "%", "%", "^", "&", "(", ")", "_", "+", "=", 
         "{", "}", "[", "]", "|", "/", ":", ";", "<", ">", ",", "?",
-        "\",
     ]
+    disallowed_chars.append("\")
     for char in disallowed_chars:
         if char in search_term:
             return "DUMMY_SEARCH_TEXT"
