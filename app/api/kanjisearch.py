@@ -601,10 +601,12 @@ def scrub_chars(search_term):
         "`", "~", "!", "@", "%", "%", "^", "&", "(", ")", "_", "+", "=", 
         "{", "}", "[", "]", "|", "/", ":", ";", "<", ">", ",", "?",
     ]
-    disallowed_chars.append("\")
     for char in disallowed_chars:
         if char in search_term:
             return "DUMMY_SEARCH_TEXT"
+    back_slash = "\"
+    if back_slash in search_term:
+        return "DUMMY_SEARCH_TEXT"
     return search_term
 
 
