@@ -166,7 +166,11 @@ def search(search_term):
         If there is no data found, returned as an array with boiler plate
     """
     print("search_term:", search_term, "@bp.route('/search/<search_term>', methods=['GET'])")
-    search_term = search_term.strip()
+
+    NO_DATA = jsonify([ ['', '', [], [], 'NO_DATA'] ])
+    search_term = scrub_search_term(search_term)
+    # search_term = search_term.strip()
+    
 
     """ (1) ORDER NUMBER & ONYOMI SEARCH
         Searches only a few columns because special cases and extra
@@ -196,7 +200,7 @@ def search(search_term):
 
     if search_data:
         return jsonify(list(search_data.values()))
-    return jsonify([ ['', '', [], [], 'NO_DATA'] ])
+    return NO_DATA
 
 
 @bp.route('/byradicals/<delimiter>/<search_term>', methods=['GET'])
@@ -373,8 +377,7 @@ def main_search_query(search_term, columns):
                 for result in results:
                     nested = nest_query_result(result)
                     nested.append(add_bushu(nested[2]))
-                    # keeps only 'Onyomi' or 'Kunyomi' part of column name
-                    nested.append(column[:-9])
+                    nested.append(column[:-9]) # only 'Onyomi' or 'Kunyomi' part of column name
                     search_data[str(result[0]) + column] = nested
     cursor.close()
     return search_data
@@ -591,6 +594,18 @@ def punctuate_kunyomi(search_term):
     return kunyomis
 
 
+def scrub_search_term(search_term):
+    search_term = search_term.strip()
+    disallowed_chars = [
+        '"', # double quotes
+        "'", # single quotes
+        "`", "~", "!", "@", "%", "^", "&", "(", ")", "-", "_", "+", "=",
+        "{", "}", "[", "]", "|", "\", "/", ":", ";", "<", ">", ",", "?"
+    ]
+    for char in disallowed_chars:
+        if char in search_term:
+            return "DUMMY_SEARCH_TEXT"
+    return search_term
 
 
 
