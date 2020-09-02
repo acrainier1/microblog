@@ -420,6 +420,7 @@ def derivative_kanji_query(search_term):
         for value in nested_results.values():
             value.append(depth)
 
+        c=0
         total_query_time = 0
         continue_search = True
         while continue_search:
@@ -449,17 +450,17 @@ def derivative_kanji_query(search_term):
                         results = cursor.fetchall()
                         en = time.time()
                         total_query_time += (en - st)
-                        # print("TIME TO EXCECUTE QUERY:", str(en - st))
                         if results:
                             for result in results:
                                 nested = nest_query_result(result)
                                 temp[result[0]] = nested
                                 temp[result[0]].append(depth)
+                                c+=1
                             continue_search = True
             deep_copy = copy.deepcopy(temp)
             nested_results.update(temp)
         cursor.close()
-        print("total_query_time", total_query_time)
+        print(f"Count {c}, total_query_time: {total_query_time}")
         return nested_results
     # end = time.time()
     # print("TIME TO EXCECUTE:", str(end - start))
