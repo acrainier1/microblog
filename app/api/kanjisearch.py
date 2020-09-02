@@ -363,20 +363,20 @@ def main_search_query(search_term, columns):
             # search results should display it twice if found as both 
             # an On/Kunyomi reading and a derivative kanji
     else:
-        for column in columns:
-            query_columns = f"""
-                SELECT *
-                    FROM kanji_data
-                    WHERE "{column}"='{search_term}'
-                    COLLATE {collocation}
-            """
-            res = cursor.execute(query_columns)
-            results = cursor.fetchall()
-            if results:
-                for result in results:
-                    nested = nest_query_result(result)
-                    nested.append(column[:-9]) # only 'Onyomi' or 'Kunyomi' part of column name
-                    search_data[str(result[0]) + column] = nested
+        query_columns = f"""
+            SELECT *
+                FROM kanji_data
+                WHERE ("{column[0]}"='{search_term}')
+                OR ("{column[1]}"='{search_term}')
+                COLLATE {collocation}
+        """
+        res = cursor.execute(query_columns)
+        results = cursor.fetchall()
+        if results:
+            for result in results:
+                nested = nest_query_result(result)
+                nested.append(column[:-9]) # only 'Onyomi' or 'Kunyomi' part of column name
+                search_data[str(result[0]) + column] = nested
     cursor.close()
     return search_data
 
@@ -615,8 +615,9 @@ def scrub_chars(search_term):
 
 
 def sort_data(search_data):
-    for datum in search_data:
-        print(datum[0])
+    print(search_data)
+    # for datum in search_data:
+    #     print(datum)
     
     return search_data
 
