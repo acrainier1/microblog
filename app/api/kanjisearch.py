@@ -366,9 +366,8 @@ def main_search_query(search_term, columns):
         query_columns = f"""
             SELECT *
                 FROM kanji_data
-                WHERE ("{columns[0]}"='{search_term}')
-                OR ("{columns[1]}"='{search_term}')
-                COLLATE {collocation}
+                WHERE ("{columns[0]}"='{search_term}' COLLATE {collocation})
+                OR ("{columns[1]}"='{search_term}' COLLATE {collocation})
         """
         res = cursor.execute(query_columns)
         results = cursor.fetchall()
