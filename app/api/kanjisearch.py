@@ -300,8 +300,8 @@ def kanjiset(search_term):
     if results:
         for result in results:
             nested = nest_kanji_result(result)
-            # nested[4] = add_bushu(nested[5])
-            nested[4] = ["w","x","y","z"]
+            nested[4] = add_bushu(nested[5])
+            # nested[4] = ["w","x","y","z"]
             nested_results.append(nested)
     if nested_results:
         return jsonify(nested_results)
