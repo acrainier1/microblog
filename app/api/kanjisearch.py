@@ -463,8 +463,9 @@ def derivative_kanji_query(search_term):
                         # print("meaning===\n", meaning) # to test for infinite loops
                         # Searches all kanji again effectively making this recursive
                         st = time.time()
+                        # "Order", "Frequency", "Kanji", "Type", "Meaning1", "Meaning2", "Meaning3"
                         query_derivatives = f"""
-                            SELECT "Order", "Frequency", "Kanji", "Type", "Meaning1", "Meaning2", "Meaning3"
+                            SELECT *
                                 FROM kanji_data 
                                 WHERE ("Radical1"='{meaning}')
                                 OR ("Radical2"='{meaning}')
