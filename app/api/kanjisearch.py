@@ -472,11 +472,12 @@ def derivative_kanji_query(search_term):
                                 OR ("Radical3"='{meaning}')
                                 OR ("Radical4"='{meaning}')
                         """
+                        res = cursor.execute(query_derivatives)
                         end1 = time.time()
                         total_query_time1 += (end1 - start1)
 
+
                         start2 = time.time()
-                        res = cursor.execute(query_derivatives)
                         results = cursor.fetchall()
                         end2 = time.time()
                         total_query_time2 += (end2 - start2)
