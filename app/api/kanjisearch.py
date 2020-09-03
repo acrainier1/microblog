@@ -458,8 +458,9 @@ def derivative_kanji_query(search_term):
                 for meaning in value[2]:
                     # because if meaning == empty string, infinite while loop
                     # meaning = value[2][0].strip()
+                    meaning = meaning.strip()
                     if meaning:
-                        meaning = meaning.strip()
+                        # meaning = meaning.strip()
                         # print("meaning===\n", meaning) # to test for infinite loops
                         # Searches all kanji again effectively making this recursive
 
