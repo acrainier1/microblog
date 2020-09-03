@@ -301,7 +301,7 @@ def kanjiset(search_term):
         for result in results:
             nested = nest_kanji_result(result)
             # nested[4] = add_bushu(nested[5])
-            nested[4] = ["x","y","z"]
+            nested[4] = ["w","x","y","z"]
             nested_results.append(nested)
     if nested_results:
         return jsonify(nested_results)
@@ -537,12 +537,15 @@ def add_bushu(radicals):
     """
     bushus = []
     for radical in radicals:
-        bushu1 = KanjiData.query.filter_by(Meaning1=radical).first()
-        bushu2 = KanjiData.query.filter_by(Meaning2=radical).first()
-        bushu3 = KanjiData.query.filter_by(Meaning3=radical).first()
-        for bushu in [bushu1, bushu2, bushu3]:
-            if bushu:
-                bushus.append(bushu.Kanji)
+        bushu = KanjiData.query.filter_by(
+            or_(Meaning1=radical, Meaning2=radical, Meaning3=radical)).first()
+        if bushu:
+            bushus.append(bushu)
+        # bushu2 = KanjiData.query.filter_by(Meaning2=radical).first()
+        # bushu3 = KanjiData.query.filter_by(Meaning3=radical).first()
+        # for bushu in [bushu1, bushu2, bushu3]:
+        #     if bushu:
+        #         bushus.append(bushu.Kanji)
     return bushus
 
 
