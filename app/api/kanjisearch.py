@@ -448,8 +448,6 @@ def derivative_kanji_query(search_term):
         total_query_time = 0
         continue_search = True
         while continue_search:
-            # end = time.time()
-            # print("TIME TO EXCECUTE DEPTH:", depth, str(end - start))
             # if continue_search doesn't update to True, loop stops
             continue_search = False 
             depth += 1
@@ -462,7 +460,7 @@ def derivative_kanji_query(search_term):
                         meaning = meaning.strip()
                         # print("meaning===\n", meaning) # to test for infinite loops
                         # Searches all kanji again effectively making this recursive
-                        st = time.time()
+                        # st = time.time()
                         # "Order", "Frequency", "Kanji", "Type", "Meaning1", "Meaning2", "Meaning3"
                         query_derivatives = f"""
                             SELECT *
@@ -472,11 +470,12 @@ def derivative_kanji_query(search_term):
                                 OR ("Radical3"='{meaning}')
                                 OR ("Radical4"='{meaning}')
                         """
+                        st = time.time()
                         res = cursor.execute(query_derivatives)
                         results = cursor.fetchall()
-                        c+=1
                         en = time.time()
                         total_query_time += (en - st)
+                        c+=1
                         if results:
                             for result in results:
                                 nested = nest_query_result(result)
