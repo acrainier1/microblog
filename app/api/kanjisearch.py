@@ -311,6 +311,32 @@ def kanjiset(search_term):
 @bp.route('/test/<search_term>', methods=['GET'])
 def testroute(search_term):
     print("search_term:", search_term, "@bp.route('/test/<search_term>', methods=['GET'])")
+    start = time.time()
+    DATABASE_URL = os.environ.get('DATABASE_URL')
+    if DATABASE_URL:
+        conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+        collocation = "case_insensitive"
+    else:
+        conn = sqlite3.connect( "/home/acanizales1/microblog/app.db")
+        collocation = "NOCASE"
+    cursor = conn.cursor()
+
+    meaning = "halberd"
+    for i in range(0, 1936):
+        meaning = meaning.trim()
+        query_derivatives = f"""
+            SELECT "Order", "Frequency", "Kanji", "Type", "Meaning1", "Meaning2", "Meaning3"
+                FROM kanji_data 
+                WHERE ("Radical1"='{meaning}')
+                OR ("Radical2"='{meaning}')
+                OR ("Radical3"='{meaning}')
+                OR ("Radical4"='{meaning}')
+        """
+        res = cursor.execute(query_derivatives)
+        results = cursor.fetchall()
+    cursor.close()
+    end = time.time()
+    print("TIME TO EXCECUTE:", str(end - start))
     test_data = [
         [1, '由', ['a','',''], ['bar','field','',''], 2],
         [2, '由', ['b','',''], ['bar','field','',''], 3],
@@ -398,9 +424,9 @@ def derivative_kanji_query(search_term):
         SELECT * 
             FROM kanji_data 
             WHERE ("Kanji"='{search_term}')
-            OR ("Meaning1"='{search_term}')
-            OR ("Meaning2"='{search_term}')
-            OR ("Meaning3"='{search_term}')
+            OR ("Meaning1"='{search_term}' COLLATE {collocation})
+            OR ("Meaning2"='{search_term}' COLLATE {collocation})
+            OR ("Meaning3"='{search_term}' COLLATE {collocation})
     """
     res = cursor.execute(query_derivatives)
     result = cursor.fetchone()
