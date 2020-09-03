@@ -323,7 +323,7 @@ def testroute(search_term):
 
     meaning = "halberd"
     for i in range(0, 1936):
-        meaning = meaning.trim()
+        meaning = meaning.strip()
         query_derivatives = f"""
             SELECT "Order", "Frequency", "Kanji", "Type", "Meaning1", "Meaning2", "Meaning3"
                 FROM kanji_data 
@@ -650,7 +650,6 @@ def sort_data(search_data):
     # print(search_data)
     for value in search_data.values:
         print(value)
-
     return search_data
 
 
