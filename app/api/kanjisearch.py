@@ -325,7 +325,7 @@ def testroute(search_term):
     for i in range(0, 1936):
         # meaning = meaning.strip()
         query_derivatives = f"""
-            SELECT "Order", "Kanji", "Meaning1", "Meaning2", "Meaning3"
+            SELECT *
                 FROM kanji_data 
                 WHERE ("Radical1"='{meaning}')
                 OR ("Radical2"='{meaning}')
