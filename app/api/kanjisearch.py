@@ -445,7 +445,8 @@ def derivative_kanji_query(search_term):
             value.append(depth)
 
         c=0
-        total_query_time = 0
+        total_query_time1 = 0
+        total_query_time2 = 0
         continue_search = True
         while continue_search:
             # if continue_search doesn't update to True, loop stops
@@ -460,7 +461,8 @@ def derivative_kanji_query(search_term):
                         meaning = meaning.strip()
                         # print("meaning===\n", meaning) # to test for infinite loops
                         # Searches all kanji again effectively making this recursive
-                        # st = time.time()
+
+                        start1 = time.time()
                         # "Order", "Frequency", "Kanji", "Type", "Meaning1", "Meaning2", "Meaning3"
                         query_derivatives = f"""
                             SELECT *
@@ -470,11 +472,14 @@ def derivative_kanji_query(search_term):
                                 OR ("Radical3"='{meaning}')
                                 OR ("Radical4"='{meaning}')
                         """
-                        st = time.time()
+                        end1 = time.time()
+                        total_query_time1 += (end1 - start1)
+
+                        start2 = time.time()
                         res = cursor.execute(query_derivatives)
                         results = cursor.fetchall()
-                        en = time.time()
-                        total_query_time += (en - st)
+                        end2 = time.time()
+                        total_query_time2 += (end2 - start2)
                         c+=1
                         if results:
                             for result in results:
@@ -485,7 +490,7 @@ def derivative_kanji_query(search_term):
             deep_copy = copy.deepcopy(temp)
             nested_results.update(temp)
         cursor.close()
-        print(f"Count {c}, total_query_time: {total_query_time}")
+        print(f"Count {c}, total_query_time 1: {total_query_time1} and 2: {total_query_time2}")
         return nested_results
     # end = time.time()
     # print("TIME TO EXCECUTE:", str(end - start))
