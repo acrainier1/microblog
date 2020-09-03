@@ -479,7 +479,7 @@ def derivative_kanji_query(search_term):
 
                         # start2 = time.time()
                         results = cursor.fetchall()
-                        end2 = time.time()
+                        end1 = time.time()
                         total_query_time1 += (end1 - start1)
                         c+=1
                         if results:
