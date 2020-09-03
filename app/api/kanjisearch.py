@@ -111,7 +111,7 @@ import sqlite3
 from config import Config
 # Flask
 from flask import jsonify, request
-from sqlalchemy import create_engine, MetaData
+from sqlalchemy import create_engine, MetaData, or_
 from sqlalchemy.sql import select
 # App
 from app import db
