@@ -336,7 +336,7 @@ def testroute(search_term):
         results = cursor.fetchall()
     cursor.close()
     end = time.time()
-    print("TIME TO EXCECUTE:", str(end - start))
+    print("TIME TO EXCECUTE TEST ROUTE:", str(end - start))
     test_data = [
         [1, '由', ['a','',''], ['bar','field','',''], 2],
         [2, '由', ['b','',''], ['bar','field','',''], 3],
