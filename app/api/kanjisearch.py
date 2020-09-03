@@ -473,14 +473,14 @@ def derivative_kanji_query(search_term):
                                 OR ("Radical4"='{meaning}')
                         """
                         res = cursor.execute(query_derivatives)
-                        end1 = time.time()
-                        total_query_time1 += (end1 - start1)
+                        # end1 = time.time()
+                        # total_query_time1 += (end1 - start1)
 
 
-                        start2 = time.time()
+                        # start2 = time.time()
                         results = cursor.fetchall()
                         end2 = time.time()
-                        total_query_time2 += (end2 - start2)
+                        total_query_time1 += (end1 - start1)
                         c+=1
                         if results:
                             for result in results:
