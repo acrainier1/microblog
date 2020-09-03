@@ -474,6 +474,7 @@ def derivative_kanji_query(search_term):
                         """
                         res = cursor.execute(query_derivatives)
                         results = cursor.fetchall()
+                        c+=1
                         en = time.time()
                         total_query_time += (en - st)
                         if results:
@@ -481,7 +482,6 @@ def derivative_kanji_query(search_term):
                                 nested = nest_query_result(result)
                                 temp[result[0]] = nested
                                 temp[result[0]].append(depth)
-                                c+=1
                             continue_search = True
             deep_copy = copy.deepcopy(temp)
             nested_results.update(temp)
