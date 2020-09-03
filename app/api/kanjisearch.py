@@ -323,7 +323,7 @@ def testroute(search_term):
 
     meaning = "halberd"
     for i in range(0, 1936):
-        meaning = meaning.strip()
+        # meaning = meaning.strip()
         query_derivatives = f"""
             SELECT "Order", "Frequency", "Kanji", "Type", "Meaning1", "Meaning2", "Meaning3"
                 FROM kanji_data 
@@ -343,9 +343,8 @@ def testroute(search_term):
         [3, '由', ['c','',''], ['bar','field','',''], 3],
         [4, '由', ['d','',''], ['bar','field','',''], 3]
     ]
-    print("test_data\n", test_data)
+    # print("test_data\n", test_data)
     return jsonify(test_data)
-    return jsonify({"Kanji" : test_data.Kanji})
 
 
 
