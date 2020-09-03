@@ -199,7 +199,6 @@ def search(search_term):
     search_data.update(derivative_kanji_query(search_term))
 
     if search_data:
-        # search_data = sort_data(search_data)
         return jsonify(list(search_data.values()))
     return NO_DATA
 
@@ -456,10 +455,11 @@ def derivative_kanji_query(search_term):
             depth += 1
             temp = {}
             for value in deep_copy.values():
-                for meaning in value[2]:
+                # for meaning in value[2]:
                     # because if meaning == empty string, infinite while loop
+                    meaning = value[2][0].strip()
                     if meaning:
-                        meaning = meaning.strip()
+                        # meaning = meaning.strip()
                         # print("meaning===\n", meaning) # to test for infinite loops
                         # Searches all kanji again effectively making this recursive
                         st = time.time()
@@ -647,7 +647,7 @@ def scrub_chars(search_term):
 
 def sort_data(search_data):
     # print(search_data)
-    for value in search_data.values:
+    for value in search_data.values():
         print(value)
     return search_data
 
