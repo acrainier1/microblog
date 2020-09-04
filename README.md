@@ -1,39 +1,69 @@
-Bash command for using requirements.txt:
+==== DEPENDENCIES =====
 
-(venv) $ pip install -r requirements.txt
+    ==== Bash command for using requirements.txt
+
+    <!-- in local terminal ensure venv is activated -->
+    (venv) $ pip install -r requirements.txt
+
+
 
 ===== LOCAL SQLITE3 =====
 
-    ==== copy [kanjidata] to EMPTY kanji_data table to match up with Heroku PGSQL
+    ==== copy [kanjidata] to EMPTY kanji_data table to match up with Heroku PostgreSQL
 
-    (1) DELETE FROM * kanji_data;
+    (1) <!-- in local terminal -->
+    ~/<top_level_directory>$
+    csv-to-sqlite -f kanjidata.csv -o kanji.db -D; sqlite3 app.db 
 
-    (2) INSERT INTO kanji_data SELECT * FROM [kanjidata];
+    (2) <!-- in sqlite3, update all table data -->
+    DELETE FROM kanji_data;
+    INSERT INTO kanji_data SELECT * FROM [kanjidata];
+    UPDATE kanji_data AS A
+        SET Bushu1 = (SELECT B.Kanji FROM kanji_data B
+        WHERE B.Meaning1=A.Radical1 OR B.Meaning2=A.Radical1 OR B.Meaning3=A.Radical1),
+        Bushu2 = (SELECT B.Kanji FROM kanji_data B
+        WHERE B.Meaning1=A.Radical2 OR B.Meaning2=A.Radical2 OR B.Meaning3=A.Radical2),
+        Bushu3 = (SELECT B.Kanji FROM kanji_data B
+        WHERE B.Meaning1=A.Radical3 OR B.Meaning2=A.Radical3 OR B.Meaning3=A.Radical3),
+        Bushu4 = (SELECT B.Kanji FROM kanji_data B
+        WHERE B.Meaning1=A.Radical4 OR B.Meaning2=A.Radical4 OR B.Meaning3=A.Radical4)
+        WHERE "Order" > 0 AND "Order" < 9000;
+
 
     ==== view column names
-
     PRAGMA table_info(kanji_data);
 
 
-
-===== LOCAL POSTGRESQL =====
-
-    ==== Login
-
-    
+    ==== Recreate kanji data table WITH Alembic
     <!-- in local terminal -->
-    sudo -i -u postgres     # start psql
-    sudo -u 'linix-username' psql   # start psql directly
-
-    <!-- Inside postgres -->
-    postgres=#
-    \q                      # quit
-    \conninfo               # check connection info
+    flask db upgrade
 
 
-    To restart postgresql on local:
-    sudo /etc/init.d/postgresql restart
-
+    ==== Recreate kanji data table WITHOUT Alembic
+    <!-- in sqlite3 -->
+    CREATE TABLE kanji_data (
+        "Order" INTEGER PRIMARY KEY UNIQUE,
+        Frequency VARCHAR(32) COLLATE NOCASE,
+        Kanji VARCHAR(32) COLLATE NOCASE,
+        Type VARCHAR(32) COLLATE NOCASE,
+        Meaning1 VARCHAR(32) COLLATE NOCASE,
+        Meaning2 VARCHAR(32) COLLATE NOCASE,
+        Meaning3 VARCHAR(32) COLLATE NOCASE,
+        Bushu1 VARCHAR(32) COLLATE NOCASE,
+        Bushu2 VARCHAR(32) COLLATE NOCASE,
+        Bushu3 VARCHAR(32) COLLATE NOCASE,
+        Bushu4 VARCHAR(32) COLLATE NOCASE,
+        Radical1 VARCHAR(32) COLLATE NOCASE,
+        Radical2 VARCHAR(32) COLLATE NOCASE,
+        Radical3 VARCHAR(32) COLLATE NOCASE,
+        Radical4 VARCHAR(32) COLLATE NOCASE,
+        Onyomi_Reading1 VARCHAR(32) COLLATE NOCASE,
+        Onyomi_Reading2 VARCHAR(32) COLLATE NOCASE,
+        Kunyomi_Reading1 VARCHAR(32) COLLATE NOCASE,
+        Kunyomi_Reading2 VARCHAR(32) COLLATE NOCASE,
+        Mnemonic VARCHAR(256),
+        Notes VARCHAR(256)
+    );
 
 
 ===== HEROKU POSTGRESQL =====
@@ -71,6 +101,27 @@ Bash command for using requirements.txt:
 
     (3) <!-- use above result to get revision's 'old_version_#' -->
     UPDATE alembic_version SET version_num = 'new_version_#' WHERE version_num = 'old_version_#';
+
+
+
+
+===== LOCAL POSTGRESQL =====
+
+    ==== Login
+
+    
+    <!-- in local terminal -->
+    sudo -i -u postgres     # start psql
+    sudo -u 'linix-username' psql   # start psql directly
+
+    <!-- Inside postgres -->
+    postgres=#
+    \q                      # quit
+    \conninfo               # check connection info
+
+
+    To restart postgresql on local:
+    sudo /etc/init.d/postgresql restart
 
 
 

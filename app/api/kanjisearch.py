@@ -1,4 +1,4 @@
-""" 
+''' 
     =============================================
     =============================================
     <<<<<<<<<<<<<<<<<< README >>>>>>>>>>>>>>>>>>>
@@ -13,6 +13,7 @@
     - 4 -   SQL QUERIES                 350
     - 5 -   HELPER FUNCTIONS            475
 
+'''
 
 
 
@@ -21,11 +22,12 @@
 
 
 
-
+'''
     =============================================
     <<<<<<<<<< - 1 - PROGRAM STRUCTURE >>>>>>>>>>
     =============================================
 
+    (0) GLOBAL DECLARATIONS
 
     (1) MAIN SEARCH FEATURE
         Flask Route:        @bp.route('/getsearch/<search_term>')
@@ -76,7 +78,7 @@
 
         Data Structuring:   nest_kanji_result(result)
 
-"""
+'''
 
 
 
@@ -96,12 +98,11 @@
 
 
 
-
-"""
+'''
     =============================================
     <<<<<<<<<<< - 2 - IMPORTS & SETUP >>>>>>>>>>>
     =============================================
-"""
+'''
 # General
 import copy
 import os
@@ -119,12 +120,24 @@ from app.models import User, KanjiData
 from app.api import bp
 from app.api.errors import bad_request
 
-
+''' GLOBAL DECLARATIONS '''
+# CONSTANTS FOR KANJI DATA
+ORDER = 0
+FREQUENCY = 1
+KANJI = 2
+TYPE = 3
+MEANINGS = 4
+BUSHU = 5
+RADICALS = 6
+ONYOMI = 6
+KUNYOMI = 7
+MNEMONIC = 8
+NOTES = 9
 
 
 @bp.route('/search/<search_term>', methods=['GET'])
 def search(search_term):
-    """ DESCRIPTION
+    ''' DESCRIPTION
         Main search feature from search bar input. It finds the searchTerm kanji 
         and returns list of all derivatives broken down by derivation depth level.
         The string search term term can be one of many things: an order number, 
@@ -164,7 +177,7 @@ def search(search_term):
             ]
 
         If there is no data found, returned as an array with boiler plate
-    """
+    '''
     print("search_term:", search_term, "@bp.route('/search/<search_term>', methods=['GET'])")
 
     NO_DATA = jsonify([ ['', '', [], [], 'NO_DATA'] ])
@@ -172,30 +185,30 @@ def search(search_term):
     # search_term = search_term.strip()
     
 
-    """ (1) ORDER NUMBER & ONYOMI SEARCH
+    ''' (1) ORDER NUMBER & ONYOMI SEARCH
         Searches only a few columns because special cases and extra
         functionality are taken care of by search queries below 
-    """
+    '''
     columns1 = ["Onyomi_Reading1", "Onyomi_Reading2"]
     search_data = main_search_query(search_term, columns1)
 
 
-    """ (2) KUNYOMI SEARCH
+    ''' (2) KUNYOMI SEARCH
         Searches for kunyomi with period "." between each letter because 
         Kunyomi_Reading1 and Kunyomi_Reading2 columns sometimes have a
         "." in the entry string in an unpredictable place. Thus, checking 
         all possible occurences of "." and without it is necessary to get
         result.
-    """
+    '''
     columns2 = ["Kunyomi_Reading1", "Kunyomi_Reading2"]
     kunyomis = punctuate_kunyomi(search_term)
     for kunyomi in kunyomis:
         search_data.update(main_search_query(kunyomi, columns2))
 
 
-    """ (3) KANJI, MEANINGS AND DERIVATIVES SEARCH
+    ''' (3) KANJI, MEANINGS AND DERIVATIVES SEARCH
         Searches for all derivative kanji of search term 
-    """
+    '''
     search_data.update(derivative_kanji_query(search_term))
 
     if search_data:
@@ -205,10 +218,10 @@ def search(search_term):
 
 @bp.route('/byradicals/<delimiter>/<search_term>', methods=['GET'])
 def byradicals(delimiter, search_term):
-    """ DESCRIPTION
+    ''' DESCRIPTION
         Searches only a few columns because special cases and extra
         functionality are taken care of by search queries below
-    """
+    '''
 
     print(search_term, "@bp.route('/byradicals/<delimiter>/<search_term>', methods=['GET'])")
     # columns = ["[Order1]",
@@ -224,8 +237,9 @@ def byradicals(delimiter, search_term):
             radicals.append(search_term[previous_delimiter + 1:idx])
             previous_delimiter = idx
 
-    """ Searches for all derivative Kanji of search term 
-        and finds the INTERSECTION of query results """
+    ''' Searches for all derivative Kanji of search term 
+        and finds the INTERSECTION of query results
+    '''
     intersection_of_results = derivative_kanji_query(radicals[0])
     for radical in radicals[1:]:
         nested_query_results1 = copy.deepcopy(intersection_of_results)
@@ -242,7 +256,7 @@ def byradicals(delimiter, search_term):
 
 @bp.route('/kanji/<search_term>', methods=['GET'])
 def kanji(search_term):
-    """ DESCRIPTION
+    ''' DESCRIPTION
         Primary search function. getKanjiData takes a search term 
         and returns the flashcard data
 
@@ -274,11 +288,11 @@ def kanji(search_term):
                 ["One.m is just a line.r..."], 
                 [""] 
             ]
-    """
-    """ 
+    '''
+    ''' 
         To test CJK characters with curl in terminal use:
         search_term = search_term.encode('iso-8859-1').decode('utf8')
-    """
+    '''
 
     print("search_term:", search_term, "@bp.route('/kanji/<search_term>', methods=['GET'])")
     result = KanjiData.query.filter_by(Order=int(search_term)).first()
@@ -351,15 +365,15 @@ def testroute(search_term):
 
 
 
-"""
+'''
     =============================================
     <<<<<<<<<<<< - 4 - SQL QUERIES  >>>>>>>>>>>>>
     =============================================
-"""
+'''
 def main_search_query(search_term, columns):
-    """ This query searches based on columns below that DO NOT
+    ''' This query searches based on columns below that DO NOT
         require deep searches of kanji derived from search term.
-    """
+    '''
     # results = KanjiData.query.filter(getattr(KanjiData, column) == search_term)
     DATABASE_URL = os.environ.get('DATABASE_URL')
     if DATABASE_URL:
@@ -433,13 +447,13 @@ def derivative_kanji_query(search_term):
         nested = nest_query_result(result)
         nested_results[result[0]] = nested
 
-        """ `depth` variable provides derivation level. Initialize at 0 
+        ''' `depth` variable provides derivation level. Initialize at 0 
             because the kanji from search_term is at the zeroeth. 
             From it, the while continue_search below will search for its descendants
             For example: 一 0 > 三 1 > 王 2 > 玉 3 > 国 4 etc.
             Append `depth` after deep copy so deep copy does not have a
             depth in case duplicates are found later.
-        """
+        '''
         depth = 0
         deep_copy = copy.deepcopy(nested_results)
         for value in nested_results.values():
@@ -531,10 +545,10 @@ def suggestions_query(search_term, columns):
 
 
 def add_bushu(radicals):
-    """ This extracts kanji version of a radical.
+    ''' This extracts kanji version of a radical.
         For example, for "tree" it finds the kanji for its 
         radicals, "big" and "bar", and returns ["大", "|"]
-    """
+    '''
     bushus = []
     for radical in radicals:
         # bushu = KanjiData.query.filter_by(
@@ -554,17 +568,17 @@ def add_bushu(radicals):
 
 
 
-"""
+'''
     =============================================
     <<<<<<<<<< - 5 - HELPER FUNCTIONS  >>>>>>>>>>
     =============================================
-"""
+'''
 def nest_query_result(result):
-    """ DESCRIPTION
+    ''' DESCRIPTION
         This is the search display data. nest_search_result appends 
         the "columns" of json response as list within a larger list.
         This is for use with RAW SQL queries returned as tuples.
-    """
+    '''
     nested_result = [
         result[0],                          # ORDER
         result[2],                          # KANJI
@@ -574,11 +588,11 @@ def nest_query_result(result):
 
 
 def nest_search_result(result):
-    """ DESCRIPTION
+    ''' DESCRIPTION
         This is the search display data. nest_search_result appends 
         the "columns" of json response as list within a larger list.
         This for use with ORM queries returned as objects.
-    """
+    '''
     r = result
     nested_result = []
     nested_result.append(r.Order)
@@ -588,11 +602,11 @@ def nest_search_result(result):
 
 
 def nest_kanji_result(result):
-    """ This is the kanji card's data. nest_kanji_result appends the
+    ''' This is the kanji card's data. nest_kanji_result appends the
         "columns" of json response as list within a larger list. 
         Some responses are semantically related so multiple columns 
         will be further nested into a list.
-    """
+    '''
     r = result
     nested_result = []
     # row[0:2] - Appends ORDER, KANJI, and TYPE
@@ -627,13 +641,13 @@ def nest_kanji_result(result):
 
 
 def punctuate_kunyomi(search_term):
-    """ DESCRIPTION
+    ''' DESCRIPTION
         Searches for kunyomi with period "." between each letter because 
         Kunyomi_Reading1 and Kunyomi_Reading2 columns sometimes have a
         "." in the entry string in an unpredictable place. Thus, checking 
         all possible occurences of "." and without it is necessary to get
         result.
-    """
+    '''
     if '.' in search_term:
         # strip out "."
         index = search_term.find(".")
