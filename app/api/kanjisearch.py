@@ -122,7 +122,7 @@ from app.api.errors import bad_request
 
 ''' GLOBAL DECLARATIONS '''
 # CONSTANTS FOR KANJI DATA
-ORDER = 0
+ID = 0
 FREQUENCY = 1
 KANJI = 2
 TYPE = 3
@@ -142,7 +142,7 @@ def search(search_term):
         and returns list of all derivatives broken down by derivation depth level.
         The string search term term can be one of many things: an order number, 
         a kanji, a meaning, a radical, or a reading.
-        The search function has three parts: (1) ORDER # and ONYOMI SEARCH, 
+        The search function has three parts: (1) ID NUMBER and ONYOMI SEARCH, 
         (2) KUNYOMI SEARCH, (3) KANJI AND DERIVATIVES SEARCH.
 
         PARAMETERS searchTerm: string
@@ -154,8 +154,8 @@ def search(search_term):
 
         KEY: integer : VALUE: array
             { 
-                Order: [Order #, Kanji, [...meanings], [...radicals], Heading/Depth], 
-                Order: [...], 
+                Id: [Id #, Kanji, [...Meanings], [...Radicals], Heading/Depth], 
+                Id: [...], 
                 ...
             }
         Example:
@@ -166,7 +166,7 @@ def search(search_term):
 
         If there is data found, returned as an array or arrays
             [
-                [Order #, Kanji, [...meanings], [...radicals], Heading/Depth], 
+                [Id #, Kanji, [...Meanings], [...Radicals], Heading/Depth], 
                 [...],
                 ...
             ]
@@ -185,7 +185,7 @@ def search(search_term):
     # search_term = search_term.strip()
     
 
-    ''' (1) ORDER NUMBER & ONYOMI SEARCH
+    ''' (1) ID NUMBER & ONYOMI SEARCH
         Searches only a few columns because special cases and extra
         functionality are taken care of by search queries below 
     '''
@@ -265,11 +265,11 @@ def kanji(search_term):
         RETURNS kanjiData: array
         DATA STRUCTURE of kanjiData:
             [
-                [Order], 
+                [Id], 
                 [Kanji],
-                [Meanings], 
-                [Bushu],
-                [Radicals], 
+                [Meanings...], 
+                [Bushu...],
+                [Radicals...], 
                 [Onyomi],
                 [Kunyomi], 
                 [Mnemonic],
@@ -295,7 +295,7 @@ def kanji(search_term):
     '''
 
     print("search_term:", search_term, "@bp.route('/kanji/<search_term>', methods=['GET'])")
-    result = KanjiData.query.filter_by(Order=int(search_term)).first()
+    result = KanjiData.query.filter_by(Id=int(search_term)).first()
     if result:
         nested = nest_kanji_result(result)
         nested[4] = add_bushu(nested[5])
@@ -386,18 +386,18 @@ def main_search_query(search_term, columns):
 
     search_data = {}
     if search_term.isdigit():
-        query_order = f"""
+        query_id = f"""
             SELECT *
                 FROM kanji_data
-                WHERE "Order"={search_term}
+                WHERE "Id"={search_term}
         """
-        res = cursor.execute(query_order)
+        res = cursor.execute(query_id)
         result = cursor.fetchone()
         if result:
             nested = nest_query_result(result)
-            nested.append("Order")
-            search_data[str(result[0]) + "Order"] = nested
-            # concatenating Order # and column preserves this result if
+            nested.append("Id")
+            search_data[str(result[0]) + "Id"] = nested
+            # concatenating Id # and column preserves this result if
             # a duplicate is found later in the derivative search
             # search results should display it twice if found as both 
             # an On/Kunyomi reading and a derivative kanji
@@ -478,7 +478,7 @@ def derivative_kanji_query(search_term):
                         # Searches all kanji again effectively making this recursive
 
                         # start1 = time.time()
-                        # "Order", "Frequency", "Kanji", "Type", "Meaning1", "Meaning2", "Meaning3"
+                        # "Id", "Frequency", "Kanji", "Type", "Meaning1", "Meaning2", "Meaning3"
                         query_derivatives = f"""
                             SELECT *
                                 FROM kanji_data 
@@ -580,7 +580,7 @@ def nest_query_result(result):
         This is for use with RAW SQL queries returned as tuples.
     '''
     nested_result = [
-        result[0],                          # ORDER
+        result[0],                          # ID
         result[2],                          # KANJI
         [result[4], result[5], result[6]]   # MEANINGS
     ]
@@ -595,7 +595,7 @@ def nest_search_result(result):
     '''
     r = result
     nested_result = []
-    nested_result.append(r.Order)
+    nested_result.append(r.Id)
     nested_result.append(r.Kanji)
     nested_result.append([r.Meaning1, r.Meaning2, r.Meaning3])
     return nested_result
@@ -609,8 +609,8 @@ def nest_kanji_result(result):
     '''
     r = result
     nested_result = []
-    # row[0:2] - Appends ORDER, KANJI, and TYPE
-    nested_result.append([r.Order])
+    # row[0:2] - Appends ID, KANJI, and TYPE
+    nested_result.append([r.Id])
     nested_result.append([r.Kanji])
     nested_result.append([r.Type])
 
