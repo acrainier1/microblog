@@ -1,10 +1,10 @@
-Order1,Frequency1,Kanji1,Type1,Meaning1,Meaning2,Meaning3,Bushu1,Bushu2,Bushu3,Bushu4,Radical1,Radical2,Radical3,Radical4,Onyomi Reading1,Onyomi Reading2,Kunyomi Reading1,Kunyomi Reading2,Mnemonic,Notes
+Id1,Frequency1,Kanji1,Type1,Meaning1,Meaning2,Meaning3,Bushu1,Bushu2,Bushu3,Bushu4,Radical1,Radical2,Radical3,Radical4,Onyomi Reading1,Onyomi Reading2,Kunyomi Reading1,Kunyomi Reading2,Mnemonic,Notes
 1,2,一,Kanji,one,,,,,,,horizontal line,,,,ICHI,ITSU,hito.tsu,,One.m is just a line.r. One ichy.o mustache is a hit.k or.k miss fashion-wise.,
 2,9,二,Kanji,two,,,,,,,horizontal line,horizontal line,,,NI,,futa.tsu,,"Two.m is two.r lines.r. A knee.o and a foot.k, you have two.",
 3,14,三,Kanji,three,,,,,,,one,two,,,SAN,,mi.ttsu,,Three.m equals one.r plus two.r. Three looks like a sane.o san.odwich with meats.k between two buns.,
 4,,囗,Radical,box,,,,,,,square,,,,,,,,A box.m is square.r-shaped. This radical boxes other radicals inside of it.,"This radical never appears by itself, only as a part of other characters."
 5,,丿,Radical,slash,,,,,,,katakana NO,,,,,,,,The slash.m radical looks like katakana.r  ノ.r.,"This radical never appears by itself, only as a part of other characters."
-6,,⺃,Radical,hook,,,,,,,hook shape,,,,,,,,The hook.m radical is just a hook.r shape.r.,"This radical never appears by itself, only as a part of other characters."
+6,,⺃,Radical,hook,,,,,,,hook shape,,,,,,,,The hook.m radical with a hook.r shape.r.,"This radical never appears by itself, only as a part of other characters."
 7,,儿,Radical,legs,,,,,,,slash,hook,,,,,,,A pair of legs.m looks like a slash.r and a hook.r.,"This radical never appears by itself, only as a part of other characters."
 8,47,四,Kanji,four,,,,,,,box,legs,,,SHI,,yo.tsu,yon,"A four.m sided box.r standing on legs.r. She.o in particular, worked yonder.k the four hills yo.k.",
 9,,T,Radical,letter T,,,,,,,capital T,,,,,,,,The letter.m T.m radical looks like a capital T.r.,"This radical never appears by itself, only as a part of other characters."
@@ -84,7 +84,7 @@ Order1,Frequency1,Kanji1,Type1,Meaning1,Meaning2,Meaning3,Bushu1,Bushu2,Bushu3,B
 83,181,川,Kanji,river,,,,,,,broken legs,bar,,,SEN,,kawa,,"In the river.m, they broke.r legs.r with a bar.r.: sen.otenced to a beating for cowardice.k.",
 84,386,州,Kanji,province,,,,,,,small,river,,,SHUU,,su,,This province.m has small.r rivers.r. Remove your shoes.o and swim.k in them.,
 85,,マ,Radical,mammal,,,,,,,katakana MA,,,,,,,,Mammal.m head.m sounds like katakana.r マ.r radical.,"This radical never appears by itself, but it is the same shape as katakana MA so use the mnemonic ""mammal."""
-86,792,了,Kanji,finish,,,,,,,mammal skull,barb,,,RYOU,,,,They finished.m the fence with a mammal.r skull.r spiked on the barb.r wire to contain the riot.o.,
+86,792,了,Kanji,finish,,,,,,,mammal,barb,,,RYOU,,,,They finished.m the fence with mammals.r spiked on the barbed.r wire to contain and finish the riot.o.,
 87,72,子,Kanji,child,,,,,,,one,finish,,,SHI,,ko,,"The child.m, only one.r task she completed.r. She.o in particular, co.ooperated with other children though.",
 88,240,男,Kanji,man,,,,,,,field,power,,,DAN,,otoko,,"Men.m toil in the fields.r with powerful.r man muscles. Dan.o, the man, is oh.k too.k cool.k for farm work.",
 89,,ナ,Radical,awning,,,,,,,katakana NA,one,slash,,,,,,It looks like an awning.m or a katakana.r ナ.r.,"The 'awning' radical, ナ, can also be analyzed as 'one', and 'slash', 丿."
@@ -130,132 +130,132 @@ Order1,Frequency1,Kanji1,Type1,Meaning1,Meaning2,Meaning3,Bushu1,Bushu2,Bushu3,B
 129,131,山,Kanji,mountain,,,,,,,bar,open box,,,SAN,,yama,,The mountain.m top had a bar.r in an open.r box.r. A sane.o farmer would but yams.k in it.,
 130,13,出,Kanji,exit,,,,,,,mountain,mountain,,,SHUTSU,,da.su,de.ru,"He exists,.m leaves,.m and climbs two.r mountains.r! There he shoots.o deer.k. Dat's.k his hobby.",
 131,787,岩,Kanji,boulder,,,,,,,mountain,stone,,,GAN,,iwa,,Boulders.m from mountains.r are perilous stones.r. I got gangrene.o. I.k was.k crushed by a boulder.,
-132,56,入,Kanji,enter,,,,,,,enter,,,,NYUU,,hai.ru ,ire.ru,Enter.m and insert.m things into a flipped-over.r person.r! The new.o sensation will be irritating.k their hairy.k parts!,This kanji looks like person 人.(hito) but flipped horizontally (mirror image).
-133,688,久,Kanji,long time,,,,,,,slash,enter,,,KYUU,,hisa.shii,,"A long.m time.m ago, I slashed.r and entered.r the arena. A cute.o cheerleader was hissing.k at me.",
-134,1404,也,Kanji,classic,,,,,,,hook,katakana SE,,,YA,,nari,,"The classical.m theatre hooked.r you in with a katakana.r セ.r. The crowed went ""Yay!"".o when the narrator.k of the play said セ.","This word used to mean ""to be"" in Classical Japanese."
-135,543,他,Kanji,other,,,,,,,standing man,classic,,,TA,,hoka,,The other.m man.r standing.r is.r classically.r trained. He tap.o dances with hookers.k and others as well!,
-136,157,心,Kanji,heart,,,,,,,legs,bloody,bloody,,SHIN,,kokoro,,My heart.m pumps the same bloody.r blood.r as Captain Hook.r. My shins.o step on hearts like cockroaches.k.,
-137,265,必,Kanji,certain,,,,,,,heart,slash,,,HITSU,,kanara.zu,,"Certainly.m, a slash.r through the heart.r hurts. It hits.o you.o like canary.k bird crashing into a window.",
-138,1812,皿,Kanji,plate,,,,,,,eye,one,,,,,sara,,A plate.m is sort of like a sideways eye.r; a flat one.r. Sarah.k washes the dishes.,
-139,832,血,Kanji,blood,,,,,,,bloody,plate,,,KETSU,,chi,,"There was blood.m on the bloody.r plate.r. Like ketchup.o, it's red and cheap.k to make.",
-140,1313,冊,Kanji,counter for books​,,,,,,,plate,staple,,,SATSU,,,,Counting.m books.m is like putting plates.r in an upside-down.r box.r. It doesn't satisfy.o and could be disastrous.,
-141,,而,Radical,moustache,,,,,,,one,bloody,staple,bar,,,,,"The moustache.m is one.r bloody.r cool stache shaped like a staple.r, not like a bar.r","This radical never appears by itself, only as a part of other characters."
-142,128,平,Kanji,flat,,,,,,,dry,horny,,,HEI,,hira.tai,taira,"The flat.m surface was dry.r and riddled with horns.r. I hate.o the dessert. Here.k, I tire.k out.",
-143,,㐄,Radical,stock,,,,,,,right-open box,bar,,,,,,,The stock.m goes into the right.r open.r box.r and placed on the bars.r.,"This radical never appears by itself, only as a part of other characters."
-144,6,年,Kanji,year,,,,,,,noon,one,,,NEN,,toshi,,Every year.m gun.r stock.r diminishes. Neanderthals.o tooshes.k are many years old.,
-145,,䒑,Radical,sewer lid,,,,,,,lid,slash,,,,,,,The sewer.m lid.m is a lid.r that got slashed.r open.,"This radical never appears by itself, only as a part of other characters."
-146,58,立,Kanji,stand up,,,,,,,lid,sewer lid,,,RITSU,,ta.tsu,ta.teru,I stand.m up and place lids.r over sewer.r lids.r for a living. Ritsy.o people never taste.k manual labor.,
-147,,𠆢,Radical,roof,,,,,,,pitched roof,,,,,,,,The roof.m radical actually looks like a pitched.r roof.r.,"This radical never appears by itself, only as a part of other characters."
-148,617,介,Kanji,mediate,,,,,,,roof,broken legs,,,KAI,,,,We mediated.m the argument under the court's roof.r to prevent broken.r legs.r. Kyle.o helped mediate.,
-149,158,界,Kanji,world,,,,,,,field,mediate,,,KAI,,,,The world.m is a field.r of opportunity mediated.r by chance. Kyle's.o kite.o flies over the world.,
-150,1850,瓦,Kanji,tile,,,,,,,one,nine,bloody,,GA,,kawara,,The tiles.m measured one.r by nine.r bloody.r inches. A gallery.o full of teeny cowardly.k tiles!,
-151,,彑,Radical,pig's head,,,,,,,letter L,yuan,,,,,,,A pig's.m head.m radical looks a yuan.r modified into a flag.,"This radical never appears by itself, only as a part of other characters."
-152,914,互,Kanji,reciprocal,,,,,,,one,pig's head,,,GO,,taga.i,,Let's reciprocate.m and kiss one.r pig's.r head.r. Let's go.o reciprocate our lust together.k.,
-153,684,王,Kanji,king,,,,,,,three,bar,,,OU,,,,The king.m rules with three.r bars.r. Oh.o shit! The king is here!,
-154,95,主,Kanji,master,,,,,,,bloody,king,,,SHU,,omo,,"Our master.m is the bloody.r king.r! Shoot.o anyone our master finds ominous.k.
+132,56,入,Kanji,enter,,,,,,,person,,,,NYUU,,ire.ru,hai.ru,Enter.m into a flipped-over person.r! The new.o sensation will irritate.k their hairy.k parts as you enter!,This kanji looks like person 人.(hito) but flipped horizontally (mirror image).
+133,1404,也,Kanji,classic,,,,,,,hook,katakana SE,,,YA,,nari,,"The classical.m theatre hooked.r you in with a katakana.r セ.r. The crowed went ""Yay!"".o when the narrator.k of the play said セ.","This word used to mean ""to be"" in Classical Japanese."
+134,543,他,Kanji,other,,,,,,,standing man,classic,,,TA,,hoka,,The other.m man.r standing.r is.r classically.r trained. He tap.o dances with hookers.k and others as well!,
+135,157,心,Kanji,heart,,,,,,,legs,bloody,bloody,,SHIN,,kokoro,,My heart.m pumps the same bloody.r blood.r as Captain Hook.r. My shins.o step on hearts like cockroaches.k.,
+136,265,必,Kanji,certain,,,,,,,heart,slash,,,HITSU,,kanara.zu,,"Certainly.m, a slash.r through the heart.r hurts. It hits.o you.o like canary.k bird crashing into a window.",
+137,1812,皿,Kanji,plate,,,,,,,eye,one,,,,,sara,,A plate.m is sort of like a sideways eye.r; a flat one.r. Sarah.k washes the dishes.,
+138,832,血,Kanji,blood,,,,,,,bloody,plate,,,KETSU,,chi,,"There was blood.m on the bloody.r plate.r. Like ketchup.o, it's red and cheap.k to make.",
+139,1313,冊,Kanji,counter for books​,,,,,,,plate,staple,,,SATSU,,,,Counting.m books.m is like putting plates.r in an upside-down.r box.r. It doesn't satisfy.o and could be disastrous.,
+140,,而,Radical,moustache,,,,,,,one,bloody,staple,bar,,,,,"The moustache.m is one.r bloody.r cool stache shaped like a staple.r, not like a bar.r","This radical never appears by itself, only as a part of other characters."
+141,128,平,Kanji,flat,,,,,,,dry,horny,,,HEI,,hira.tai,taira,"The flat.m surface was dry.r and riddled with horns.r. I hate.o the dessert. Here.k, I tire.k out.",
+142,,㐄,Radical,stock,,,,,,,right-open box,bar,,,,,,,The stock.m goes into the right.r open.r box.r and placed on the bars.r.,"This radical never appears by itself, only as a part of other characters."
+143,6,年,Kanji,year,,,,,,,noon,one,,,NEN,,toshi,,Every year.m gun.r stock.r diminishes. Neanderthals.o tooshes.k are many years old.,
+144,,䒑,Radical,sewer lid,,,,,,,lid,slash,,,,,,,The sewer.m lid.m is a lid.r that got slashed.r open.,"This radical never appears by itself, only as a part of other characters."
+145,58,立,Kanji,stand up,,,,,,,lid,sewer lid,,,RITSU,,ta.tsu,ta.teru,I stand.m up and place lids.r over sewer.r lids.r for a living. Ritsy.o people never taste.k manual labor.,
+146,,𠆢,Radical,roof,,,,,,,pitched roof,,,,,,,,The roof.m radical actually looks like a pitched.r roof.r.,"This radical never appears by itself, only as a part of other characters."
+147,617,介,Kanji,mediate,,,,,,,roof,broken legs,,,KAI,,,,We mediated.m the argument under the court's roof.r to prevent broken.r legs.r. Kyle.o helped mediate.,
+148,158,界,Kanji,world,,,,,,,field,mediate,,,KAI,,,,The world.m is a field.r of opportunity mediated.r by chance. Kyle's.o kite.o flies over the world.,
+149,1850,瓦,Kanji,tile,,,,,,,one,nine,bloody,,GA,,kawara,,The tiles.m measured one.r by nine.r bloody.r inches. A gallery.o full of teeny cowardly.k tiles!,
+150,,彑,Radical,pig's head,,,,,,,letter L,yuan,,,,,,,A pig's.m head.m radical looks a yuan.r modified into a flag.,"This radical never appears by itself, only as a part of other characters."
+151,914,互,Kanji,reciprocal,,,,,,,one,pig's head,,,GO,,taga.i,,Let's reciprocate.m and kiss one.r pig's.r head.r. Let's go.o reciprocate our lust together.k.,
+152,684,王,Kanji,king,,,,,,,three,bar,,,OU,,,,The king.m rules with three.r bars.r. Oh.o shit! The king is here!,
+153,95,主,Kanji,master,,,,,,,bloody,king,,,SHU,,omo,,"Our master.m is the bloody.r king.r! Shoot.o anyone our master finds ominous.k.
 ",
-155,737,玉,Kanji,ball,,,,,,,king,bloody,,,GYOKU,,tama,,The ball.m of the king.r got bloody.r. because he threw it at gawkers.o eating tamales.k.,
-156,3,国,Kanji,country,,,,,,,box,ball,,,KOKU,,kuni,,The country.m boxed.r in the foreign ball.r players after customs found coke.o in their baggage. How cunning.k!,
-157,75,全,Kanji,all,,,,,,,roof,king,,,ZEN,,sube.te,,All.m helps put a roof.r over the king.r. Even the zen.o priests subtly.k go all in.,
-158,53,金,Kanji,gold,,,,,,,all,horny,,,KIN,,kane,,"For gold.m, all.r the golden horny.r people will do anything. My rich kin.o walk with a golden cane.k.",
-159,,弋,Radical,ceremony,,,,,,,one,hook,bloody,,,,,,The ceremony.m is one.r more social hook.r to take our bloody.r time. Annoying cermonies.,"This radical never appears by itself, only as a part of other characters."
-160,251,式,Kanji,formal,,,,,,,ceremony,industry,,,SHIKI,,,,The formal.m ceremony.r was crafted by the wedding industry.r. She.o keeps.o up the formalities.,
-161,,戈,Radical,spear,,,,,,,ceremony,slash,,,,,,,"With a spear.m, he entered the ceremony.r and slashed.r everyone.
+154,737,玉,Kanji,ball,,,,,,,king,bloody,,,GYOKU,,tama,,The ball.m of the king.r got bloody.r. because he threw it at gawkers.o eating tamales.k.,
+155,3,国,Kanji,country,,,,,,,box,ball,,,KOKU,,kuni,,The country.m boxed.r in the foreign ball.r players after customs found coke.o in their baggage. How cunning.k!,
+156,75,全,Kanji,all,,,,,,,roof,king,,,ZEN,,sube.te,,All.m helps put a roof.r over the king.r. Even the zen.o priests subtly.k go all in.,
+157,53,金,Kanji,gold,,,,,,,all,horny,,,KIN,,kane,,"For gold.m, all.r the golden horny.r people will do anything. My rich kin.o walk with a golden cane.k.",
+158,,弋,Radical,ceremony,,,,,,,one,hook,bloody,,,,,,The ceremony.m is one.r more social hook.r to take our bloody.r time. Annoying cermonies.,"This radical never appears by itself, only as a part of other characters."
+159,251,式,Kanji,formal,,,,,,,ceremony,industry,,,SHIKI,,,,The formal.m ceremony.r was crafted by the wedding industry.r. She.o keeps.o up the formalities.,
+160,,戈,Radical,spear,,,,,,,ceremony,slash,,,,,,,"With a spear.m, he entered the ceremony.r and slashed.r everyone.
 ","This radical never appears by itself, only as a part of other characters."
-162,66,代,Kanji,change,,,,,,,standing man,ceremony,,,DAI,,ka.wari,ba.keru,The wedding changed.m the standing.r man.r after the ceremony.r. The coward.k will change diapers at a bakery.k.,
-163,1816,伐,Kanji,attack,,,,,,,standing man,spear,,,BATSU,,kiri,,"Attacking.m the standing.r man.r holding a spear.r, the bats.o killed.k him.",
-164,,𠄌,Radical,scythe,,,,,,,katakana RE,,,,,,,,An upside down scythe.m looks like a katakana.r レ.r.,"This radical never appears by itself, but it is the same shape as katakana RE. "
-165,,𧘇,Radical,chain mail,,,,,,,standing man,scythe,scissor,,,,,,The chain.m mail.m the standing.r man.r wore resisted scythe.r swings and scissor.r cuts.,
-166,1214,衣,Kanji,clothes,,,,,,,lid,chain mail,,,I,,koromo,,"The clothes.m under the lid.r were chain.r mail.r. I,.o and.o only.o I,.o wore clothes while holding the column.k against the enemy.",
-167,77,表,Kanji,diagram,,,,,,,master,chain mail,,,HYOU,,omote,,It's a diagram.m of our master's.r is chain.r mail.r. A diagram his hy.odr#o.oelectric plant .,
-168,501,良,Kanji,good,,,,,,,white,chain mail,,,RYOU,,i.i,yo.i,"The good.m wear white.r chain.r mail.r in heaven. It's a riot.o up there, like taking good E.k, yo.k!",
-169,328,食,Kanji,eat,,,,,,,roof,good,,,SHOKU,,ta.beru,,"We ate.m under a roof.r a good.r meal. It shocked.o us how well the table.k was set up.
+161,66,代,Kanji,change,,,,,,,standing man,ceremony,,,DAI,,ka.wari,ba.keru,The wedding changed.m the standing.r man.r after the ceremony.r. The coward.k will change diapers at a bakery.k.,
+162,1816,伐,Kanji,attack,,,,,,,standing man,spear,,,BATSU,,kiri,,"Attacking.m the standing.r man.r holding a spear.r, the bats.o killed.k him.",
+163,,𠄌,Radical,scythe,,,,,,,katakana RE,,,,,,,,An upside down scythe.m looks like a katakana.r レ.r.,"This radical never appears by itself, but it is the same shape as katakana RE. "
+164,,𧘇,Radical,chain mail,,,,,,,standing man,scythe,scissor,,,,,,The chain.m mail.m the standing.r man.r wore resisted scythe.r swings and scissor.r cuts.,
+165,1214,衣,Kanji,clothes,,,,,,,lid,chain mail,,,I,,koromo,,"The clothes.m under the lid.r were chain.r mail.r. I,.o and.o only.o I,.o wore clothes while holding the column.k against the enemy.",
+166,77,表,Kanji,diagram,,,,,,,master,chain mail,,,HYOU,,omote,,It's a diagram.m of our master's.r is chain.r mail.r. A diagram his hy.odr#o.oelectric plant .,
+167,501,良,Kanji,good,,,,,,,white,chain mail,,,RYOU,,i.i,yo.i,"The good.m wear white.r chain.r mail.r in heaven. It's a riot.o up there, like taking good E.k, yo.k!",
+168,328,食,Kanji,eat,,,,,,,roof,good,,,SHOKU,,ta.beru,,"We ate.m under a roof.r a good.r meal. It shocked.o us how well the table.k was set up.
 ",
-170,12,長,Kanji,long,,,,,,,bar,three,chain mail,,CHOU,,naga.i,,The long.m iron bars.r for the three.r sets of chain.r mail.r. They choose.o long negative.k staffs.,
-171,,匚,Radical,right-open box,,,,,,,one,letter L,,,,,,,Right-open.m box.m is a one.r stacked over a letter.r L. A hungry Pacman.,"This radical never appears by itself, only as a part of other characters."
-172,137,区,Kanji,district,,,,,,,right-open box,scissors,,,KU,,,,In this district.m they put scissors.r in right-open.r box.r. They think it's cool.o.,
-173,1673,凶,Kanji,wicked,,,,,,,open box,scissors,,,KYOO,,,,The wicked.m villian.m cut him up with scissors.r and put him in an open.r box.r in Kyoto.o because he was wicked!,
-174,,厶,Radical,private,,,,,,,katakana MU,,,,,,,,"In private.m, we think the katakana.r 厶.r is really radical!","This radical never appears by itself, but it is the same shape as katakana MU."
-175,,云,Radical,it-is-said,,,,,,,two,private,,,UN,TEN,mi,,It-is-said.m that the two.r private.r investigators are un.ohappy.,"Rare kanji. Mostly used as a radical or in names. Its real meaning is ""to say.'"
-176,819,仏,Kanji,Buddha,,,,,,,standing man,private,,,FUTSU,BUTSU,hotoke,,"The Buddhist.m standing.r man.r is very private.r. He never plays footsie.o, kisses butts.k or eats hot.k cakes.k.",
-177,416,伝,Kanji,transmit,,,,,,,standing man,it-is-said,,,DEN,,tsuda.u,,Transmit.m the message to the standing.r man.r as it-is-said.r. Transmit it from Denmark.o to TSudan.k.,
-178,61,米,Kanji,rice,,,,,,,horns,tree,,,BEI,MEI,kome,,American.m rice.m comes from horny.r trees.r. Bake.o and make.o a rice cake for the comencement.k ceremony.,
-179,102,来,Kanji,come,,,,,,,one,rice,,,RAI,,ku.ru,,"Come.m and get one.r rice.r bowl. Right.o now, come and have a coors.k lite.",
-180,,夭,Radical,calamity,,,,,,,slash,big,,,,,,,It's a calamity.m to get slashed.r big.r time.,"This radical never appears by itself, only as a part of other characters."
-181,1294,矢,Kanji,arrow,,,,,,,gun,big,,,SHI,,ya,,"An arrow.m is stealthier than a gun.r that is big.r. She.o in particular, will murder ya.k with arrows.",
-182,447,失,Kanji,error,,,,,,,gun,husband,,,SHITSU,,ushina.u,,"Tis an error.m to shoot, with a gun.r, your husband.r. He shits.o himself. You.k should.k know.k this is an error.",
-183,1788,朱,Kanji,crimson,,,,,,,gun,tree,,,SHU,,ake,,Crimson.m death by gunt.r of tree.r hanging. Shoot.o him. Crimson wounds. An ache.k. ,
-184,173,先,Kanji,previous,,,,,,,gun,ground,,,SEN,,saki,ma.zu,"Previously.m, I kicked the gun.r on the ground.r with my legs.r. Then, I sent.o him off for his own sake.k in a previously-owned Mazda.k.",
-185,437,医,Kanji,doctor,,,,,,,arrow,right-open box,,,I,,,,"The doctor.m said to put the arrow.r in a right-open.r box.o. I,.o and.o only.o I,.o was healed by that battlefield doctor.",
-186,1720,垂,Kanji,hang,,,,,,,knight,mouth,ground,,SUI,,ta.reru,,"Hanging.m from the ledge, the knight's.r mouth.r faced the ground.r. The Swiss.o knight tirelessly.k hung on for dear life.",
-187,377,乗,Kanji,ride,,,,,,,hang,tree,,,JOU,,no.ru,,He rode.m here to see the hanging.r from a tree.r. Joe.o rode from Norway.k to see it.,
-188,,勹,Radical,wrap,,,,,,,slash,rake,,,,,,,Wrap.m your grip on the handle and slash.r away with the rake.r!,"This radical never appears by itself, only as a part of other characters."
-189,,勺,Kanji,ladle,,,,,,,wrap,bloody,,,SHAKU,,,,"The ladle.m has a bloody.r grip.r so don't hake.o it!
+169,12,長,Kanji,long,,,,,,,bar,three,chain mail,,CHOU,,naga.i,,The long.m iron bars.r for the three.r sets of chain.r mail.r. They choose.o long negative.k staffs.,
+170,,匚,Radical,right-open box,,,,,,,one,letter L,,,,,,,Right-open.m box.m is a one.r stacked over a letter.r L. A hungry Pacman.,"This radical never appears by itself, only as a part of other characters."
+171,137,区,Kanji,district,,,,,,,right-open box,scissors,,,KU,,,,In this district.m they put scissors.r in right-open.r box.r. They think it's cool.o.,
+172,1673,凶,Kanji,wicked,,,,,,,open box,scissors,,,KYOO,,,,The wicked.m villian.m cut him up with scissors.r and put him in an open.r box.r in Kyoto.o because he was wicked!,
+173,,厶,Radical,private,,,,,,,katakana MU,,,,,,,,"In private.m, we think the katakana.r 厶.r is really radical!","This radical never appears by itself, but it is the same shape as katakana MU."
+174,,云,Radical,it-is-said,,,,,,,two,private,,,UN,TEN,mi,,It-is-said.m that the two.r private.r investigators are un.ohappy.,"Rare kanji. Mostly used as a radical or in names. Its real meaning is ""to say.'"
+175,819,仏,Kanji,Buddha,,,,,,,standing man,private,,,FUTSU,BUTSU,hotoke,,"The Buddhist.m standing.r man.r is very private.r. He never plays footsie.o, kisses butts.k or eats hot.k cakes.k.",
+176,416,伝,Kanji,transmit,,,,,,,standing man,it-is-said,,,DEN,,tsuda.u,,Transmit.m the message to the standing.r man.r as it-is-said.r. Transmit it from Denmark.o to TSudan.k.,
+177,61,米,Kanji,rice,,,,,,,horns,tree,,,BEI,MEI,kome,,American.m rice.m comes from horny.r trees.r. Bake.o and make.o a rice cake for the comencement.k ceremony.,
+178,102,来,Kanji,come,,,,,,,one,rice,,,RAI,,ku.ru,,"Come.m and get one.r rice.r bowl. Right.o now, come and have a coors.k lite.",
+179,,夭,Radical,calamity,,,,,,,slash,big,,,,,,,It's a calamity.m to get slashed.r big.r time.,"This radical never appears by itself, only as a part of other characters."
+180,1294,矢,Kanji,arrow,,,,,,,gun,big,,,SHI,,ya,,"An arrow.m is stealthier than a gun.r that is big.r. She.o in particular, will murder ya.k with arrows.",
+181,447,失,Kanji,error,,,,,,,gun,husband,,,SHITSU,,ushina.u,,"Tis an error.m to shoot, with a gun.r, your husband.r. He shits.o himself. You.k should.k know.k this is an error.",
+182,1788,朱,Kanji,crimson,,,,,,,gun,tree,,,SHU,,ake,,Crimson.m death by gunt.r of tree.r hanging. Shoot.o him. Crimson wounds. An ache.k. ,
+183,173,先,Kanji,previous,,,,,,,gun,ground,,,SEN,,saki,ma.zu,"Previously.m, I kicked the gun.r on the ground.r with my legs.r. Then, I sent.o him off for his own sake.k in a previously-owned Mazda.k.",
+184,437,医,Kanji,doctor,,,,,,,arrow,right-open box,,,I,,,,"The doctor.m said to put the arrow.r in a right-open.r box.o. I,.o and.o only.o I,.o was healed by that battlefield doctor.",
+185,1720,垂,Kanji,hang,,,,,,,knight,mouth,ground,,SUI,,ta.reru,,"Hanging.m from the ledge, the knight's.r mouth.r faced the ground.r. The Swiss.o knight tirelessly.k hung on for dear life.",
+186,377,乗,Kanji,ride,,,,,,,hang,tree,,,JOU,,no.ru,,He rode.m here to see the hanging.r from a tree.r. Joe.o rode from Norway.k to see it.,
+187,,勹,Radical,wrap,,,,,,,slash,rake,,,,,,,Wrap.m your grip on the handle and slash.r away with the rake.r!,"This radical never appears by itself, only as a part of other characters."
+188,,勺,Kanji,ladle,,,,,,,wrap,bloody,,,SHAKU,,,,"The ladle.m has a bloody.r grip.r so don't hake.o it!
 ",Rare kanji. Mostly used as a radical.
-190,1244,句,Kanji,complaint,,,,,,,wrap,mouth,,,KU,,,,A complaint.m of wrapped.r around my mouth.r. I could.o complain all day.,
-191,1162,旬,Kanji,ten day period,,,,,,,wrap,sun,,,JUN,,,,The ten.m day.m period.m when darkness wraps.r around the sun.r is June.o gloom.,
-192,860,欠,Kanji,lack,,,,,,,wrap,person,,,KETSU,,ka.keru,ka.ku,A lack.m of plastic wrap.r made the person.r angry. We put ketchup.o on his cocky.k ass because he lacked patience.,
-193,222,次,Kanji,next,,,,,,,icicle,lack,,,SHI,JI,tsu.gu,tsu.gi,"For the next.m ice.r storm, don't lack.r supplies. She.o in particular, will drive a Jeep.o next time to tug.k them.",
-194,969,飲,Kanji,drink,,,,,,,eat,lack,,,IN,,no.mu,,"Drink.m and eat.r for nothing lacks.r here. In.oside the nomads'.k realm, food and drink abound.",
-195,,勿,Kanji,must not,,,,,,,wrap,slash,slash,,MOTSU,,nako,,You must.m not.m wrap.r enemy wounds after slashes.r. Leave most.o of them naked.k.,Rare kanji. Mostly used as a radical.
-196,215,物,Kanji,stuff,,,,,,,cow,must not,,,MOTSU,BUTSU,mono,,Stuff.m made from cows.r must.r not.r be vegan! Most.o of this stuff is pure butts.o and mono.ktone.,
-197,,⺣,Radical,bottom fire,,,,,,,eight,bloody,bloody,,,,,,Bottom.m fire.m is four little ticks: eight.r divided by bloody.r two!,"The 'bottom fire,' ⺣ radical is a variant of 'fire,'  火."
-198,,勹⺣,WPR,beast legs,,,,,,,wrap,bottom fire,,,,,,,The beast's.r legs.r were wrapped.r in fire.r!,BOTTOM PART OF 馬. This is not a real radical but it is part of in many kanji.
-199,639,馬,Kanji,horse,,,,,,,bar,one,master,beast legs,BA,,uma,,The horse.m got hit with a bar.r by its one.r master.r on its beastly.r legs.r. The bad.o horse trampled his umbrella.k!,
-200,1043,鳥,Kanji,bird,,,,,,,white,one,beast legs,,CHOU,,tori,,"The bird.m, the white.r one.r, with beast.r legs.r, is cho.osen to tour.k the skies.",
-201,245,島,Kanji,island,,,,,,,bird,mountain,,,TOU,,shima,,The island.m has birds.r on its mountains.r that are totally.o shimmering.k in the light.,
-202,44,内,Kanji,inside,,,,,,,staple,person,,,NAI,,uchi,,"Inside.m the office, we stapled.r a person.r. At night.o they place the urchins.k there.",
-203,986,肉,Kanji,meat,,,,,,,inside,person,,,NIKU,,shishi,,Meat.m is served inside.r to people.r. It has nickel.o and other shitty.k minerals.,
-204,,丙,Kanji,third,,,,,,,one,inside,,,HEI,,hinoe,,"In third.m class, only one.r bag can go inside.r. I hate.o flying third class coach!",Mostly used as a radical.
-205,950,雨,Kanji,rain,,,,,,,letter T,staple,bloody,,U,,ame,,"Toxic rain.m. T.r is for train. For staple.r crops. Four bloody.r drops. Usually.o the rain, ameliorates.k the pain.",
-206,,両,Kanji,both,,,,,,,letter T,staple,mountain,,RYOU,,futatsu,,"Both.m T.r-squares and staples.r on the mountain.r top. During the riot.o, both where brought to the top.",
-207,1312,丁,Kanji,street,,,,,,,letter T,barb,,,CHOU,TEI,,,The street.m intersection shapped like a T.r had barbs.r. We chose.o to take.o another street.,
-208,60,手,Kanji,hand,,,,,,,slash,two,barb,,SHU,,te,,"Your hands.m, with two,.r slash.r people and throw them onto barbed.r wire. Shoot.o only if kara#te.k technique.k fails you.","手 is the 'te' in karate, 空手, i.e. empty handed fighting style."
-209,1179,毛,Kanji,fur,,,,,,,hand,seven,,,MOU,,ke,,"We have furry.m hands.r and seven.r arms. We mow.o the furry lawn and carry the kettles.k.
+189,1244,句,Kanji,complaint,,,,,,,wrap,mouth,,,KU,,,,A complaint.m of wrapped.r around my mouth.r. I could.o complain all day.,
+190,1162,旬,Kanji,ten day period,,,,,,,wrap,sun,,,JUN,,,,The ten.m day.m period.m when darkness wraps.r around the sun.r is June.o gloom.,
+191,860,欠,Kanji,lack,,,,,,,wrap,person,,,KETSU,,ka.keru,ka.ku,A lack.m of plastic wrap.r made the person.r angry. We put ketchup.o on his cocky.k ass because he lacked patience.,
+192,222,次,Kanji,next,,,,,,,icicle,lack,,,SHI,JI,tsu.gu,tsu.gi,"For the next.m ice.r storm, don't lack.r supplies. She.o in particular, will drive a Jeep.o next time to tug.k them.",
+193,969,飲,Kanji,drink,,,,,,,eat,lack,,,IN,,no.mu,,"Drink.m and eat.r for nothing lacks.r here. In.oside the nomads'.k realm, food and drink abound.",
+194,,勿,Kanji,must not,,,,,,,wrap,slash,slash,,MOTSU,,nako,,You must.m not.m wrap.r enemy wounds after slashes.r. Leave most.o of them naked.k.,Rare kanji. Mostly used as a radical.
+195,215,物,Kanji,stuff,,,,,,,cow,must not,,,MOTSU,BUTSU,mono,,Stuff.m made from cows.r must.r not.r be vegan! Most.o of this stuff is pure butts.o and mono.ktone.,
+196,,⺣,Radical,bottom fire,,,,,,,eight,bloody,bloody,,,,,,Bottom.m fire.m is four little ticks: eight.r divided by bloody.r two!,"The 'bottom fire,' ⺣ radical is a variant of 'fire,'  火."
+197,,勹⺣,WPR,beast legs,,,,,,,wrap,bottom fire,,,,,,,The beast's.r legs.r were wrapped.r in fire.r!,BOTTOM PART OF 馬. This is not a real radical but it is part of in many kanji.
+198,639,馬,Kanji,horse,,,,,,,bar,one,master,beast legs,BA,,uma,,The horse.m got hit with a bar.r by its one.r master.r on its beastly.r legs.r. The bad.o horse trampled his umbrella.k!,
+199,1043,鳥,Kanji,bird,,,,,,,white,one,beast legs,,CHOU,,tori,,"The bird.m, the white.r one.r, with beast.r legs.r, is cho.osen to tour.k the skies.",
+200,245,島,Kanji,island,,,,,,,bird,mountain,,,TOU,,shima,,The island.m has birds.r on its mountains.r that are totally.o shimmering.k in the light.,
+201,44,内,Kanji,inside,,,,,,,staple,person,,,NAI,,uchi,,"Inside.m the office, we stapled.r a person.r. At night.o they place the urchins.k there.",
+202,986,肉,Kanji,meat,,,,,,,inside,person,,,NIKU,,shishi,,Meat.m is served inside.r to people.r. It has nickel.o and other shitty.k minerals.,
+203,,丙,Kanji,third,,,,,,,one,inside,,,HEI,,hinoe,,"In third.m class, only one.r bag can go inside.r. I hate.o flying third class coach!",Mostly used as a radical.
+204,950,雨,Kanji,rain,,,,,,,letter T,staple,bloody,,U,,ame,,"Toxic rain.m. T.r is for train. For staple.r crops. Four bloody.r drops. Usually.o the rain, ameliorates.k the pain.",
+205,,両,Kanji,both,,,,,,,letter T,staple,mountain,,RYOU,,futatsu,,"Both.m T.r-squares and staples.r on the mountain.r top. During the riot.o, both where brought to the top.",
+206,1312,丁,Kanji,street,,,,,,,letter T,barb,,,CHOU,TEI,,,The street.m intersection shapped like a T.r had barbs.r. We chose.o to take.o another street.,
+207,60,手,Kanji,hand,,,,,,,slash,two,barb,,SHU,,te,,"Your hands.m, with two,.r slash.r people and throw them onto barbed.r wire. Shoot.o only if kara#te.k technique.k fails you.","手 is the 'te' in karate, 空手, i.e. empty handed fighting style."
+208,1179,毛,Kanji,fur,,,,,,,hand,seven,,,MOU,,ke,,"We have furry.m hands.r and seven.r arms. We mow.o the furry lawn and carry the kettles.k.
 ",
-210,,厂,Radical,cliff,,,,,,,one,slash,,,,,,,The cliff.m radical is the side profile of a cliff drawn with one.r slash.r.,"This radical never appears by itself, only as a part of other characters."
-211,1600,辰,Kanji,Hydra,,,,,,,cliff,clothes,,,SHIN,,,,The Hydra.m battled on cliffs.r without clothes.r. Hydra shine.o in battle.,The 'Hydra' radical's real meaning is the Dragon sign of the Chinese zodiac.
-212,,尸,Radical,corpse,,,,,,,mouth,cliff,,,,,,,The corpse monster.m fell off a cliff.r and hurt its mouth.r! It looks like the facehugger from the Alien movies.,"This radical never appears by itself, only as a part of other characters."
-213,286,局,Kanji,channel,,,,,,,corpse,complaint,,,KYOKU,,,,The channel's.m show about corpses.r received complaints.r. The kiosk.o sold TVs tuned to that channel.,
-214,575,戸,Kanji,door,,,,,,,one,corpse,,,KO,,to,,"By the door.m, lays a one.m bloody.r corpse.r coated.o in tomato.k sauce."," 'Door' has three orthographic variants depending on the font or kanji: one corpse, 戸;  bloody corpse, 户;  slash corpse, 戶."
-215,,斤,Kanji,axe,,,,,,,cliff,letter T,,,KIN,,,,"With an axe.m, he attacked on the cliff.r. I defended myself with a T.r-square and saved my kin.o.",
-216,2231,斥,Kanji,reject,,,,,,,axe,bloody,,,SEKI,,,,"Rejection.m feels like a bloody.r axe.r, sectioning.o me to pieces.",
-217,1405,丘,Kanji,hill,,,,,,,axe,one,,,KYUU,,oka,,"The hills.m have an axe.r murderer with one.r target: cute.o girls.
+209,,厂,Radical,cliff,,,,,,,one,slash,,,,,,,The cliff.m radical is the side profile of a cliff drawn with one.r slash.r.,"This radical never appears by itself, only as a part of other characters."
+210,1600,辰,Kanji,Hydra,,,,,,,cliff,clothes,,,SHIN,,,,The Hydra.m battled on cliffs.r without clothes.r. Hydra shine.o in battle.,The 'Hydra' radical's real meaning is the Dragon sign of the Chinese zodiac.
+211,,尸,Radical,corpse,,,,,,,mouth,cliff,,,,,,,The corpse monster.m fell off a cliff.r and hurt its mouth.r! It looks like the facehugger from the Alien movies.,"This radical never appears by itself, only as a part of other characters."
+212,286,局,Kanji,channel,,,,,,,corpse,complaint,,,KYOKU,,,,The channel's.m show about corpses.r received complaints.r. The kiosk.o sold TVs tuned to that channel.,
+213,575,戸,Kanji,door,,,,,,,one,corpse,,,KO,,to,,"By the door.m, lays a one.m bloody.r corpse.r coated.o in tomato.k sauce."," 'Door' has three orthographic variants depending on the font or kanji: one corpse, 戸;  bloody corpse, 户;  slash corpse, 戶."
+214,,斤,Kanji,axe,,,,,,,cliff,letter T,,,KIN,,,,"With an axe.m, he attacked on the cliff.r. I defended myself with a T.r-square and saved my kin.o.",
+215,2231,斥,Kanji,reject,,,,,,,axe,bloody,,,SEKI,,,,"Rejection.m feels like a bloody.r axe.r, sectioning.o me to pieces.",
+216,1405,丘,Kanji,hill,,,,,,,axe,one,,,KYUU,,oka,,"The hills.m have an axe.r murderer with one.r target: cute.o girls.
 ",
-218,522,兵,Kanji,infantry,,,,,,,hill,eight,,,HEI,,tsuwamono,,The infantry.m combed the hills.r eight.r times for the hateful.o sewer.k monkey.k. axe murderer.,
-219,645,浜,Kanji,beach,,,,,,,water splash,infantry,,,HIN,,hama,,"The beaches's.m waters.r splashed.r as the infantry.r landed. Un#hin.odered, they hammered.k the beach.",
-220,221,所,Kanji,place,,,,,,,door,axe,,,SHO,,tokoro,,The place's.m door.r was breached with an axe.r. They shot.o everyone and took.k ochre.k from that place.,
-221,,亦,Kanji,also,,,,,,,lid,slash,small,,,,mata,,"Also.m, put a lid.r over it, or we'll slash.r off your small.r penis. Nothing else will matter.k anymore.",
-222,584,赤,Kanji,red,,,,,,,ground,also,,,SEKI,,aka,,"The red.m colored ground.r was also.r cultivated, sectioned.o into lots, accounting.k for each redneck.",
-223,1841,乙,Kanji,smart,,,,,,,upside down 2,,,,OTSU,,oto,,The smart.m creatures can understand an upside.r down.r 2.r. The smart ostrich.o attacked Otto.k.,Rare kanji. Mostly used as a radical.
-224,1318,之,Kanji,this,,,,,,,bloody,smart,,,,,kore,yuki,This.m bloody.r fish.r hook.r caught a fish rotten to the core.o. So yucky.r.,Another kunyomi is 'no' as in the possesive particle. Mostly used in names.
-225,1646,乏,Kanji,scarcity,,,,,,,slash,this,,,BOU,,tobo.shii,,The scarcity.m led to slashes.r for hoarding this.r. A scacrity: empty bowls.o to.k bullshit.k us.,
-226,,⺾,Radical,plant,,,,,,,railroad track,,,,,,,,Plant.m looks like railroad.r track.r in which vegetation grows.,"This radical never appears by itself, only as a part of other characters."
-227,1052,芝,Kanji,lawn,,,,,,,plant,this,,,SHI,,shiba,,"The lawn.m has plants.r of this.r variety. She.o in particular, shivers.k while mowing the lawn.",
-228,458,若,Kanji,young,,,,,,,plant,right,,,JAKU,,waka.i,,The young.m plant.r flowers and go the right.r way. Young jack.oasses are wacky.k though.,
-229,,廿,Kanji,score,,,,,,,plant,box,,,,,,,A score.m (20) of plants.r went into the box.r.,"This radical never appears by itself, only as a part of other characters."
-230,1248,甘,Kanji,sweet,,,,,,,score,day,,,KAN,,ama.i,,The sweet.m scores.r of candy melted in the sun.r. Candy.o is sweetly amazing.k.,
-231,,コ,Radical,left-open box,,,,,,,katakana KO,,,,,,,,"This is radical never appears by itself, only as a part of other characters.","This radical never appears by itself, but it is the same shape as katakana KO."
-232,892,巨,Kanji,gigantic,,,,,,,left-open box,right-open box,,,KYO,,,,A gigantic.m left-open.r box.r inside a right-open.r box.r with a gigantic coyote.o inside.,
-233,1249,臣,Kanji,subject,,,,,,,gigantic,bar,,,JIN,,tomi,,His subjects.m were beaten with a gigantic.r bar.r. The subjects made gin.o offerings to King Tommy.k.,
-234,1384,匹,Kanji,counter for animals,,,,,,,right-open box,legs,,,HITSU,,hiku,,"After counting.m animals.m, he puts their legs.r in a right-open.r box.r. He hits.o them and gives them a hickey.k.
+217,522,兵,Kanji,infantry,,,,,,,hill,eight,,,HEI,,tsuwamono,,The infantry.m combed the hills.r eight.r times for the hateful.o sewer.k monkey.k. axe murderer.,
+218,645,浜,Kanji,beach,,,,,,,water splash,infantry,,,HIN,,hama,,"The beaches's.m waters.r splashed.r as the infantry.r landed. Un#hin.odered, they hammered.k the beach.",
+219,221,所,Kanji,place,,,,,,,door,axe,,,SHO,,tokoro,,The place's.m door.r was breached with an axe.r. They shot.o everyone and took.k ochre.k from that place.,
+220,,亦,Kanji,also,,,,,,,lid,slash,small,,,,mata,,"Also.m, put a lid.r over it, or we'll slash.r off your small.r penis. Nothing else will matter.k anymore.",
+221,584,赤,Kanji,red,,,,,,,ground,also,,,SEKI,,aka,,"The red.m colored ground.r was also.r cultivated, sectioned.o into lots, accounting.k for each redneck.",
+222,1841,乙,Kanji,smart,,,,,,,upside down 2,,,,OTSU,,oto,,The smart.m creatures can understand an upside.r down.r 2.r. The smart ostrich.o attacked Otto.k.,Rare kanji. Mostly used as a radical.
+223,1318,之,Kanji,this,,,,,,,bloody,smart,,,,,kore,yuki,This.m bloody.r fish.r hook.r caught a fish rotten to the core.o. So yucky.r.,Another kunyomi is 'no' as in the possesive particle. Mostly used in names.
+224,1646,乏,Kanji,scarcity,,,,,,,slash,this,,,BOU,,tobo.shii,,The scarcity.m led to slashes.r for hoarding this.r. A scacrity: empty bowls.o to.k bullshit.k us.,
+225,,⺾,Radical,plant,,,,,,,railroad track,,,,,,,,Plant.m looks like railroad.r track.r in which vegetation grows.,"This radical never appears by itself, only as a part of other characters."
+226,1052,芝,Kanji,lawn,,,,,,,plant,this,,,SHI,,shiba,,"The lawn.m has plants.r of this.r variety. She.o in particular, shivers.k while mowing the lawn.",
+227,458,若,Kanji,young,,,,,,,plant,right,,,JAKU,,waka.i,,The young.m plant.r flowers and go the right.r way. Young jack.oasses are wacky.k though.,
+228,,廿,Kanji,score,,,,,,,plant,box,,,,,,,A score.m (20) of plants.r went into the box.r.,"This radical never appears by itself, only as a part of other characters."
+229,1248,甘,Kanji,sweet,,,,,,,score,day,,,KAN,,ama.i,,The sweet.m scores.r of candy melted in the sun.r. Candy.o is sweetly amazing.k.,
+230,,コ,Radical,left-open box,,,,,,,katakana KO,,,,,,,,"This is radical never appears by itself, only as a part of other characters.","This radical never appears by itself, but it is the same shape as katakana KO."
+231,892,巨,Kanji,gigantic,,,,,,,left-open box,right-open box,,,KYO,,,,A gigantic.m left-open.r box.r inside a right-open.r box.r with a gigantic coyote.o inside.,
+232,1249,臣,Kanji,subject,,,,,,,gigantic,bar,,,JIN,,tomi,,His subjects.m were beaten with a gigantic.r bar.r. The subjects made gin.o offerings to King Tommy.k.,
+233,1384,匹,Kanji,counter for animals,,,,,,,right-open box,legs,,,HITSU,,hiku,,"After counting.m animals.m, he puts their legs.r in a right-open.r box.r. He hits.o them and gives them a hickey.k.
 ",
-235,1098,己,Kanji,self,,,,,,,left-open box,hook,,,KI,,onore,,The self.m is shaped like a katakana.r KO.r over a hook.r. It's key.o to honor.k oneself.,
-236,2140,已,Kanji,cease,,,,,,,self,,,,I,,,,"I cease.m the selfish self.r. I,.o and.o only.o I.o, have discipline.",Mostly used in names.
-237,954,包,Kanji,envelop,,,,,,,wrap,cease,,,HOU,,tsutsu.mu,,"Envelop.m, wrap.r and cease.r spreading STDs. The hoe.o envelops your tootsie.k roll with protection.",
-238,1802,弓,Kanji,bow,,,,,,,self,wrap,,,KYUU,,yumi,,"Around a bow.m, he himself.r wrapped.r his grip. That archer is cute.o and yummy.k.",
-239,218,引,Kanji,pull,,,,,,,bow,bar,,,IN,,hiku,,"Pull.m the bow.r and aim at the bar.r. In.oside, or while hiking.k, practice pulling.",
-240,1840,弔,Kanji,funeral,,,,,,,bow,bar,,,CHOU,,tomurau,,We'll hold a funeral.m for those felled by bows.r in the bar.r. We chose.o to have the funeral tomorrow.k instead.,
-241,1161,弟,Kanji,younger brother,,,,,,,horny,funeral,slash,,DAI,,otooto,,Younger.m brother's.m horniness.r will lead to his funeral.r and a slashing.r. Younger brother will die.o fucking an otter.k.,
-242,,◫,Kanji,eclipse,,,,,,,sun,,,,,,,,An eclipse.m looks like a sideways sun.r. Think of a vendiagram!,SIDEWAYS 日.This is not a real radical but this pseudo-radical appears in many kanji.
-243,69,円,Kanji,yen,,,,,,,eclipse,staple,,,EN,,maru.i,,Yen.m coins look round.m like a solar eclipse.r. I purchase staples.r. I en.ojoy my yen with my.k room.k full of hookers.,
-244,2142,巳,Kanji,snake sign of Chinese zodiac,,,,,,,mouth,self,,,SHI,,mi,,"The sign.m of.m the.m snake.m has a mouth.r itself.r. She.o in particular, looks like me.k because were both snake signs.",
-245,2082,巴,Kanji,tomoe,,,,,,,eclipse,snake sign of Chinese zodiac,,,HA,,tomoe,,The tomoe.m symbol is circular like a solar eclipse.r and a coiled snake.r.,Uncmmon kanji. Mostly used in names. The tomoe is a common symbol in Japanese culture.
-246,,ク,Radical,animal head,,,,,,,katakana KU,,,,,,,,The animal.m head.m radical looks like a katakana.r ク.r.,"This radical never appears by itself, but it is the same shape as katakana KU. It's related to radical 勹, 'wrap'."
-247,621,色,Kanji,color,,,,,,,animal head,tomoe,,,SHIKI,SHOKU,iro,,The colorful.m banners had animal.r heads.r and tomoe.r symbols. She.o ki.olled them all with iron.k colored fury.,
-248,1080,免,Kanji,license,,,,,,,color,legs,,,MAN,,manuka.reru,,I have license.m to color.r code the legs.r of man.o and manequin.k.,
+234,1098,己,Kanji,self,,,,,,,left-open box,hook,,,KI,,onore,,The self.m is shaped like a katakana.r KO.r over a hook.r. It's key.o to honor.k oneself.,
+235,2140,已,Kanji,cease,,,,,,,self,,,,I,,,,"I cease.m the selfish self.r. I,.o and.o only.o I.o, have discipline.",Mostly used in names.
+236,954,包,Kanji,envelop,,,,,,,wrap,cease,,,HOU,,tsutsu.mu,,"Envelop.m, wrap.r and cease.r spreading STDs. The hoe.o envelops your tootsie.k roll with protection.",
+237,1802,弓,Kanji,bow,,,,,,,self,wrap,,,KYUU,,yumi,,"Around a bow.m, he himself.r wrapped.r his grip. That archer is cute.o and yummy.k.",
+238,218,引,Kanji,pull,,,,,,,bow,bar,,,IN,,hiku,,"Pull.m the bow.r and aim at the bar.r. In.oside, or while hiking.k, practice pulling.",
+239,1840,弔,Kanji,funeral,,,,,,,bow,bar,,,CHOU,,tomurau,,We'll hold a funeral.m for those felled by bows.r in the bar.r. We chose.o to have the funeral tomorrow.k instead.,
+240,1161,弟,Kanji,younger brother,,,,,,,horny,funeral,slash,,DAI,,otooto,,Younger.m brother's.m horniness.r will lead to his funeral.r and a slashing.r. Younger brother will die.o fucking an otter.k.,
+241,,◫,Kanji,eclipse,,,,,,,sun,,,,,,,,An eclipse.m looks like a sideways sun.r. Think of a vendiagram!,SIDEWAYS 日.This is not a real radical but this pseudo-radical appears in many kanji.
+242,69,円,Kanji,yen,,,,,,,eclipse,staple,,,EN,,maru.i,,Yen.m coins look round.m like a solar eclipse.r. I purchase staples.r. I en.ojoy my yen with my.k room.k full of hookers.,
+243,2142,巳,Kanji,snake sign of Chinese zodiac,,,,,,,mouth,self,,,SHI,,mi,,"The sign.m of.m the.m snake.m has a mouth.r itself.r. She.o in particular, looks like me.k because were both snake signs.",
+244,2082,巴,Kanji,tomoe,,,,,,,eclipse,snake sign of Chinese zodiac,,,HA,,tomoe,,The tomoe.m symbol is circular like a solar eclipse.r and a coiled snake.r.,Uncmmon kanji. Mostly used in names. The tomoe is a common symbol in Japanese culture.
+245,,ク,Radical,skull,,,,,,,katakana KU,,,,,,,,Skull.m has a katakana.r ク.r in it: S--KU--LL. Skull-crushing ey?,"This radical never appears by itself, but it is the same shape as katakana KU. It's related to radical 勹, 'wrap'."
+246,621,色,Kanji,color,,,,,,,skull,tomoe,,,SHIKI,SHOKU,iro,,The colorful.m banners had skulls.r and tomoe.r symbols. She.o ki.olled them all with iron.k colored fury.,
+247,1080,免,Kanji,license,,,,,,,color,legs,,,MAN,,manuka.reru,,I have license.m to color.r code the legs.r of man.o and manequin.k.,
+248,688,久,Kanji,long time,,,,,,,slash,enter,,,KYUU,,hisa.shii,,"A long.m time.m ago, I slashed.r and entered.r the arena. A cute.o cheerleader was hissing.k at me.",
 249,388,声,Kanji,voice,,,,,,,warlord,corpse,eclipse,,SEI,,koe,,The voice.m of the warlord.r piled up corpses.r during the eclipse.r.r. They say.o his voice alone coerces.k.,
-250,1208,魚,Kanji,fish,,,,,,,animal head,field,bottom fire,,GYO,,sakana,,Fish.m animal.r heads.r are cooked in the field.r over fire.r. A gyro.o of fish from Scandinavia.k.,
+250,1208,魚,Kanji,fish,,,,,,,skull,field,bottom fire,,GYO,,sakana,,Fish.m skulls.r are cooked in the field.r over fire.r. A gyro.o of fish from Scandinavia.k.,
 251,274,無,Kanji,nothing,,,,,,,gun,one,plate,bottom fire,MU,BU,na.i,na.kusu,"Nothing.m left after a gun.r shot armor-#plating.r and one.r tank caught fire.r. 'Twas moot.o, for nothing was nigh.k at hand.",
 252,,幺,Radical,string,,,,,,,hiragana ku,private,,,,,,,"A string.r ties together hiragana.r く.r and bushu 厶.r, 'private': く.r厶.r","This radical never appears by itself, only as a part of other characters."
 253,1409,玄,Kanji,mystery,,,,,,,lid,string,,,GEN,,,,The mystery.m was a lid.r with a string.r tied to it. and the gentleman.m found dead inside.,
@@ -288,7 +288,7 @@ Order1,Frequency1,Kanji1,Type1,Meaning1,Meaning2,Meaning3,Bushu1,Bushu2,Bushu3,B
 278,,冂口,WPR,vent,,,,,,,staple,mouth,,,,,,,Vent.m thy pain after getting stapled.r in thy mouth.r. Ow!,BOTTOM PART OF 向. This is not a real radical but this pseudo-radical appears in many kanji.
 279,182,向,Kanji,to face,,,,,,,slash,vent,,,KOU,,mu.ku,mu.keru,"Facing.m him, he slashed.r him and threw him out the vent.r. The cow.oard, facing away, mucked.k about.",
 280,1531,尚,Kanji,still,,,,,,,tiara,vent,,,SHOU,,nao,,"Still.m, they chucked the diamond tiara.r down the vent.r. That show.o still plays on Broadway, even now.k.",
-281,,亠口,SPR,kind-of-old,,,,,,,lid,mouth,,,,,,,"The kind-of-old.m kid was still putting lids.r in his mouth.r, becaue he wasn't old.r (古).r maturity-wise.","This is not a real radical but it is part of many kanji. It is similar to ""old,"" 古 hence ""kind-of-old."""
+281,,亠口,SPR,kind-of-old,,,,,,,lid,mouth,,,,,,,"The kind-of-old.m kid was still putting lids.r in his mouth.r, becaue he wasn't old.r (古).r maturity-wise.",This is not a real radical but it is part of many kanji. It is similar to 'old' 古 hence 'kind-of-old.'
 282,74,京,Kanji,capital,,,,,,,kind-of-old,small,,,KYOU,,,,The capital.m was kind-of-old.r and small.r. Thus Kyoto.o was moved to a new capital: Tokyo.,"This is the kanji for Tokyo, 東京, the capital of Japan."
 283,419,景,Kanji,scenery,,,,,,,sun,capital,,,KEI,,,,The scenery.m of the sun.rset from the capital.r is great from the Cay.oman Islands.,
 284,65,高,Kanji,tall,,,,,,,kind-of-old,vent,,,KOU,,taka.i,,The tall.m and expensive.m but kind-of-old.r skyscraper with air vents.r cou.orageously pierced the sky in a tacky.k way.,
@@ -296,7 +296,7 @@ Order1,Frequency1,Kanji1,Type1,Meaning1,Meaning2,Meaning3,Bushu1,Bushu2,Bushu3,B
 286,41,合,Kanji,suitable,,,,,,,roof,one mouth,,,GOU,GATSU,a.u,,It suits.m a provider to put a roof.r over one.r mouth.r. Go.o to Austria.k where it is suitable.,
 287,4,会,Kanji,meet,,,,,,,roof,it-is-said,,,KAI,,a.u,,"Meeting.m under a roof.r, it-is-said.r that Kyle.o plotted to oust the Austrian.k dictator.",
 288,49,今,Kanji,now,,,,,,,roof,katakana RA,,,KON,,ima,,Now.m looks like a roof.r over katakana.r ラ.r. Con.ogratulations! What an ima.kgination!,
-289,804,令,Kanji,command,,,,,,,roof,bloody,seal,,REI,,,,Command.m the roofers.r to seal.r the bunker to rays.o can't penetrate.,"In some fonts, command's, 令, seal radical,卩, looks like a mammal skull/katakana MA, マ."
+289,804,令,Kanji,command,,,,,,,roof,bloody,seal,,REI,,,,Command.m the roofers.r to seal.r the bunker to rays.o can't penetrate.,"In some fonts, command's, 令, seal radical,卩, looks like a mammal/katakana MA, マ."
 290,466,含,Kanji,contain,,,,,,,now,mouth,,,GAN,,fuku.mu,,Contain.m right now.r your mouth.r! It's like ganja.o! The fuck.k man.k? Contain yourself.,
 291,667,冷,Kanji,cold,,,,,,,icicle,command,,,REI,,tsume.tai,,The cold.m and icey.r commands.r. Rays.o stumbled.k to melt the cold ice.,
 292,465,命,Kanji,lifespan,,,,,,,command,mouth,,,MEI,,inochi,,Lifespan.m is destined by the command.r of his mouth.r. He may.o shorten innocents'.k lifespan.,
@@ -368,7 +368,7 @@ Order1,Frequency1,Kanji1,Type1,Meaning1,Meaning2,Meaning3,Bushu1,Bushu2,Bushu3,B
 357,1060,看,Kanji,take care of,,,,,,,hand,eye,,,KAN,,mi.ru,,Take.m care.m of.m your hands.r and eyes.r. You can.o take care of yourself looking in a mirror.k.,
 358,376,着,Kanji,wear,,,,,,,sheep,slash,eye,,CHAKU,,ki.ru,tsu.ku,Wear.m sheep.r skin. We slashed.r 'im in the eye.r.  Check.o out the kilt.k that tsucker.k's wearing.,Also means 'arrive' with kunyomi tsu.ku.
 359,449,差,Kanji,variation,,,,,,,sheep,left,,,SA,,sa.su,,"The variation.m between the sheep.r on the left.r is that, sadly.o, they are sassy.k bitches.",
-360,805,角,Kanji,corner,,,,,,,animal head,utilize,,,KAKU,,kado,,A corner.m of the animal.r head.r is utilized.r to control the cock.o of the cadet.k.,Corner has the 'utilize' 用 without the stick protruding at the bottom.
+360,805,角,Kanji,corner,,,,,,,skull,utilize,,,KAKU,,kado,,A corner.m of the skull.r is utilized.r to control the cock.o of the cadet.k.,Corner has the 'utilize' 用 without the stick protruding at the bottom.
 361,275,再,Kanji,once more,,,,,,,industry,yen,,,SAI,,futata.bi,,"Once.m more,.m industry.r earned some yen.r. Sigh.o. Once more communism proves futile.k.","再, 'once more,' looks a lot like 甫, 'initially.'"
 362,,⺎,Radical,pirate,,,,,,,one,legs,,,,,,,The pirate.m is missing one.r of his legs.r.,"This radical never appears by itself, only as a part of other characters."
 363,527,光,Kanji,light,,,,,,,sparkles,pirate,,,KOU,,hika.ru,,The light.m of the sparkes.r gave the pirate.r the cou.orage to light the old hickory.k ship on fire.,
@@ -446,7 +446,7 @@ Order1,Frequency1,Kanji1,Type1,Meaning1,Meaning2,Meaning3,Bushu1,Bushu2,Bushu3,B
 435,162,結,Kanji,bind,,,,,,,thread,luck,,,KETSU,,musu.bu,,Bind.m 'em with threads.r and bless their fortune.r. Ketchup.o and mustard.k are bound together.,
 436,202,売,Kanji,sell,,,,,,,warlord,hat,legs,,BAI,,u.reru,u.ru,"I sold.m the warlord.k my hat.r to spare my legs.r. ""Good bye,"".o said I, to the uranium.k hat I sold.",
 437,618,読,Kanji,read,,,,,,,talk,sell,,,DOKU,,yo.mu,,Reading.m is better than talking.r or selling.r empty promises. I read doctors.o recommend yummy.k yams.,
-438,141,続,Kanji,continue,,,,,,,thread,sell,,,ZOKU,,tsudzu.ku,,Continue.m threading.r the loom and selling.r textiles. The zodiac.o continues to predict you'll own a suzuki.k.,
+438,141,続,Kanji,continue,,,,,,,thread,sell,,,ZOKU,,tsudzu.ku,tsudzu.keru,Continue.m threading.r and selling.r knits. The zodiac.o continues to predict you'll own a Suzuki.k.,
 439,1787,貝,Kanji,money,,,,,,,eye,eight,,,BAI,KAI,,,"For money.m, he'd sell his eye.r eight.r times. He said bye.o to his kite.o and sold it for money.",
 440,54,員,Kanji,member,,,,,,,mouth,money,,,IN,,,,A member's.m mouth.r is worth much money.r. Inner.o members know many things.,
 441,,⺲,Kanji,net,,,,,,,eye,,,,,,,,The net.m caught the attention of my sideways eye.r.,"This is a radical. It never appears by itself, only as a part of other characters."
@@ -610,13 +610,13 @@ Order1,Frequency1,Kanji1,Type1,Meaning1,Meaning2,Meaning3,Bushu1,Bushu2,Bushu3,B
 599,127,機,Kanji,machine,,,,,,,tree,how many,,,KI,,hata,,The machine.m chopped how.r many.r trees.r? Keep.o the machine away from the haters.k!,
 600,1348,卓,Kanji,table top,,,,,,,divination,early,,,TAKU,,,,The table.m top.m on which the divination.r cards foretold earlier.r that they'd take.o you was a rigged table top.,
 601,1389,貞,Kanji,upright,,,,,,,up,money,,,TEI,,sada,,The upright.m hold up.r even without money.r. The upright take.o things seriously and aren't sadistic.k.,
-602,443,負,Kanji,defeat,,,,,,,animal head,money,,,FU,,ma.keru,,Defeat.m and sever the animal's.r head.r for prize money.r! F..o U..o! Make.k 'er.k suffer!,
-603,309,急,Kanji,suddenly,,,,,,,animal head,bristles,heart,,KYUU,,iso.gu,,"Suddenly.m, an animal.r head.r with fur-like bristles.r manifested. My heart.r raced. Suddenly, a cute.o pet appeared. It's.k so.k good.k.",
+602,443,負,Kanji,defeat,,,,,,,skull,money,,,FU,,ma.keru,,Defeat.m and sever the skull.r for prize money.r! F..o U..o! Make.k 'er.k suffer!,
+603,309,急,Kanji,suddenly,,,,,,,skull,bristles,heart,,KYUU,,iso.gu,,"Suddenly.m, an skull.r with fur-like bristles.r manifested. My heart.r raced. Suddenly, a cute.o pet appeared. It's.k so.k good.k.",
 604,462,美,Kanji,beautiful,,,,,,,sheep,big,,,BI,,utsuku.shii,,The beautiful.m sheep.r and big.r. Bi.o and beautiful. U.k stick.k shee.kp with ur thingy. ;-p,
 605,1018,奥,Kanji,wife,,,,,,,bloody,box,rice,big,OU,,oku.san,,"Me wife.m lives in a bloody.r box.r and cooks rice.r in a big.r pot. Like an Ow.ol, she occasionally.k goes outside.",
 606,1367,奇,Kanji,weird,,,,,,,big,acceptable,,,KI,,ku.shiki,,Weird.m big.r things are acceptable.r here. Keep.o the weird cushy.k cushions.k here.,
 607,663,河,Kanji,stream,,,,,,,water splash,acceptable,,,KA,,,,Streams.m of water.r splashes.r are acceptable.r in Ca.onada. (Weird fetishes there).,
-608,2055,呂,Kanji,backbone,,,,,,,mouth,mouth,,,RO,RYO,,,"The backbone.m connects the mouth.r to another mouth.r (the butthole). Durings the rolls.o and riots.o, many backbones were broken.","This kanji the the origin of katakana RO, ロ."
+608,2055,呂,Kanji,backbone,,,,,,,mouth,mouth,,,RO,RYO,,,"The backbone.m connects the mouth.r to butt mouth.r. Durings the ro.oaring rio.ot, backbones were broken.","This kanji the the origin of katakana RO, ロ."
 609,367,宮,Kanji,palace,,,,,,,crown,backbone,,,KYUU,,miya,,The palace.m and the crown.r are the backbone.r of society. The cute.o palace is mine.k.,
 610,303,営,Kanji,manage,,,,,,,tiara,backbone,,,EI,,itona.mu,,We manage.m the business of tiaras.r with a backbone.r Ei.oghty-#ei.oght managers with great intonation.k.,
 611,398,労,Kanji,labor,,,,,,,tiara,power,,,ROU,,itawa.ru,,Labor.m for a tiara.r of royal power.r. Row.o and labor until it.k wears.k you.k down.,
@@ -668,7 +668,7 @@ Order1,Frequency1,Kanji1,Type1,Meaning1,Meaning2,Meaning3,Bushu1,Bushu2,Bushu3,B
 657,944,巻,Kanji,roll up,,,,,,,roll,oneself,,,KEN,KAN,ma.ku,maki,He rolls.m up.m the rolls.r himself.r. Ken.o can.o make.k sushi rolls.,
 658,,癶,Radical,tent,,,,,,,evening,bloody,bloody,roof,,,,,A tent.m was found in the evening.r with a bloody.r roof.r near the camp site.,"This is a radical. It never appears by itself, only as a part of other characters."
 659,32,発,Kanji,emit,,,,,,,tent,origin,legs,,HATSU,,,,Emissions.m originated.r from the tent.r. We wore lead hats.o. to block emissions.,"In the bottom of 発, the 儿 of the 'origin' 元 reach up to  二."
-660,566,登,Kanji,ascend,,,,,,,tent,bean,,,TOU,,nobo.ru,,"We ascended.m to the top, pitched tents.r, and ate beans.r. We ascended totally.o sober with no.k beer.k.",
+660,566,登,Kanji,ascend,,,,,,,tent,bean,,,TO,TOU,nobo.ru,,"We ascended.m, pitched tents.r and ate beans.r. We ascended totally.o sober with no.k beer.k.",
 661,1256,雲,Kanji,cloud,,,,,,,rain,it-is-said,,,UN,,kumo,,"A cloud.m of rain.r, it.r is.r said.r, to hover over the U.N..o: communisim.k...",
 662,1131,雪,Kanji,snow,,,,,,,rain,bristles,,,SETSU,,yuki,,Wipe the snow.m and rain.r with bristles.r. It sets.o you up and then you.k kill.k in the snow like in The Shining.,
 663,1491,雷,Kanji,thunder,,,,,,,rain,field,,,RAI,,kaminari,,"Thunder.m and rain.r struck the fields.r. Right.o before us, thunder struck a calamari.k.",
@@ -770,7 +770,7 @@ Order1,Frequency1,Kanji1,Type1,Meaning1,Meaning2,Meaning3,Bushu1,Bushu2,Bushu3,B
 759,1262,巡,Kanji,patrol,,,,,,,rapids,motion,,,JUN,,megu.ru,,"Patrol.m the rapids.r in a circular motion.r. In June.o, patrol like a merry-go-round.k.",
 760,685,返,Kanji,repay,,,,,,,against,motion,,,HEN,,kae.ru,kae.su,Repay.m against.r your loans or make a motion.r for bankruptcy. Han.o didn't repay the caesin.k protein loan.,
 761,1046,飯,Kanji,meal,,,,,,,eat,against,,,HAN,,meshi,,Meals.m are eaten.r against.r flateware. Han's.o meal is messy.k pussy.,
-762,,甬,Radical,perimeter,,,,,,,mammal,utilize,,,TSUU,,,,"Around the perimeter.m, mammal.r skulls were utilized.r to strike fear.","This radical never appears by itself, only as a part of other characters."
+762,,甬,Radical,perimeter,,,,,,,mammal,utilize,,,TSUU,,,,A perimeter.m around the mammals.r was utilized.r to corral them.,"This radical never appears by itself, only as a part of other characters."
 763,80,通,Kanji,way,,,,,,,perimeter,motion,,,TSUU,,too.ru,too.ri,The way's.m perimeter.r was blocked but they motioned.r us through. A polluting stew.o of cars and trucks tour.k the city's high#ways.,
 764,30,連,Kanji,union,,,,,,,car,motion,,,REN,,tsu.reru,tsura.neru,The union.m of car.r makers is in motion.r. A labor union ren.oaissance is in store.k.,
 765,255,運,Kanji,carry,,,,,,,military,motion,,,UN,,hako.bu,,"Carried.m by the military.r, it was in motion.r. The U.N.o carried along with the hacker.k bot.k conspiracy.",
@@ -787,7 +787,7 @@ Order1,Frequency1,Kanji1,Type1,Meaning1,Meaning2,Meaning3,Bushu1,Bushu2,Bushu3,B
 776,,丬,Radical,chop wood,,,,,,,icicle,bar,,,,,,,Chopping.m wood.m from logs frozen to solid icicle.r bars.r.,"The 'chop wood', 丬, radical is a variant of 'log,'  爿."
 777,298,状,Kanji,situation,,,,,,,chop wood,dog,,,JOU,,,,The situation.m required chopped.r wood.r and dog.r sleds. Joe.o understood the situation.,
 778,1657,壮,Kanji,manhood,,,,,,,chop wood,warlord,,,SOU,,,,A manhood.m test of chopping.r wood.r makes you a warlord.r. Sow.o manhood and reap its reward.,
-779,271,争,Kanji,conflict,,,,,,,animal head,bristles,barb,,SOU,,araso.u,,The conflict.m lead to animal.r heads.r and their fur's bristles.r on a barb.r To sow.o conflict is to arouse.k violence.,
+779,271,争,Kanji,conflict,,,,,,,skull,bristles,barb,,SOU,,araso.u,,The conflict.m lead to skulls.r and their fur's bristles.r on a barb.r To sow.o conflict is to arouse.k violence.,
 780,1383,浄,Kanji,cleanse,,,,,,,water splash,dispute,,,JOU,,kiyo.meru,,Cleanse.m with water.r before the conflict.r. Joe.o Stalin cleansed kilometers.k of territory.,
 781,403,張,Kanji,stretch,,,,,,,bow,long,,,CHOU,,ha.ru,ha.ri,Stretch.m a bow.r to its length.r. The choice.o to stretch is Harry.k and Barry's.k.,
 782,112,強,Kanji,strong,,,,,,,bow,private,insect,,KYOU,GOU,tsuyo.i,tsuyo.meru,"A strong.m bow.r. defends private.r interest from insect.r raiders. Kyoto.o, put up a strong defense against stow.k aways.k.",
@@ -1067,12 +1067,12 @@ Order1,Frequency1,Kanji1,Type1,Meaning1,Meaning2,Meaning3,Bushu1,Bushu2,Bushu3,B
 1056,808,房,Kanji,segment,,,,,,,door,direction,,,BOU,,fusa,,A segment.m of the door.r was open in that direction.r. He shot a bow.o through the segment and blew a fuse.k.,
 1057,1359,炉,Kanji,furnace,,,,,,,fire,door,,,RO,,,,The furnace.m burned its fire.r by the door.r. The furnace fires roar.o.,
 1058,1215,肩,Kanji,shoulder,,,,,,,door,organ,,,KEN,,kata,,The shoulder.m banged the door.r and his organs.r failed. Ken's.o shoulder made him catatonic.k.,
-1059,1063,祉,Kanji,welfare,,,,,,,clothing,stop,,,SHI,,,,"The welfare.m state provided clothing.r It must be stopped.r. She.o in particular, receives welfare.",
-1060,1749,枯,Kanji,wither,,,,,,,tree,old,,,KO,,ka.reru,,"A withered.m away tree.r from old.r age. K.O.ed.o by time, even corporate careers.k wither.",
-1061,1295,耐,Kanji,endurance,,,,,,,moustache,inch,,,TAI,,ta.eru,,I endured.m shaving my moustache.r by an inch.r. It's tight.o and but tiring.k to endure.,
-1062,1122,妙,Kanji,exquisite,,,,,,,woman,few,,,MYOU,,tae,,The exquisite.m woman.r had a few.r screws loose. The myopic.o need exquisitly tight.k glasses.,
-1063,1015,秒,Kanji,second,,,,,,,grain,few,,,BYOU,,,,"In a second,.m the grain.r is baled into a few.r bales. It's biological.o clock has seconds left.",
-1064,1146,砂,Kanji,sand,,,,,,,stone,few,,,SA,,suna,,"Sand.m is stone.r crushed into a few.r particles. Sadly,.o there's sand in the sauna.k.",
+1059,1063,祉,Kanji,welfare,,,,,,,clothing,stop,,,SHI,,,,"Welfare.m provided clothing.r but it stopped.r. She.o in particular, received welfare.",
+1060,1749,枯,Kanji,wither,,,,,,,tree,old,,,KO,,ka.reru,ka.rasu,"A withered.m away tree.r from old.r age. K.O..oed by time, even great careers.k wither.",
+1061,1295,耐,Kanji,endure,,,,,,,moustache,inch,,,TAI,,ta.eru,,I endured.m shaving my moustache.r by an inch.r. It's tight.o and but tiring.k to endure.,
+1062,1122,妙,Kanji,exquisite,,,,,,,woman,few,,,MYOU,,tae,,Exquisite.m women.r there are few.r. The myo.opic are too tight.k to see the exquisiteness.,
+1063,1015,秒,Kanji,second,,,,,,,grain,few,,,BYOU,,,,"In a second.m, grain.r is baled into a few.r bales. Its bio.ological clock has mere seconds left.",
+1064,1146,砂,Kanji,sand,,,,,,,stone,few,,,SA,,suna,,"Sand.m is stone.r crushed into a few.r particles. Sadly.o, there's sand in the sauna.k.",
 1065,1897,沙,Kanji,affairs,,,,,,,water splash,few,,,SA,,,,"The affairs.m across the water.r are of few.r concern. Sadly.o, our affairs matter more.","This kanji actually means ""sand"" but it's rarely used for that meaning.  沙汰 means ""affairs, sates."""
 1066,1620,劣,Kanji,inferior,,,,,,,few,power,,,RETSU,,oto.ru,,"Inferiority.m is having few.r powers.r. Rest.o assured, the inferiors will crawl like otters.k.",
 1067,461,種,Kanji,variety,,,,,,,grain,heavy,,,SHU,,tane,,This variety.m of grain.r crop is heavy.r. Surely.o all varieties have tannins.k.,
@@ -1213,7 +1213,7 @@ Order1,Frequency1,Kanji1,Type1,Meaning1,Meaning2,Meaning3,Bushu1,Bushu2,Bushu3,B
 1202,1191,距,Kanji,distance,,,,,,,foot,great,,,KYO,,,,The distance.m on foot.r is a great.r effort. Coyotes.o chase for great distances.,
 1203,953,跡,Kanji,mark,,,,,,,foot,also,,,SEKI,,ato,,Mark.m the length in feet.r also.r. This section.o is marked at an atomic.k scale.,
 1204,1308,踊,Kanji,jump,,,,,,,foot,perimeter,,,YOU,,odo.ru,,"Jump.m with your feet.r over the perimeter.r. You,.o and.o only.o, you.o, jump with a bad odor.r.",
-1205,1075,縄,Kanji,rope,,,,,,,thread,turtle,,,JOU,,nawa,,A rope.r of threads.r to tie turtles.r. Joe.o used a rope in Oki#nama.k to catch 'em.,"The right side 'turtle' radical is missing the 'animal head,' ク, on top."
+1205,1075,縄,Kanji,rope,,,,,,,thread,turtle,,,JOU,,nawa,,A rope.r of threads.r to tie turtles.r. Joe.o used a rope in Oki#nama.k to catch 'em.,"The right side 'turtle' radical is missing the 'skull,' ク, on top."
 1206,965,郡,Kanji,county,,,,,,,you (informal),town,,,GUN,,kouri,,This county.m is your.r town.r. Guns.o and couriers.k are in this county.,
 1207,1012,群,Kanji,crowd,,,,,,,you (informal),sheep,,,GUN,,mu.reru,mura.garu,They crowd.m around you.r like a flock of sheep.r. Gun.o down that crowd against a mural.k!,
 1208,1178,詳,Kanji,detailed,,,,,,,talk,sheep,,,SHOU,,kuwa.shii,,A detailed.m talk.r about sheep.r. Show.o me the details about the Kuwaiti.k sheep.k.,
@@ -1415,7 +1415,7 @@ Order1,Frequency1,Kanji1,Type1,Meaning1,Meaning2,Meaning3,Bushu1,Bushu2,Bushu3,B
 1403,605,隊,Kanji,squad,,,,,,,town,horny,pig,,TAI,,,,The squad.m marched into town.r like horny.r pigs.r. The squad wanted tight.o pussy.,
 1404,1864,豚,Kanji,pork,,,,,,,organ,pig,,,TON,,buta,,Pork.m organs.r from pigs.r are juicy. Put a ton.o of butter.k on the pork.,
 1405,1477,脈,Kanji,vein,,,,,,,organ,massacre,,,MYAKU,,suji,,Veins.m and organs.r sliced in the massacre.r. My.o acute.o suggestion.k is to bandage the veins.,
-1406,1387,肺,Kanji,lung,,,,,,,organ,city,,,HI,,,,The lungs.m are the organ.r that suffers the most in cities.r at high.o altitude.,
+1406,1387,肺,Kanji,lung,,,,,,,organ,city,,,HAI,,,,The lungs.m are the organ.r that suffers the most in cities.r at high.o altitude.,
 1407,2419,袁,Kanji,kimono,,,,,,,ground,mouth,clothes,,EN,,,,A kimono.o drags on the ground.r. A mouth.r complains about clothes.r. En.ojoy wearing a kimono.,
 1408,628,園,Kanji,park,,,,,,,box,kimono,,,EN,,sono,,A park.m is green box.r to stroll in kimonos.r. The park en.oclosed citizens from sound.k.,
 1409,887,遠,Kanji,far,,,,,,,kimono,motion,,,EN,ON,too.i,,Far.m distances wrinkle kimonos.r with all the motion.r. I en.joy far walks on.o the beach with a toy.k poodle.,
@@ -1610,7 +1610,7 @@ Order1,Frequency1,Kanji1,Type1,Meaning1,Meaning2,Meaning3,Bushu1,Bushu2,Bushu3,B
 1598,1557,鬼,Kanji,demon,,,,,,,bloody,field,legs,private,KI,,oni,,The demon.m slashes.r in the fields.r at our legs.r and private.r parts. The onyx.o demon keeps.o us at bay.,
 1599,1717,灰,Kanji,ash,,,,,,,cliff,fire,,,KAI,,hai,,"The ash.m from the cliff.r fire.r where blown like a kite.o, high.k into the sky.",
 1600,1307,炭,Kanji,coal,,,,,,,mountain,ash,,,TAN,,sumi,,The coal.m from the mountains.r burned to ash.r. I got a tan.o watching coals burn in summer.k.,
-1601,556,岸,Kanji,shore,,,,,,,mountain,cliff,dry,,GAN,,kishi,,The shore.r is at the base of mountains.r and cliffs.r. A gang.o ate quiches.k on the shore.,
+1601,556,岸,Kanji,shore,,,,,,,mountain,cliff,dry,,GAN,,kishi,,A shore.m at the base of mountainous.r cliffs.r. The gang.o ate quiches.k on the shore.,
 1602,1748,魂,Kanji,soul,,,,,,,it-is-said,demon,,,KON,,tamashii,,"Your soul.m, it.r is.r said.r the demon.r wants. It cons.o you to.k mash.k your soul.",
 1603,1206,魅,Kanji,charm,,,,,,,demon,not yet,,,MI,,,,That charming.m demon.r is not.r yet.r ready for me.o in particular.,
 1604,1843,汁,Kanji,juice,,,,,,,water splash,ten,,,JUU,,shiru,,The juice.m needs water.r and ten.r flavors. The Jewish.o juice recipe is shear.k intuition.,
@@ -1664,20 +1664,21 @@ Order1,Frequency1,Kanji1,Type1,Meaning1,Meaning2,Meaning3,Bushu1,Bushu2,Bushu3,B
 9024,,く,Proto-radical,hiragana ku,,,,,,,,,,,,,,,,
 9025,,一,Proto-radical,horizontal line,,,,,,,,,,,,,,,,
 9026,,囗,Proto-radical,square,,,,,,,,,,,,,,,,
-9027,,乙,Proto-radical,upside down 2,,,,,,,,,,,,,,,,
-9028,,十,Proto-radical,cross,,,,,,,,,,,,,,,,
-9029,,T,Proto-radical,capital T,,,,,,,,,,,,,,,,
-9030,,丶 ,Proto-radical,dot,,,,,,,,,,,,,,,,
-9031,,|,Proto-radical,vertical stick,,,,,,,,,,,,,,,,
-9032,,⺌,Proto-radical,three rays,,,,,,,,,,,,,,,,
-9033,,丷,Proto-radical,pair of horns,,,,,,,,,,,,,,,,
-9034,,亅,Proto-radical,hooked stick,,,,,,,,,,,,,,,,
-9035,,𠆢,Proto-radical,pitched roof,,,,,,,,,,,,,,,,
-9036,,L,Proto-radical,capital L,,,,,,,,,,,,,,,,
-9037,,冖,Proto-radical,downwards bracket,,,,,,,,,,,,,,,,
-9038,,⺾,Proto-radical,railroad track,,,,,,,,,,,,,,,,
-9039,,[,Proto-radical,opening bracket,,,,,,,,,,,,,,,,
-9040,,卩,Proto-radical,capital P,,,,,,,,,,,,,,,,
-9041,,⻌,Proto-radical,bottom left enclosure,,,,,,,,,,,,,,,,
-9042,,K,Proto-radical,capital K,,,,,,,,,,,,,,,,
-9043,,𠄎,Proto-radical,number 3,,,,,,,,,,,,,,,,
+9027,,⺃,Proto-radical,hook shape,,,,,,,,,,,,,,,,
+9028,,乙,Proto-radical,upside down 2,,,,,,,,,,,,,,,,
+9029,,十,Proto-radical,cross,,,,,,,,,,,,,,,,
+9030,,T,Proto-radical,capital T,,,,,,,,,,,,,,,,
+9031,,丶 ,Proto-radical,dot,,,,,,,,,,,,,,,,
+9032,,|,Proto-radical,vertical stick,,,,,,,,,,,,,,,,
+9033,,⺌,Proto-radical,three rays,,,,,,,,,,,,,,,,
+9034,,丷,Proto-radical,pair of horns,,,,,,,,,,,,,,,,
+9035,,亅,Proto-radical,hooked stick,,,,,,,,,,,,,,,,
+9036,,𠆢,Proto-radical,pitched roof,,,,,,,,,,,,,,,,
+9037,,L,Proto-radical,capital L,,,,,,,,,,,,,,,,
+9038,,冖,Proto-radical,downwards bracket,,,,,,,,,,,,,,,,
+9039,,⺾,Proto-radical,railroad track,,,,,,,,,,,,,,,,
+9040,,[,Proto-radical,opening bracket,,,,,,,,,,,,,,,,
+9041,,卩,Proto-radical,capital P,,,,,,,,,,,,,,,,
+9042,,⻌,Proto-radical,bottom left enclosure,,,,,,,,,,,,,,,,
+9043,,K,Proto-radical,capital K,,,,,,,,,,,,,,,,
+9044,,𠄎,Proto-radical,number 3,,,,,,,,,,,,,,,,
