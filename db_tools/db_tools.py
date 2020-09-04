@@ -18,27 +18,27 @@ with open(KANJI_DATA, 'r') as f:
 cur.execute('''
     UPDATE kanji_data AS a
 
-        SET Bushu1 = (SELECT "b.Kanji" FROM kanji_data b
-                WHERE "a.Radical1" <> '' AND "b.Meaning1"="a.Radical1" 
-                   OR "a.Radical1" <> '' AND "b.Meaning2"="a.Radical1" 
-                   OR "a.Radical1" <> '' AND "b.Meaning3"="a.Radical1"),
+        SET "Bushu1" = (SELECT b."Kanji" FROM kanji_data b
+                WHERE a."Radical1" <> '' AND b."Meaning1"=a."Radical1" 
+                   OR a."Radical1" <> '' AND b."Meaning2"=a."Radical1" 
+                   OR a."Radical1" <> '' AND b."Meaning3"=a."Radical1"),
 
-            Bushu2 = (SELECT "b.Kanji" FROM kanji_data b
-                WHERE "a.Radical2" <> '' AND "b.Meaning1"="a.Radical2" 
-                      OR "a.Radical2" <> '' AND "b.Meaning2"="a.Radical2" 
-                      OR "a.Radical2" <> '' AND "b.Meaning3"="a.Radical2"),
+            "Bushu2" = (SELECT b."Kanji" FROM kanji_data b
+                WHERE a."Radical2" <> '' AND b."Meaning1"=a."Radical2" 
+                      OR a."Radical2" <> '' AND b."Meaning2"=a."Radical2" 
+                      OR a."Radical2" <> '' AND b."Meaning3"=a."Radical2"),
 
-            Bushu3 = (SELECT "b.Kanji" FROM kanji_data b
-                WHERE "a.Radical3" <> '' AND "b.Meaning1"="a.Radical3" 
-                    OR "a.Radical3" <> '' AND "b.Meaning2"="a.Radical3" 
-                    OR "a.Radical3" <> '' AND "b.Meaning3"="a.Radical3"),
+            "Bushu3" = (SELECT b."Kanji" FROM kanji_data b
+                WHERE a."Radical3" <> '' AND b."Meaning1"=a."Radical3" 
+                    OR a."Radical3" <> '' AND b."Meaning2"=a."Radical3" 
+                    OR a."Radical3" <> '' AND b."Meaning3"=a."Radical3"),
 
-            Bushu4 = (SELECT "b.Kanji" FROM kanji_data b
-                WHERE "a.Radical4" <> '' AND "b.Meaning1"="a.Radical4" 
-                   OR "a.Radical4" <> '' AND "b.Meaning2"="a.Radical4" 
-                   OR "a.Radical4" <> '' AND "b.Meaning3"="a.Radical4")
+            "Bushu4" = (SELECT b."Kanji" FROM kanji_data b
+                WHERE a."Radical4" <> '' AND b."Meaning1"=a."Radical4" 
+                   OR a."Radical4" <> '' AND b."Meaning2"=a."Radical4" 
+                   OR a."Radical4" <> '' AND b."Meaning3"=a."Radical4")
 
-        WHERE "Id" > 0 AND "Id" < 9000 
+        WHERE "Id" > 0 AND  "Id" < 9000 
 ''')
 cur.execute('SELECT * FROM kanji_data')
 first_row = cur.fetchone()
