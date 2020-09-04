@@ -265,13 +265,17 @@ class Notification(db.Model):
 
 
 class KanjiData(db.Model):
-    Order = db.Column(db.Integer, primary_key=True)
+    Id = db.Column(db.Integer, primary_key=True)
     Frequency = db.Column(db.Integer)
     Kanji = db.Column(db.String(32, collation='NOCASE'))
     Type = db.Column(db.String(32, collation='NOCASE'))
     Meaning1 = db.Column(db.String(32, collation='NOCASE'))
     Meaning2 = db.Column(db.String(32, collation='NOCASE'))
     Meaning3 = db.Column(db.String(32, collation='NOCASE'))
+    Bushu1 = db.Column(db.String(32, collation='NOCASE'))
+    Bushu2 = db.Column(db.String(32, collation='NOCASE'))
+    Bushu3 = db.Column(db.String(32, collation='NOCASE'))
+    Bushu4 = db.Column(db.String(32, collation='NOCASE'))
     Radical1 = db.Column(db.String(32, collation='NOCASE'))
     Radical2 = db.Column(db.String(32, collation='NOCASE'))
     Radical3 = db.Column(db.String(32, collation='NOCASE'))
