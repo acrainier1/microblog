@@ -289,3 +289,9 @@ class KanjiData(db.Model):
 
     def __repr__(self):
         return f'<Kanji {self.Kanji}>'
+
+
+class Dummy(db.Model):
+    Id = db.Column(db.Integer, primary_key=True)
+    Frequency = db.Column(db.Integer)
+    Kanji = db.Column(db.String(32, collation='NOCASE'))
