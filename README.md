@@ -40,7 +40,7 @@
     (3) <!-- check -->
     SELECT * FROM kanji_data;
 
-    ==== view column names
+    ==== view column names & table info
     PRAGMA table_info(kanji_data);
 
 
@@ -111,6 +111,19 @@
 
     (3) <!-- use above result to get revision's 'old_version_#' -->
     UPDATE alembic_version SET version_num = 'new_version_#' WHERE version_num = 'old_version_#';
+
+
+    ==== view column names & table info
+    \d kajnji_data
+
+
+    ==== Collation
+    <!-- Equivalent of Sqlite's COLLATE NOCASE -->
+    CREATE COLLATION case_insensitive (
+      provider = icu,
+      locale = 'und-u-ks-level2',
+      deterministic = false
+    );
 
 
 
