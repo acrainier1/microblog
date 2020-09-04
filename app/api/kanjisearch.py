@@ -140,7 +140,7 @@ def search(search_term):
     ''' DESCRIPTION
         Main search feature from search bar input. It finds the searchTerm kanji 
         and returns list of all derivatives broken down by derivation depth level.
-        The string search term term can be one of many things: an order number, 
+        The string search term term can be one of many things: an ID number, 
         a kanji, a meaning, a radical, or a reading.
         The search function has three parts: (1) ID NUMBER and ONYOMI SEARCH, 
         (2) KUNYOMI SEARCH, (3) KANJI AND DERIVATIVES SEARCH.
