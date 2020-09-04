@@ -18,7 +18,7 @@ with open(KANJI_DATA, 'r') as f:
 cur.execute('''
     UPDATE kanji_data AS A
 
-        SET Bushu1 = (SELECT B.Kanji FROM kanji_data B
+        SET Bushu1 = (SELECT b.Kanji FROM kanji_data B
                 WHERE A.Radical1 <> '' AND B.Meaning1=A.Radical1 
                    OR A.Radical1 <> '' AND B.Meaning2=A.Radical1 
                    OR A.Radical1 <> '' AND B.Meaning3=A.Radical1),
