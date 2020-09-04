@@ -1,5 +1,6 @@
 ==== DEPENDENCIES =====
 
+
     ==== Bash command for using requirements.txt
 
     <!-- in local terminal ensure venv is activated -->
@@ -8,6 +9,7 @@
 
 
 ===== LOCAL SQLITE3 =====
+
 
     ==== copy [kanjidata] to EMPTY kanji_data table to match up with Heroku PostgreSQL
 
@@ -40,8 +42,10 @@
     (3) <!-- check -->
     SELECT * FROM kanji_data;
 
+
     ==== view column names & table info
     PRAGMA table_info(kanji_data);
+
 
 
     ==== Recreate kanji data table WITH Alembic
@@ -78,6 +82,7 @@
 
 ===== HEROKU POSTGRESQL =====
 
+
     ==== To update postgresql kanji data table on Heroku:
 
     (1) <!-- in local terminal -->
@@ -91,6 +96,7 @@
 
     (4) <!-- in Heroku terminal -->
     python3 db_tools.py; exit;
+
 
 
     ==== To update postgresql schema on Heroku:
@@ -130,9 +136,9 @@
 
 ===== LOCAL POSTGRESQL =====
 
+
     ==== Login
 
-    
     <!-- in local terminal -->
     sudo -i -u postgres     # start psql
     sudo -u 'linix-username' psql   # start psql directly
@@ -149,6 +155,7 @@
 
 
 ===== Joke
+
 
     ==== pip install no-migrane 
     <!-- A database migration tool that doesn't blow -->
