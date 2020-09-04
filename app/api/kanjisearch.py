@@ -298,7 +298,7 @@ def kanji(search_term):
     result = KanjiData.query.filter_by(Id=int(search_term)).first()
     if result:
         nested = nest_kanji_result(result)
-        nested[4] = add_bushu(nested[5])
+        # nested[4] = add_bushu(nested[5])
     if nested:
         return jsonify(nested)
     return jsonify([[0], [], [], ["NO_KANJI_DATA"], [], [], [], [], [], []])
@@ -314,8 +314,7 @@ def kanjiset(search_term):
     if results:
         for result in results:
             nested = nest_kanji_result(result)
-            nested[4] = add_bushu(nested[5])
-            # nested[4] = ["w","x","y","z"]
+            # nested[4] = add_bushu(nested[5])
             nested_results.append(nested)
     if nested_results:
         return jsonify(nested_results)
@@ -508,8 +507,6 @@ def derivative_kanji_query(search_term):
         cursor.close()
         # print(f"Count {c}, total_query_time 1: {total_query_time1} and 2: {total_query_time2}")
         return nested_results
-    # end = time.time()
-    # print("TIME TO EXCECUTE:", str(end - start))
     cursor.close()
     return nested_results
     
