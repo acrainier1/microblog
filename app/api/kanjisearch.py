@@ -260,6 +260,9 @@ def kanji(search_term):
         Primary search function. getKanjiData takes a search term 
         and returns the flashcard data
 
+        To test CJK characters with curl in terminal use:
+        search_term = search_term.encode('iso-8859-1').decode('utf8')
+
         PARAMETERS: search_term: string
 
         RETURNS kanjiData: array
@@ -289,16 +292,11 @@ def kanji(search_term):
                 [""] 
             ]
     '''
-    ''' 
-        To test CJK characters with curl in terminal use:
-        search_term = search_term.encode('iso-8859-1').decode('utf8')
-    '''
 
     print("search_term:", search_term, "@bp.route('/kanji/<search_term>', methods=['GET'])")
     result = KanjiData.query.filter_by(Id=int(search_term)).first()
     if result:
         nested = nest_kanji_result(result)
-        # nested[4] = add_bushu(nested[5])
     if nested:
         return jsonify(nested)
     return jsonify([[0], [], [], ["NO_KANJI_DATA"], [], [], [], [], [], []])
@@ -314,10 +312,8 @@ def kanjiset(search_term):
     if results:
         for result in results:
             nested = nest_kanji_result(result)
-            # nested[4] = add_bushu(nested[5])
             nested_results.append(nested)
     if nested_results:
-        # print("nested_results\n", nested_results)
         return jsonify(nested_results)
     return jsonify([])
 
@@ -337,7 +333,6 @@ def testroute(search_term):
 
     meaning = "halberd"
     for i in range(0, 1936):
-        # meaning = meaning.strip()
         query_derivatives = f"""
             SELECT *
                 FROM kanji_data 
@@ -470,33 +465,42 @@ def derivative_kanji_query(search_term):
             depth += 1
             temp = {}
             for value in deep_copy.values():
+                # print("value\n", value)
+                Id_of_child = value[0]
                 for meaning in value[2]:
                     # because if meaning == empty string, infinite while loop
                     if meaning:
                         meaning = meaning.strip()
                         # print("meaning===\n", meaning) # to test for infinite loops
                         # Searches all kanji again effectively making this recursive
-
-                        # start1 = time.time()
+                        start1 = time.time()
                         # "Id", "Frequency", "Kanji", "Type", "Meaning1", "Meaning2", "Meaning3"
                         query_derivatives = f"""
                             SELECT *
                                 FROM kanji_data 
-                                WHERE ("Radical1"='{meaning}')
-                                OR ("Radical2"='{meaning}')
-                                OR ("Radical3"='{meaning}')
-                                OR ("Radical4"='{meaning}')
+                                WHERE ("Id" > {Id_of_child})
+                                AND ("Radical1"='{meaning}'
+                                OR "Radical2"='{meaning}'
+                                OR "Radical3"='{meaning}'
+                                OR "Radical4"='{meaning}')
                         """
+
+                        query_derivatives = f"""
+                            SELECT *
+                                FROM kanji_data 
+                                WHERE "Radical1"='{meaning}'
+                                OR "Radical2"='{meaning}'
+                                OR "Radical3"='{meaning}'
+                                OR "Radical4"='{meaning}'
+                        """
+                        
                         res = cursor.execute(query_derivatives)
-                        # end1 = time.time()
-                        # total_query_time1 += (end1 - start1)
-
-
-                        # start2 = time.time()
                         results = cursor.fetchall()
-                        # end1 = time.time()
-                        # total_query_time1 += (end1 - start1)
+
+                        end1 = time.time()
+                        total_query_time1 += (end1 - start1)
                         # c+=1
+
                         if results:
                             for result in results:
                                 nested = nest_search_result(result)
@@ -506,7 +510,7 @@ def derivative_kanji_query(search_term):
             deep_copy = copy.deepcopy(temp)
             nested_results.update(temp)
         cursor.close()
-        # print(f"Count {c}, total_query_time 1: {total_query_time1} and 2: {total_query_time2}")
+        print(f"Count {c}, total_query_time 1: {total_query_time1} and 2: {total_query_time2}")
         return nested_results
     cursor.close()
     return nested_results
