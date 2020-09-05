@@ -308,16 +308,16 @@ def kanji(search_term):
 def kanjiset(search_term):
     print("search_term:", search_term, "@bp.route('/kanjiset/<int:search_term>', methods=['GET'])")
 
-    results = KanjiData.query.filter(
-        KanjiData.Order.between(search_term, search_term+99))
     nested_results = []
+    results = KanjiData.query.filter(
+        KanjiData.Id.between(search_term, search_term+99))
     if results:
         for result in results:
             nested = nest_kanji_result(result)
             # nested[4] = add_bushu(nested[5])
             nested_results.append(nested)
     if nested_results:
-        print("nested_results\n", nested_results)
+        # print("nested_results\n", nested_results)
         return jsonify(nested_results)
     return jsonify([])
 
