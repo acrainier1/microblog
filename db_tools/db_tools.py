@@ -17,13 +17,13 @@ cur.execute('SELECT * FROM kanji_data')
 response = cur.fetchone()
 if response:
     cur.execute('TRUNCATE TABLE kanji_data')
-    conn.commit()
-    
+    # conn.commit()
+
 
 with open(KANJI_DATA, 'r') as f:
     next(f) # Skip the header row.
     cur.copy_expert(sql="""COPY kanji_data FROM STDIN WITH (FORMAT CSV)""", file=f)
-    conn.commit()
+    # conn.commit()
 
 cur.execute('''
     UPDATE kanji_data AS A

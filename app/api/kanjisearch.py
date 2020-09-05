@@ -37,7 +37,7 @@
                             main_search_query(kunyomi, columns2)
                             derivative_kanji_query(search_term)
 
-        Data Structuring:   nest_search_result(result)
+        Data Structuring:   nest_orm_result(result)
 
 
     (2) SUGGESTIONS BOX
@@ -47,7 +47,7 @@
         SQL Query:          suggestions_query(search_term, columns1)
                             suggestions_query(kunyomi, columns2)
 
-        Data Structuring:   nest_search_result(result)
+        Data Structuring:   nest_orm_result(result)
 
 
     (3) SEARCH BY RADICAL
@@ -56,7 +56,7 @@
 
         SQL Query:          derivative_kanji_query(search_term)
 
-        Data Structuring:   nest_search_result(result)
+        Data Structuring:   nest_orm_result(result)
 
 
     (4) KANJI DATA CARD
@@ -393,7 +393,7 @@ def main_search_query(search_term, columns):
         res = cursor.execute(query_id)
         result = cursor.fetchone()
         if result:
-            nested = nest_query_result(result)
+            nested = nest_search_result(result)
             nested.append("Id")
             search_data[str(result[0]) + "Id"] = nested
             # concatenating Id # and column preserves this result if
@@ -411,7 +411,7 @@ def main_search_query(search_term, columns):
         results = cursor.fetchall()
         if results:
             for result in results:
-                nested = nest_query_result(result)
+                nested = nest_search_result(result)
                 nested.append(columns[0][:-9]) # only 'Onyomi' or 'Kunyomi' part of column name
                 search_data[str(result[0]) + columns[0]] = nested
     cursor.close()
@@ -443,7 +443,7 @@ def derivative_kanji_query(search_term):
     res = cursor.execute(query_derivatives)
     result = cursor.fetchone()
     if result:
-        nested = nest_query_result(result)
+        nested = nest_search_result(result)
         nested_results[result[0]] = nested
 
         ''' `depth` variable provides derivation level. Initialize at 0 
@@ -498,7 +498,7 @@ def derivative_kanji_query(search_term):
                         # c+=1
                         if results:
                             for result in results:
-                                nested = nest_query_result(result)
+                                nested = nest_search_result(result)
                                 temp[result[0]] = nested
                                 temp[result[0]].append(depth)
                             continue_search = True
@@ -524,7 +524,7 @@ def suggestions_query(search_term, columns):
             results = cursor.execute(SQL, (search_term_wildcard,)).fetchall()
             if results:
                 for result in results:
-                    nested = nest_search_result(result)
+                    nested = nest_orm_result(result)
                     nested_results[str(result[0])+column] = nested
                     nested_results[str(result[0])+column].append(column[1:-2])
                     COLUMN_SQL = f""" SELECT {column} FROM [kanjidata] 
@@ -570,7 +570,7 @@ def add_bushu(radicals):
     <<<<<<<<<< - 5 - HELPER FUNCTIONS  >>>>>>>>>>
     =============================================
 '''
-def nest_query_result(result):
+def nest_search_result(result):
     ''' DESCRIPTION
         This is the search display data. nest_search_result appends 
         the "columns" of json response as list within a larger list.
@@ -584,9 +584,9 @@ def nest_query_result(result):
     return nested_result
 
 
-def nest_search_result(result):
+def nest_orm_result(result):
     ''' DESCRIPTION
-        This is the search display data. nest_search_result appends 
+        This is the search display data. nest_orm_result appends 
         the "columns" of json response as list within a larger list.
         This for use with ORM queries returned as objects.
     '''
@@ -615,8 +615,8 @@ def nest_kanji_result(result):
     meanings = list(filter(None, [r.Meaning1, r.Meaning2, r.Meaning3]))
     nested_result.append(meanings)
 
-    # row[4] - Empty list for BUSHU added in calling function
-    nested_result.append([])
+    # row[4] - nested list of BUSU and checks for empty columns
+    nested_result.append([r.Bushu1, r.Bushu2, r.Bushu3, r.Bushu4])
 
     # row[5] - nested list of RADICALS and checks for empty columns
     radicals = list(filter(None, [r.Radical1, r.Radical2, r.Radical3, r.Radical4]))
