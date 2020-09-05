@@ -485,14 +485,14 @@ def derivative_kanji_query(search_term):
                                 OR "Radical4"='{meaning}')
                         """
 
-                        query_derivatives = f"""
-                            SELECT *
-                                FROM kanji_data 
-                                WHERE "Radical1"='{meaning}'
-                                OR "Radical2"='{meaning}'
-                                OR "Radical3"='{meaning}'
-                                OR "Radical4"='{meaning}'
-                        """
+                        # query_derivatives = f"""
+                        #     SELECT *
+                        #         FROM kanji_data 
+                        #         WHERE "Radical1"='{meaning}'
+                        #         OR "Radical2"='{meaning}'
+                        #         OR "Radical3"='{meaning}'
+                        #         OR "Radical4"='{meaning}'
+                        # """
                         
                         res = cursor.execute(query_derivatives)
                         results = cursor.fetchall()
