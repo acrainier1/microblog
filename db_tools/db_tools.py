@@ -2,6 +2,9 @@ import psycopg2
 import os
 import csv
 
+
+
+
 DATABASE_URL = os.environ.get('DATABASE_URL')
 KANJI_DATA = 'kanjidata.csv'
 
@@ -9,6 +12,13 @@ KANJI_DATA = 'kanjidata.csv'
 conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 cur = conn.cursor()
 
+
+cur.execute('SELECT * FROM kanji_data')
+response = cur.fetchone()
+if response:
+    cur.execute('TRUNCATE TABLE kanji_data')
+    conn.commit()
+    
 
 with open(KANJI_DATA, 'r') as f:
     next(f) # Skip the header row.
@@ -38,12 +48,15 @@ cur.execute('''
                    OR A."Radical4" <> '' AND B."Meaning2"=A."Radical4" 
                    OR A."Radical4" <> '' AND B."Meaning3"=A."Radical4")
 
-        WHERE A."Id" > 0
+        WHERE A."Id" > 0 AND  A."Id" < 9000
 ''')
 conn.commit()
 
+
 cur.execute('SELECT * FROM kanji_data')
 first_row = cur.fetchone()
+
+
 cur.close()
 
 
