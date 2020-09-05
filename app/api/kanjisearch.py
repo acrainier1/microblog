@@ -317,6 +317,7 @@ def kanjiset(search_term):
             # nested[4] = add_bushu(nested[5])
             nested_results.append(nested)
     if nested_results:
+        print("nested_results\n", nested_results)
         return jsonify(nested_results)
     return jsonify([])
 

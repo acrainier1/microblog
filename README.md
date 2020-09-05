@@ -86,15 +86,12 @@
     ==== To update postgresql kanji data table on Heroku:
 
     (1) <!-- in local terminal -->
-    heroke pg:pqsl
+    heroku pg:pqsl
 
-    (2) <!-- Inside postgres -->
-    TRUNCATE TABLE kanji_data; \q
-
-    (3) <!-- in local terminal -->
+    (2) <!-- in local terminal -->
     heroku run bash
 
-    (4) <!-- in Heroku terminal -->
+    (43 <!-- in Heroku terminal -->
     python3 db_tools.py; exit;
 
 
