@@ -475,25 +475,15 @@ def derivative_kanji_query(search_term):
                         # Searches all kanji again effectively making this recursive
                         start1 = time.time()
                         # "Id", "Frequency", "Kanji", "Type", "Meaning1", "Meaning2", "Meaning3"
-                        # query_derivatives = f"""
-                        #     SELECT *
-                        #         FROM kanji_data 
-                        #         WHERE ("Id" > {Id_of_child})
-                        #         AND ("Radical1"='{meaning}'
-                        #         OR "Radical2"='{meaning}'
-                        #         OR "Radical3"='{meaning}'
-                        #         OR "Radical4"='{meaning}')
-                        # """
-
                         query_derivatives = f"""
                             SELECT *
                                 FROM kanji_data 
-                                WHERE "Radical1"='{meaning}'
+                                WHERE ("Id" > {Id_of_child})
+                                AND ("Radical1"='{meaning}'
                                 OR "Radical2"='{meaning}'
                                 OR "Radical3"='{meaning}'
-                                OR "Radical4"='{meaning}'
+                                OR "Radical4"='{meaning}')
                         """
-                        
                         res = cursor.execute(query_derivatives)
                         results = cursor.fetchall()
 
