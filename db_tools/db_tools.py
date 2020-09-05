@@ -40,6 +40,8 @@ cur.execute('''
 
         WHERE A."Id" > 0 AND  A."Id" < 9000
 ''')
+conn.commit()
+
 cur.execute('SELECT * FROM kanji_data')
 first_row = cur.fetchone()
 cur.close()
