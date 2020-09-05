@@ -382,7 +382,7 @@ def main_search_query(search_term, columns):
     search_data = {}
     if search_term.isdigit():
         query_id = f"""
-            SELECT *
+            SELECT "Id", "Kanji", "Meaning1", "Meaning2", "Meaning3"
                 FROM kanji_data
                 WHERE "Id"={search_term}
         """
@@ -398,7 +398,7 @@ def main_search_query(search_term, columns):
             # an On/Kunyomi reading and a derivative kanji
     else:
         query_columns = f"""
-            SELECT *
+            SELECT "Id", "Kanji", "Meaning1", "Meaning2", "Meaning3"
                 FROM kanji_data
                 WHERE ("{columns[0]}"='{search_term}' COLLATE {collocation})
                 OR ("{columns[1]}"='{search_term}' COLLATE {collocation})
@@ -429,7 +429,7 @@ def derivative_kanji_query(search_term):
 
     nested_results = {}
     query_derivatives = f"""
-        SELECT * 
+        SELECT "Id", "Kanji", "Meaning1", "Meaning2", "Meaning3"
             FROM kanji_data 
             WHERE ("Kanji"='{search_term}')
             OR ("Meaning1"='{search_term}' COLLATE {collocation})
@@ -476,7 +476,7 @@ def derivative_kanji_query(search_term):
                         start1 = time.time()
                         # "Id", "Frequency", "Kanji", "Type", "Meaning1", "Meaning2", "Meaning3"
                         query_derivatives = f"""
-                            SELECT *
+                            SELECT "Id", "Kanji", "Meaning1", "Meaning2", "Meaning3"
                                 FROM kanji_data 
                                 WHERE ("Id" > {Id_of_child})
                                 AND ("Radical1"='{meaning}'
@@ -573,8 +573,8 @@ def nest_search_result(result):
     '''
     nested_result = [
         result[0],                          # ID
-        result[2],                          # KANJI
-        [result[4], result[5], result[6]]   # MEANINGS
+        result[1],                          # KANJI
+        [result[2], result[3], result[4]]   # MEANINGS
     ]
     return nested_result
 
