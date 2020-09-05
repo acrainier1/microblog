@@ -38,7 +38,7 @@ cur.execute('''
                    OR A."Radical4" <> '' AND B."Meaning2"=A."Radical4" 
                    OR A."Radical4" <> '' AND B."Meaning3"=A."Radical4")
 
-        WHERE A."Id" > 0 AND  A."Id" < 9000
+        WHERE A."Id" > 0
 ''')
 conn.commit()
 
