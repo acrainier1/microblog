@@ -160,20 +160,20 @@ def search(search_term):
             }
         Example:
             { 
-                57Onyomi_Reading1: [[51], ['大'], ['big', '', ''], 'Onyomi']
-                43: [43, '由', ['reason','',''], ['bar','field','',''], 3]
+                57Onyomi_Reading1: [51, '大', ['big', '', ''], 'Onyomi']
+                43: [43, '由', ['reason','',''], 3]
             }
 
         If there is data found, returned as an array or arrays
             [
-                [Id #, Kanji, [...Meanings], [...Radicals], Heading/Depth], 
+                [Id #, Kanji, [...Meanings], Heading/Depth], 
                 [...],
                 ...
             ]
         Example:
             [
-                [[51], ['大'], ['big', '', ''], 'Onyomi']
-                [43, '由', ['reason','',''], ['bar','field','',''], 3]
+                [51, '大', ['big', '', ''], 'Onyomi']
+                [43, '由', ['reason','',''], 3]
             ]
 
         If there is no data found, returned as an array with boiler plate
@@ -431,10 +431,11 @@ def derivative_kanji_query(search_term):
     query_derivatives = f"""
         SELECT "Id", "Kanji", "Meaning1", "Meaning2", "Meaning3"
             FROM kanji_data 
-            WHERE ("Kanji"='{search_term}')
-            OR ("Meaning1"='{search_term}' COLLATE {collocation})
-            OR ("Meaning2"='{search_term}' COLLATE {collocation})
-            OR ("Meaning3"='{search_term}' COLLATE {collocation})
+            WHERE "Type" <> "Proto-radical"
+            AND ("Kanji"='{search_term}'
+            OR "Meaning1"='{search_term}' COLLATE {collocation}
+            OR "Meaning2"='{search_term}' COLLATE {collocation}
+            OR "Meaning3"='{search_term}' COLLATE {collocation})
     """
     res = cursor.execute(query_derivatives)
     result = cursor.fetchone()
@@ -454,10 +455,9 @@ def derivative_kanji_query(search_term):
         for value in nested_results.values():
             value.append(depth)
 
-        c=0
-        total_query_time1 = 0
-        total_query_time2 = 0
-
+        # c=0
+        # total_query_time1 = 0
+        # total_query_time2 = 0
         continue_search = True
         while continue_search:
             # if continue_search doesn't update to True, loop stops
@@ -468,13 +468,11 @@ def derivative_kanji_query(search_term):
                 # print("value\n", value)
                 Id_of_child = value[0]
                 for meaning in value[2]:
-                    # because if meaning == empty string, infinite while loop
                     if meaning:
                         meaning = meaning.strip()
                         # print("meaning===\n", meaning) # to test for infinite loops
                         # Searches all kanji again effectively making this recursive
-                        start1 = time.time()
-                        # "Id", "Frequency", "Kanji", "Type", "Meaning1", "Meaning2", "Meaning3"
+                        # start1 = time.time()
                         query_derivatives = f"""
                             SELECT "Id", "Kanji", "Meaning1", "Meaning2", "Meaning3"
                                 FROM kanji_data 
@@ -486,11 +484,9 @@ def derivative_kanji_query(search_term):
                         """
                         res = cursor.execute(query_derivatives)
                         results = cursor.fetchall()
-
-                        end1 = time.time()
-                        total_query_time1 += (end1 - start1)
+                        # end1 = time.time()
+                        # total_query_time1 += (end1 - start1)
                         # c+=1
-
                         if results:
                             for result in results:
                                 nested = nest_search_result(result)
@@ -500,7 +496,7 @@ def derivative_kanji_query(search_term):
             deep_copy = copy.deepcopy(temp)
             nested_results.update(temp)
         cursor.close()
-        print(f"Count {c}, total_query_time 1: {total_query_time1} and 2: {total_query_time2}")
+        # print(f"Count {c}, total_query_time 1: {total_query_time1} and 2: {total_query_time2}")
         return nested_results
     cursor.close()
     return nested_results
@@ -536,24 +532,15 @@ def suggestions_query(search_term, columns):
     return nested_results
 
 
-def add_bushu(radicals):
-    ''' This extracts kanji version of a radical.
-        For example, for "tree" it finds the kanji for its 
-        radicals, "big" and "bar", and returns ["大", "|"]
-    '''
-    bushus = []
-    for radical in radicals:
-        # bushu = KanjiData.query.filter_by(
-        #     or_(Meaning1=radical, Meaning2=radical, Meaning3=radical)).first()
-        # if bushu:
-        #     bushus.append(bushu)
-        bushu1 = KanjiData.query.filter_by(Meaning1=radical).first()
-        bushu2 = KanjiData.query.filter_by(Meaning2=radical).first()
-        bushu3 = KanjiData.query.filter_by(Meaning3=radical).first()
-        for bushu in [bushu1, bushu2, bushu3]:
-            if bushu:
-                bushus.append(bushu.Kanji)
-    return bushus
+
+
+
+
+
+
+
+
+
 
 
 
@@ -700,3 +687,23 @@ def sort_data(search_data):
 #     nested.append(column[:-9])
 # else:
 #     nested.append(column)
+
+
+# def add_bushu(radicals):
+#     ''' This extracts kanji version of a radical.
+#         For example, for "tree" it finds the kanji for its 
+#         radicals, "big" and "bar", and returns ["大", "|"]
+#     '''
+#     bushus = []
+#     for radical in radicals:
+#         # bushu = KanjiData.query.filter_by(
+#         #     or_(Meaning1=radical, Meaning2=radical, Meaning3=radical)).first()
+#         # if bushu:
+#         #     bushus.append(bushu)
+#         bushu1 = KanjiData.query.filter_by(Meaning1=radical).first()
+#         bushu2 = KanjiData.query.filter_by(Meaning2=radical).first()
+#         bushu3 = KanjiData.query.filter_by(Meaning3=radical).first()
+#         for bushu in [bushu1, bushu2, bushu3]:
+#             if bushu:
+#                 bushus.append(bushu.Kanji)
+#     return bushus
