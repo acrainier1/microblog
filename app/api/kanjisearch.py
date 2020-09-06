@@ -440,6 +440,7 @@ def derivative_kanji_query(search_term):
     res = cursor.execute(query_derivatives)
     result = cursor.fetchone()
     if result:
+        print("result====\n", result)
         nested = nest_search_result(result)
         nested_results[result[0]] = nested
 
