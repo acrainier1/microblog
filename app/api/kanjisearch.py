@@ -431,7 +431,7 @@ def derivative_kanji_query(search_term):
     query_derivatives = f"""
         SELECT "Id", "Kanji", "Meaning1", "Meaning2", "Meaning3"
             FROM kanji_data 
-            WHERE "Type" <> "Proto-radical"
+            WHERE "Type" <> 'Proto-radical'
             AND ("Kanji"='{search_term}'
             OR "Meaning1"='{search_term}' COLLATE {collocation}
             OR "Meaning2"='{search_term}' COLLATE {collocation}
