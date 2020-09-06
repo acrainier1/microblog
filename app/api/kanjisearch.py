@@ -212,6 +212,7 @@ def search(search_term):
     search_data.update(derivative_kanji_query(search_term))
 
     if search_data:
+        print("sd===")
         return jsonify(list(search_data.values()))
     return NO_DATA
 
