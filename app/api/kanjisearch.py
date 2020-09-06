@@ -180,7 +180,7 @@ def search(search_term):
     '''
     print("search_term:", search_term, "@bp.route('/search/<search_term>', methods=['GET'])")
 
-    NO_DATA = jsonify([ ['', '', [], [], 'NO_DATA'] ])
+    NO_DATA = jsonify([ ['', '', [], 'NO_DATA'] ])
     search_term = scrub_chars(search_term)
     # search_term = search_term.strip()
     
@@ -212,7 +212,6 @@ def search(search_term):
     search_data.update(derivative_kanji_query(search_term))
 
     if search_data:
-        print("sd===")
         return jsonify(list(search_data.values()))
     return NO_DATA
 
@@ -441,7 +440,6 @@ def derivative_kanji_query(search_term):
     res = cursor.execute(query_derivatives)
     result = cursor.fetchone()
     if result:
-        print("result====\n", result)
         nested = nest_search_result(result)
         nested_results[result[0]] = nested
 
