@@ -297,7 +297,6 @@ def kanji(search_term):
     result = KanjiData.query.filter_by(Id=int(search_term)).first()
     if result:
         nested = nest_kanji_result(result)
-    if nested:
         return jsonify(nested)
     return jsonify([[0], [], [], ["NO_KANJI_DATA"], [], [], [], [], [], []])
 
@@ -586,37 +585,56 @@ def nest_kanji_result(result):
         Some responses are semantically related so multiple columns 
         will be further nested into a list.
     '''
-    r = result
-    nested_result = []
-    # row[0:2] - Appends ID, KANJI, and TYPE
-    nested_result.append([r.Id])
-    nested_result.append([r.Kanji])
-    nested_result.append([r.Type])
-
-    # row[3] - Appends nested list of MEANINGS and checks for empty columns
-    meanings = list(filter(None, [r.Meaning1, r.Meaning2, r.Meaning3]))
-    nested_result.append(meanings)
-
-    # row[4] - nested list of BUSU and checks for empty columns
-    nested_result.append([r.Bushu1, r.Bushu2, r.Bushu3, r.Bushu4])
-
-    # row[5] - nested list of RADICALS and checks for empty columns
-    radicals = list(filter(None, [r.Radical1, r.Radical2, r.Radical3, r.Radical4]))
-    nested_result.append(radicals)
-
-    # row[6] - Appends nested list of ONYOMI and checks for empty columns
-    onyomi = list(filter(None, [r.Onyomi_Reading1, r.Onyomi_Reading2]))
-    nested_result.append(onyomi)
-
-    # row[7] - Appends nested list of KUNYOMI and checks for empty columns
-    kunyomi = list(filter(None, [r.Kunyomi_Reading1, r.Kunyomi_Reading2]))
-    nested_result.append(kunyomi)
-
-    # row[8:9] - Appends MNEMONIC and NOTES
-    nested_result.append([r.Mnemonic])
-    nested_result.append([r.Notes])
-
+    r = result    
+    nested_result = {
+        "Order": r.Id,
+        "Kanji": r.Kanji,
+        "Type": r.Type,
+        "Meanings": list(filter(None, [r.Meaning1, r.Meaning2, r.Meaning3])),
+        "Bushu": list(filter(None, [r.Bushu1, r.Bushu2, r.Bushu3, r.Bushu4])),
+        "Radicals": list(filter(None, [r.Radical1, r.Radical2, r.Radical3, r.Radical4])),
+        "Onyomi": list(filter(None, [r.Onyomi_Reading1, r.Onyomi_Reading2])),
+        "Kunyomi": list(filter(None, [r.Kunyomi_Reading1, r.Kunyomi_Reading2])),
+        "Mnemonic": r.Mnemonic,
+        "Notes": r.Notes
+    }
     return nested_result
+
+
+
+
+
+# r = result
+# nested_result = []
+# # row[0:2]
+# nested_result.append(r.Id)
+# nested_result.append(r.Kanji)
+# nested_result.append(r.Type)
+
+# # row[3]
+# meanings = list(filter(None, [r.Meaning1, r.Meaning2, r.Meaning3]))
+# nested_result.append(meanings)
+
+# # row[4]
+# nested_result.append([r.Bushu1, r.Bushu2, r.Bushu3, r.Bushu4])
+
+# # row[5]
+# radicals = list(filter(None, [r.Radical1, r.Radical2, r.Radical3, r.Radical4]))
+# nested_result.append(radicals)
+
+# # row[6]
+# onyomi = list(filter(None, [r.Onyomi_Reading1, r.Onyomi_Reading2]))
+# nested_result.append(onyomi)
+
+# # row[7]
+# kunyomi = list(filter(None, [r.Kunyomi_Reading1, r.Kunyomi_Reading2]))
+# nested_result.append(kunyomi)
+
+# # row[8:9]
+# nested_result.append(r.Mnemonic)
+# nested_result.append(r.Notes)
+
+# return nested_result
 
 
 def punctuate_kunyomi(search_term):
