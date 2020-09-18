@@ -601,42 +601,6 @@ def nest_kanji_result(result):
     return nested_result
 
 
-
-
-
-# r = result
-# nested_result = []
-# # row[0:2]
-# nested_result.append(r.Id)
-# nested_result.append(r.Kanji)
-# nested_result.append(r.Type)
-
-# # row[3]
-# meanings = list(filter(None, [r.Meaning1, r.Meaning2, r.Meaning3]))
-# nested_result.append(meanings)
-
-# # row[4]
-# nested_result.append([r.Bushu1, r.Bushu2, r.Bushu3, r.Bushu4])
-
-# # row[5]
-# radicals = list(filter(None, [r.Radical1, r.Radical2, r.Radical3, r.Radical4]))
-# nested_result.append(radicals)
-
-# # row[6]
-# onyomi = list(filter(None, [r.Onyomi_Reading1, r.Onyomi_Reading2]))
-# nested_result.append(onyomi)
-
-# # row[7]
-# kunyomi = list(filter(None, [r.Kunyomi_Reading1, r.Kunyomi_Reading2]))
-# nested_result.append(kunyomi)
-
-# # row[8:9]
-# nested_result.append(r.Mnemonic)
-# nested_result.append(r.Notes)
-
-# return nested_result
-
-
 def punctuate_kunyomi(search_term):
     ''' DESCRIPTION
         Searches for kunyomi with period "." between each letter because 
@@ -645,8 +609,7 @@ def punctuate_kunyomi(search_term):
         all possible occurences of "." and without it is necessary to get
         result.
     '''
-    if '.' in search_term:
-        # strip out "."
+    while '.' in search_term:       # strips out "."
         index = search_term.find(".")
         search_term = search_term[:index] + search_term[index + 1:]
     kunyomis = [search_term[:i] + "." + search_term[i:] for i in range(1, len(search_term))]
