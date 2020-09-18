@@ -298,7 +298,20 @@ def kanji(search_term):
     if result:
         nested = nest_kanji_result(result)
         return jsonify(nested)
-    return jsonify([[0], [], [], ["NO_KANJI_DATA"], [], [], [], [], [], []])
+    NO_DATA = {
+        "Id": 0,
+        "Kanji": "",
+        "Type": "NO_KANJI_DATA",
+        "Meanings": [],
+        "Bushu": [],
+        "Radicals": [],
+        "Onyomi": [],
+        "Kunyomi": [],
+        "Mnemonic": [],
+        "Notes": []
+    }
+    return jsonify(NO_DATA)
+    # return jsonify([[0], [], [], ["NO_KANJI_DATA"], [], [], [], [], [], []])
 
 
 @bp.route('/kanjiset/<int:search_term>', methods=['GET'])
@@ -587,7 +600,7 @@ def nest_kanji_result(result):
     '''
     r = result    
     nested_result = {
-        "Order": r.Id,
+        "Id": r.Id,
         "Kanji": r.Kanji,
         "Type": r.Type,
         "Meanings": list(filter(None, [r.Meaning1, r.Meaning2, r.Meaning3])),

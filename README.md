@@ -17,7 +17,7 @@
 
 (1) <!-- in local terminal -->
 ~/<top_level_directory>$
-csv-to-sqlite -f kanjidata.csv -o kanji.db -D; sqlite3 app.db 
+csv-to-sqlite -f kanjidata.csv -o app.db -D; sqlite3 app.db 
 
 (2) <!-- in sqlite3, update all table data -->
 DELETE FROM kanji_data;
@@ -58,7 +58,7 @@ flask db upgrade
 ==== Recreate kanji data table WITHOUT Alembic
 <!-- in sqlite3 -->
 CREATE TABLE kanji_data (
-    "Order" INTEGER PRIMARY KEY UNIQUE,
+    Id INTEGER PRIMARY KEY UNIQUE,
     Frequency VARCHAR(32) COLLATE NOCASE,
     Kanji VARCHAR(32) COLLATE NOCASE,
     Type VARCHAR(32) COLLATE NOCASE,
@@ -133,30 +133,12 @@ CREATE COLLATION case_insensitive (
 );
 
 
-
-    ============================
-    ===== LOCAL POSTGRESQL =====
-    ============================
-
-==== Login
-
-(1) <!-- in local terminal -->
-sudo -i -u postgres     # start psql
-sudo -u 'linix-username' psql   # start psql directly
-
-(2) <!-- Inside postgres -->
-psql
-
-(3) <!-- connect to kanjiremastered -->
-\c kanjiremastered
-
-
 ==== Recreate kanji data table
 <!-- Postgres doesn't take a 'COLLATE NOCASE' keyword, 
 unlike sqlite3! -->
 
 CREATE TABLE kanji_data (
-    "Order" INTEGER PRIMARY KEY UNIQUE,
+    Id INTEGER PRIMARY KEY UNIQUE,
     Frequency VARCHAR(32),
     Kanji VARCHAR(32),
     Type VARCHAR(32),
@@ -178,6 +160,28 @@ CREATE TABLE kanji_data (
     Mnemonic VARCHAR(256),
     Notes VARCHAR(256)
 );
+
+
+
+
+
+
+    ============================
+    ===== LOCAL POSTGRESQL =====
+    ============================
+
+==== Login
+
+(1) <!-- in local terminal -->
+sudo -i -u postgres     # start psql
+sudo -u 'linix-username' psql   # start psql directly
+
+(2) <!-- Inside postgres -->
+psql
+
+(3) <!-- connect to kanjiremastered -->
+\c kanjiremastered
+
 
 
 ==== Start/Stop postgresql
