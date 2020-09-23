@@ -1,3 +1,14 @@
+    =================
+    ===== FLASK =====
+    =================
+
+==== Run flask in dev mode
+
+<!-- in local terminal ensure venv is activated -->
+(venv) ~$ clear; export FLASK_DEBUG=1; flask run;
+
+
+
     =======================
     ==== DEPENDENCIES =====
     =======================
@@ -5,7 +16,7 @@
 ==== Bash command for using requirements.txt
 
 <!-- in local terminal ensure venv is activated -->
-(venv) $ pip install -r requirements.txt
+(venv) ~$ pip install -r requirements.txt
 
 
 
@@ -194,6 +205,7 @@ sudo /etc/init.d/postgresql stop
 
     ================
     ===== Joke =====
+    ================
 
 ==== pip install no-migrane 
 <!-- A database migration tool that doesn't blow -->

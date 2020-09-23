@@ -5,13 +5,13 @@
     =============================================
     =============================================
 
-            TABLE OF CONTENTS           Line No.
+            TABLE OF CONTENTS
 
-    - 1 -   PROGRAM STRUCTURE           25
-    - 2 -   IMPORTS & SETUP             100
-    - 3 -   FLASK ROUTES                125
-    - 4 -   SQL QUERIES                 350
-    - 5 -   HELPER FUNCTIONS            475
+    - 1 -   PROGRAM STRUCTURE
+    - 2 -   IMPORTS & SETUP
+    - 3 -   FLASK ROUTES
+    - 4 -   SQL QUERIES
+    - 5 -   HELPER FUNCTIONS
 
 '''
 
@@ -310,8 +310,7 @@ def kanji(search_term):
         "Mnemonic": [],
         "Notes": []
     }
-    return jsonify(NO_DATA)
-    # return jsonify([[0], [], [], ["NO_KANJI_DATA"], [], [], [], [], [], []])
+    return jsonify([])
 
 
 @bp.route('/kanjiset/<int:search_term>', methods=['GET'])

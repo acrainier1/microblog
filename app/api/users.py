@@ -62,9 +62,6 @@ def create_user():
         return bad_request('Please use a different username')
     if User.query.filter_by(email=data['email']).first():
         return bad_request('Please use a different email address')
-    #  check for valid email
-    if False:
-        return bad_request('Please use a valid email address')
     user = User()
     user.from_dict(data, new_user=True)
     db.session.add(user)
