@@ -1,8 +1,4 @@
 from flask import jsonify, request, url_for, abort
-# from flask_wtf import FlaskForm
-from wtforms import validators
-from wtforms.validators import Email
-from wtforms.fields.html5 import EmailField
 from app import db
 from app.models import User, KanjiData
 from app.api import bp
@@ -55,9 +51,8 @@ def get_followed(id):
 @bp.route('/users', methods=['POST'])
 def create_user():
     data = request.get_json() or {}
-    print("data====\n", data)
-    if 'username' not in data or 'email' not in data or 'password' not in data:
-        return bad_request('Must include username, email and password fields')
+    if 'email' not in data or 'password' not in data:
+        return bad_request('Must include email and password fields')
     if User.query.filter_by(username=data['username']).first():
         return bad_request('Please use a different username')
     if User.query.filter_by(email=data['email']).first():
@@ -93,6 +88,55 @@ def update_user(id):
     db.session.commit()
     return jsonify(user.to_dict())
 
+
+@bp.route('/getuser', methods=['GET'])
+@token_auth.login_required
+def get_user_data():
+    # data = request.get_json() or {}
+    if token_auth.current_user().id:
+        response = {
+            'email' : token_auth.current_user().email,
+            'username' : token_auth.current_user().username
+        }
+        response['statusCode'] = 201
+        return jsonify(response)
+    return jsonify({})
+    
+
+@bp.route('/updateuser', methods=['POST'])
+@token_auth.login_required
+def update_user_data():
+    data = request.get_json()
+    print('data =====\n', data)
+    old_email = data.get('oldEmail')
+    new_email = data.get('newEmail')
+    old_username = data.get('oldUsername')
+    new_username = data.get('newUsername')
+    new_password = data.get('newPassword')
+
+    fields = ['oldEmail', 'newEmail', 'oldUsername', 'newUsername']
+    for field in fields:
+        if field in data:
+            print('field', data.get(field))
+
+    if token_auth.current_user().email != old_email:
+        abort(403)
+    if User.query.filter_by(email=old_email).first():
+        user = User.query.filter_by(email=old_email).first()
+    else:
+        return bad_request('Something went wrong! Please try again')
+    if new_username and new_username != user.username and \
+            User.query.filter_by(username=new_username).first():
+        return bad_request('Please use a different username')
+    if new_email and new_email != user.email and \
+            User.query.filter_by(email=new_email).first():
+        return bad_request('Please use a different email address')
+
+    user.update_data(data, new_user=False)
+    db.session.commit()
+    print('new data ====',user.new_data())
+    return jsonify(user.new_data())
+    # return jsonify({})
 
 
 @bp.route('/postcontactform/<subject>/<name>/<email>/<message>/<page>/<card>', methods=['POST'])

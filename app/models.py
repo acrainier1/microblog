@@ -205,6 +205,23 @@ class User(UserMixin, PaginatedAPIMixin, db.Model):
         if new_user and 'password' in data:
             self.set_password(data['password'])
 
+    def update_data(self, data, new_user=False):
+        print("DATA ====\n", data)
+        fields = ['oldEmail', 'newEmail', 'oldUsername', 'newUsername']
+        for field in fields:
+            if field in data:
+                setattr(self, field, data[field])
+        if 'newPassword' in data:
+            self.set_password(data['newPassword'])
+
+    def new_data(self, include_email=False):
+        data = {
+            'email': self.email,
+            'username': self.username,
+        }
+        return data
+
+
     def get_token(self, expires_in=3600):
         now = datetime.utcnow()
         if self.token and self.token_expiration > now + timedelta(seconds=60):

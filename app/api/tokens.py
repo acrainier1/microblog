@@ -1,4 +1,4 @@
-from flask import jsonify
+from flask import jsonify, request
 from app import db
 from app.api import bp
 from app.api.auth import basic_auth, token_auth
@@ -8,6 +8,8 @@ from app.api.auth import basic_auth, token_auth
 @bp.route('/tokens', methods=['POST'])
 @basic_auth.login_required
 def get_token():
+    # data = request.headers
+    # print("headers =====", data)
     token = basic_auth.current_user().get_token()
     db.session.commit()
     return jsonify({'token': token})
