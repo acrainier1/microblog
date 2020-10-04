@@ -61,10 +61,8 @@ def create_user():
     user.from_dict(data, new_user=True)
     db.session.add(user)
     db.session.commit()
-    # response = jsonify(user.to_dict())
     response = jsonify({"statusCode": 201})
     response.status_code = 201
-    # response.headers['Location'] = url_for('api.get_user', id=user.id)
     return response
 
 
@@ -114,29 +112,53 @@ def update_user_data():
     new_username = data.get('newUsername')
     new_password = data.get('newPassword')
 
-    fields = ['oldEmail', 'newEmail', 'oldUsername', 'newUsername']
-    for field in fields:
-        if field in data:
-            print('field', data.get(field))
+    # fields = ['oldEmail', 'newEmail', 'oldUsername', 'newUsername']
+    # for field in fields:
+    #     if field in data:
+    #         print('field', data.get(field))
 
-    if token_auth.current_user().email != old_email:
-        abort(403)
-    if User.query.filter_by(email=old_email).first():
-        user = User.query.filter_by(email=old_email).first()
-    else:
-        return bad_request('Something went wrong! Please try again')
-    if new_username and new_username != user.username and \
-            User.query.filter_by(username=new_username).first():
-        return bad_request('Please use a different username')
-    if new_email and new_email != user.email and \
-            User.query.filter_by(email=new_email).first():
-        return bad_request('Please use a different email address')
+    if 'newEmail' in data:
 
-    user.update_data(data, new_user=False)
-    db.session.commit()
-    print('new data ====',user.new_data())
-    return jsonify(user.new_data())
-    # return jsonify({})
+        if new_email == '':
+            print('Please enter an email address')
+            return bad_request('Please enter an email address')
+        elif token_auth.current_user().email != old_email:
+            print('email updt w/bad email')
+            abort(403)
+
+        if new_email and new_email != user.email and \
+                User.query.filter_by(email=new_email).first():
+            return bad_request('Please use a different email address')
+
+        if User.query.filter_by(email=old_email).first():
+            user = User.query.filter_by(email=old_email).first()
+        else:
+            return bad_request('Something went wrong! Please try again')
+
+    # if new_email != '' and token_auth.current_user().email != old_email:
+    #     print('email updt w/bad email')
+    #     abort(403)
+    # if new_username in data and token_auth.current_user().username != old_username:
+    #     print('usrn updt w/bad usrnm')
+    #     abort(403)
+
+    # if User.query.filter_by(email=old_email).first():
+    #     user = User.query.filter_by(email=old_email).first()
+    # else:
+    #     return bad_request('Something went wrong! Please try again')
+
+    # if new_username and new_username != user.username and \
+    #         User.query.filter_by(username=new_username).first():
+    #     return bad_request('Please use a different username')
+    # if new_email and new_email != user.email and \
+    #         User.query.filter_by(email=new_email).first():
+    #     return bad_request('Please use a different email address')
+
+    # user.update_data(data, new_user=False)
+    # db.session.commit()
+    # print('new data ====',user.new_data())
+    # return jsonify(user.new_data())
+    return jsonify({})
 
 
 @bp.route('/postcontactform/<subject>/<name>/<email>/<message>/<page>/<card>', methods=['POST'])
