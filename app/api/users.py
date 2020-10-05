@@ -112,13 +112,13 @@ def update_user_data():
     new_username = data.get('newUsername')
     new_password = data.get('newPassword')
 
-    # fields = ['oldEmail', 'newEmail', 'oldUsername', 'newUsername']
-    # for field in fields:
-    #     if field in data:
-    #         print('field', data.get(field))
+    if User.query.filter_by(email=old_email).first():
+        user = User.query.filter_by(email=old_email).first()
+    else:
+        return bad_request('Something went wrong! Please try again')
 
+    ''' UPDATE EMAIL ONLY '''
     if 'newEmail' in data:
-
         if new_email == '':
             print('Please enter an email address')
             return bad_request('Please enter an email address')
@@ -130,10 +130,33 @@ def update_user_data():
                 User.query.filter_by(email=new_email).first():
             return bad_request('Please use a different email address')
 
-        if User.query.filter_by(email=old_email).first():
-            user = User.query.filter_by(email=old_email).first()
-        else:
-            return bad_request('Something went wrong! Please try again')
+
+    ''' UPDATE USERNAME ONLY '''
+    if 'newUsername' in data:
+        if new_username == '':
+            print('Please enter a username')
+            return bad_request('Please enter a username')
+        elif token_auth.current_user().username != old_username:
+            print('username updt w/bad username')
+            abort(403)
+
+        if new_username and new_username != user.username and \
+                User.query.filter_by(username=new_username).first():
+            return bad_request('Please use a different username')
+
+    ''' UPDATE USPASSWORD  ONLY '''
+    if 'newPassword' in data:
+        if new_password == '':
+            print('Please enter a password')
+            return bad_request('Please enter a password')
+        elif not user.check_password(old_password):
+            print('password updt w/bad password')
+            abort(403)
+
+        if new_username and new_username != user.username and \
+                User.query.filter_by(email=new_email).first():
+            return bad_request('Please use a different email address')
+
 
     # if new_email != '' and token_auth.current_user().email != old_email:
     #     print('email updt w/bad email')

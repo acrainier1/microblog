@@ -221,7 +221,6 @@ class User(UserMixin, PaginatedAPIMixin, db.Model):
         }
         return data
 
-
     def get_token(self, expires_in=3600):
         now = datetime.utcnow()
         if self.token and self.token_expiration > now + timedelta(seconds=60):
