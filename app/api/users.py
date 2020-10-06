@@ -118,7 +118,7 @@ def update_user_data():
         return bad_request('Something went wrong! Please try again')
 
     ''' UPDATE EMAIL ONLY '''
-    if 'newEmail' in data:
+    if 'newEmail' in data and 'newUsername' not in data and 'newPassword' not in data:
         if new_email == '':
             print('Please enter an email address')
             return bad_request('Please enter an email address')
@@ -129,7 +129,8 @@ def update_user_data():
         if new_email and new_email != user.email and \
                 User.query.filter_by(email=new_email).first():
             return bad_request('Please use a different email address')
-
+        print(user.email, old_email, new_email)
+        print('made it past email gate!')
 
     ''' UPDATE USERNAME ONLY '''
     if 'newUsername' in data:
@@ -143,8 +144,9 @@ def update_user_data():
         if new_username and new_username != user.username and \
                 User.query.filter_by(username=new_username).first():
             return bad_request('Please use a different username')
+        print('made it past username gate!')
 
-    ''' UPDATE USPASSWORD  ONLY '''
+    ''' UPDATE PASSWORD ONLY '''
     if 'newPassword' in data:
         if new_password == '':
             print('Please enter a password')
@@ -156,32 +158,13 @@ def update_user_data():
         if new_username and new_username != user.username and \
                 User.query.filter_by(email=new_email).first():
             return bad_request('Please use a different email address')
+        print('made it past pw gate!')
 
-
-    # if new_email != '' and token_auth.current_user().email != old_email:
-    #     print('email updt w/bad email')
-    #     abort(403)
-    # if new_username in data and token_auth.current_user().username != old_username:
-    #     print('usrn updt w/bad usrnm')
-    #     abort(403)
-
-    # if User.query.filter_by(email=old_email).first():
-    #     user = User.query.filter_by(email=old_email).first()
-    # else:
-    #     return bad_request('Something went wrong! Please try again')
-
-    # if new_username and new_username != user.username and \
-    #         User.query.filter_by(username=new_username).first():
-    #     return bad_request('Please use a different username')
-    # if new_email and new_email != user.email and \
-    #         User.query.filter_by(email=new_email).first():
-    #     return bad_request('Please use a different email address')
-
-    # user.update_data(data, new_user=False)
-    # db.session.commit()
-    # print('new data ====',user.new_data())
-    # return jsonify(user.new_data())
-    return jsonify({})
+    user.update_data(data, new_user=False)
+    db.session.commit()
+    print('new data ====',user.new_data())
+    return jsonify(user.new_data())
+    # return jsonify({})
 
 
 @bp.route('/postcontactform/<subject>/<name>/<email>/<message>/<page>/<card>', methods=['POST'])

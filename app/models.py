@@ -207,12 +207,13 @@ class User(UserMixin, PaginatedAPIMixin, db.Model):
 
     def update_data(self, data, new_user=False):
         print("DATA ====\n", data)
-        fields = ['oldEmail', 'newEmail', 'oldUsername', 'newUsername']
-        for field in fields:
-            if field in data:
-                setattr(self, field, data[field])
+        if 'newEmail' in data:
+            setattr(self, 'email', data['newEmail'])
+        if 'newUsername' in data:
+            setattr(self, 'username', data['newUsername'])
         if 'newPassword' in data:
             self.set_password(data['newPassword'])
+            print('password_hash', self.password_hash)
 
     def new_data(self, include_email=False):
         data = {
