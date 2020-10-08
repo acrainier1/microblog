@@ -2,7 +2,7 @@ from flask import jsonify, request, url_for, abort
 from app import db
 from app.models import User, KanjiData
 from app.api import bp
-from app.api.auth import token_auth
+from app.api.auth import token_auth, basic_auth
 from app.api.errors import bad_request
 
 
@@ -69,6 +69,13 @@ def update_user(id):
     return jsonify(user.to_dict())
 
 
+''' 
+    ======================================
+    ======================================
+    >>>>>>>>>> FRONT END ROUTES <<<<<<<<<<
+    ======================================
+    ======================================
+'''
 @bp.route('/users', methods=['POST'])
 def create_user():
     data = request.get_json() or {}
@@ -80,9 +87,15 @@ def create_user():
         return bad_request('Please use a different email address')
     user = User()
     user.from_dict(data, new_user=True)
+    # TODO figure out how to gen. token without auth headers
+    token = basic_auth.current_user().get_token()
+    # TODO add token to user before db session add/commit
     db.session.add(user)
     db.session.commit()
-    response = jsonify({"statusCode": 201})
+    response = jsonify({
+        "token": token,
+        "statusCode": 201
+    })
     response.status_code = 201
     return response
 
@@ -156,7 +169,7 @@ def update_user_data():
     user.update_data(data, new_user=False)
     db.session.commit()
     response = user.new_data()
-    response['status_code'] = 201
+    response['statusCode'] = 201
     print('new data ====', response)
     return jsonify(response)
 
