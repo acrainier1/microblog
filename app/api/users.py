@@ -48,24 +48,6 @@ def get_followed(id):
     return jsonify(data)
 
 
-@bp.route('/users', methods=['POST'])
-def create_user():
-    data = request.get_json() or {}
-    if 'email' not in data or 'password' not in data:
-        return bad_request('Must include email and password fields')
-    if User.query.filter_by(username=data['username']).first():
-        return bad_request('Please use a different username')
-    if User.query.filter_by(email=data['email']).first():
-        return bad_request('Please use a different email address')
-    user = User()
-    user.from_dict(data, new_user=True)
-    db.session.add(user)
-    db.session.commit()
-    response = jsonify({"statusCode": 201})
-    response.status_code = 201
-    return response
-
-
 @bp.route('/users/<int:id>', methods=['PUT'])
 @token_auth.login_required
 def update_user(id):
@@ -87,10 +69,27 @@ def update_user(id):
     return jsonify(user.to_dict())
 
 
+@bp.route('/users', methods=['POST'])
+def create_user():
+    data = request.get_json() or {}
+    if 'email' not in data or 'password' not in data:
+        return bad_request('Must include email and password fields')
+    if User.query.filter_by(username=data['username']).first():
+        return bad_request('Please use a different username')
+    if User.query.filter_by(email=data['email']).first():
+        return bad_request('Please use a different email address')
+    user = User()
+    user.from_dict(data, new_user=True)
+    db.session.add(user)
+    db.session.commit()
+    response = jsonify({"statusCode": 201})
+    response.status_code = 201
+    return response
+
+
 @bp.route('/getuser', methods=['GET'])
 @token_auth.login_required
 def get_user_data():
-    # data = request.get_json() or {}
     if token_auth.current_user().id:
         response = {
             'email' : token_auth.current_user().email,
@@ -104,6 +103,7 @@ def get_user_data():
 @bp.route('/updateuser', methods=['POST'])
 @token_auth.login_required
 def update_user_data():
+    ''' DESTRUCTURE INCOMING DATA '''
     data = request.get_json()
     print('data =====\n', data)
     old_email = data.get('oldEmail')
@@ -120,39 +120,31 @@ def update_user_data():
     ''' UPDATE EMAIL ONLY '''
     if 'newEmail' in data and 'newUsername' not in data and 'newPassword' not in data:
         if new_email == '':
-            print('Please enter an email address')
             return bad_request('Please enter an email address')
         elif token_auth.current_user().email != old_email:
-            print('email updt w/bad email')
             abort(403)
 
         if new_email and new_email != user.email and \
                 User.query.filter_by(email=new_email).first():
-            return bad_request('Please use a different email address')
-        print(user.email, old_email, new_email)
-        print('made it past email gate!')
+            return bad_request('Email error')
 
     ''' UPDATE USERNAME ONLY '''
     if 'newUsername' in data:
         if new_username == '':
-            print('Please enter a username')
             return bad_request('Please enter a username')
         elif token_auth.current_user().username != old_username:
-            print('username updt w/bad username')
             abort(403)
 
         if new_username and new_username != user.username and \
                 User.query.filter_by(username=new_username).first():
-            return bad_request('Please use a different username')
+            return bad_request('Username error')
         print('made it past username gate!')
 
     ''' UPDATE PASSWORD ONLY '''
     if 'newPassword' in data:
         if new_password == '':
-            print('Please enter a password')
             return bad_request('Please enter a password')
         elif not user.check_password(old_password):
-            print('password updt w/bad password')
             abort(403)
 
         if new_username and new_username != user.username and \
@@ -160,11 +152,13 @@ def update_user_data():
             return bad_request('Please use a different email address')
         print('made it past pw gate!')
 
+    ''' RETURN UPDATED DATA '''
     user.update_data(data, new_user=False)
     db.session.commit()
-    print('new data ====',user.new_data())
-    return jsonify(user.new_data())
-    # return jsonify({})
+    response = user.new_data()
+    response['status_code'] = 201
+    print('new data ====', response)
+    return jsonify(response)
 
 
 @bp.route('/postcontactform/<subject>/<name>/<email>/<message>/<page>/<card>', methods=['POST'])
