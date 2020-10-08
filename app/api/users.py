@@ -87,9 +87,7 @@ def create_user():
         return bad_request('Please use a different email address')
     user = User()
     user.from_dict(data, new_user=True)
-    # TODO figure out how to gen. token without auth headers
-    token = basic_auth.current_user().get_token()
-    # TODO add token to user before db session add/commit
+    token = user.get_token()
     db.session.add(user)
     db.session.commit()
     response = jsonify({
