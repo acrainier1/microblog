@@ -206,7 +206,6 @@ class User(UserMixin, PaginatedAPIMixin, db.Model):
             self.set_password(data['password'])
 
     def update_data(self, data, new_user=False):
-        print("DATA ====\n", data)
         if 'newEmail' in data:
             setattr(self, 'email', data['newEmail'])
         if 'newUsername' in data:

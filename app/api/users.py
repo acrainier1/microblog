@@ -121,6 +121,7 @@ def update_user_data():
     new_email = data.get('newEmail')
     old_username = data.get('oldUsername')
     new_username = data.get('newUsername')
+    old_password = data.get('oldPassword')
     new_password = data.get('newPassword')
 
     if User.query.filter_by(email=old_email).first():
@@ -149,19 +150,14 @@ def update_user_data():
         if new_username and new_username != user.username and \
                 User.query.filter_by(username=new_username).first():
             return bad_request('Username error')
-        print('made it past username gate!')
 
     ''' UPDATE PASSWORD ONLY '''
-    if 'newPassword' in data:
-        if new_password == '':
-            return bad_request('Please enter a password')
-        elif not user.check_password(old_password):
-            abort(403)
-
-        if new_username and new_username != user.username and \
-                User.query.filter_by(email=new_email).first():
-            return bad_request('Please use a different email address')
-        print('made it past pw gate!')
+    if 'oldPassword' in data and 'newPassword' in data:
+        if not user.check_password(old_password):
+            # abort(403)
+            print('pwerr')
+            return bad_request('Password error')
+        user.set_password(new_password)
 
     ''' RETURN UPDATED DATA '''
     user.update_data(data, new_user=False)
