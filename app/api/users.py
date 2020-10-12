@@ -155,7 +155,6 @@ def update_user_data():
     if 'oldPassword' in data and 'newPassword' in data:
         if not user.check_password(old_password):
             # abort(403)
-            print('pwerr')
             return bad_request('Password error')
         user.set_password(new_password)
 
