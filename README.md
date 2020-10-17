@@ -63,7 +63,7 @@ PRAGMA table_info(kanji_data);
 
 ==== Recreate kanji data table WITH Alembic
 <!-- in local terminal -->
-flask db upgrade
+flask db upgrade;
 
 
 ==== Recreate kanji data table WITHOUT Alembic
@@ -134,10 +134,10 @@ UPDATE alembic_version SET version_num = 'new_version_#' WHERE version_num = 'ol
 heroku run bash
 
 (5) <!-- in Heroku terminal -->
-flask db migrate -m "update DB"; flask db upgrade;
+flask db migrate -m "update DB"; flask db upgrade; exit;
 
 
-==== View column names & table info
+==== View column names & table info in postgresql
 \d kanji_data
 
 
