@@ -5,6 +5,8 @@ from app.api import bp
 from app.api.auth import basic_auth, token_auth
 
 
+
+
 # Generate user tokens
 @bp.route('/tokens', methods=['POST'])
 @basic_auth.login_required
