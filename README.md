@@ -130,6 +130,12 @@ SELECT * FROM alembic_version;
 (3) <!-- use above result to get revision's 'old_version_#' -->
 UPDATE alembic_version SET version_num = 'new_version_#' WHERE version_num = 'old_version_#';
 
+(4) <!-- in local terminal -->
+heroku run bash
+
+(5) <!-- in Heroku terminal -->
+flask db migrate -m "update DB"; flask db upgrade;
+
 
 ==== View column names & table info
 \d kanji_data
