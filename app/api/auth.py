@@ -25,26 +25,7 @@ def verify_password(username, password):
 
     if user and user.check_password(password):
         print('first condition')
-        # user.reset_login_count()
-        # db.session.commit()
         return user
-    
-    # elif user and \
-    #         user.check_password(password) and \
-    #         login_count >= 4 and \
-    #         time_span >= interval:
-    #     print('second condition')
-    #     user.reset_login_count()
-    #     db.session.commit()
-    #     return user
-
-    # elif user and \
-    #         user.check_password(password) and \
-    #         login_count >= 4 and \
-    #         time_span < interval:
-    #     print('third condition Wait 30 minutes')
-    #     wait_msg = 'Wait 30 minutes'
-    #     return
 
     elif user and \
             login_count < 4 and \
