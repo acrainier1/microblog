@@ -1,5 +1,6 @@
 import base64
 from datetime import datetime, timedelta
+import time
 from hashlib import md5
 import json
 import os
@@ -99,6 +100,8 @@ class User(UserMixin, PaginatedAPIMixin, db.Model):
     last_message_read_time = db.Column(db.DateTime)
     token = db.Column(db.String(32), index=True, unique=True)
     token_expiration = db.Column(db.DateTime)
+    login_count = db.Column(db.Integer, default=0)
+    last_login_attempt = db.Column(db.DateTime, default=datetime.utcnow)
     
     posts = db.relationship('Post', backref='author', lazy='dynamic')
     
@@ -232,6 +235,17 @@ class User(UserMixin, PaginatedAPIMixin, db.Model):
 
     def revoke_token(self):
         self.token_expiration = datetime.utcnow() - timedelta(seconds=1)
+
+    def set_bad_login_count(self):
+        self.last_login_attempt = datetime.utcnow()
+        self.login_count += 1
+
+    def reset_login_count(self):
+        self.last_login_attempt = datetime.utcnow()
+        self.login_count = 0
+
+    def check_login_count(self):
+        return self.login_count
 
     @staticmethod
     def check_token(token):
