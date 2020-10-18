@@ -1,9 +1,10 @@
 from flask import jsonify, request, url_for, abort
 from app import db
-from app.models import User, KanjiData
 from app.api import bp
 from app.api.auth import token_auth, basic_auth
 from app.api.errors import bad_request
+from app.auth.email import send_mail, send_password_reset_email
+from app.models import User, KanjiData
 
 
 @bp.route('/users/<int:id>', methods=['GET'])
@@ -166,6 +167,29 @@ def update_user_data():
     print('new data ====', response)
     return jsonify(response)
 
+
+@bp.route('/reset_password_email/<email>', methods=['GET', 'POST'])
+def reset_password_request(email):
+    user = User.query.filter_by(email=email).first()
+    if user:
+        print('reset_password_email=====')
+        send_mail(user)
+
+
+@bp.route('/reset_password/<token>', methods=['GET', 'POST'])
+def reset_password(token):
+    if current_user.is_authenticated:
+        return redirect(url_for('main.index'))
+    user = User.verify_reset_password_token(token)
+    if not user:
+        return redirect(url_for('main.index'))
+    form = ResetPasswordForm()
+    if form.validate_on_submit():
+        user.set_password(form.password.data)
+        db.session.commit()
+        flash(_('Your password has been reset.'))
+        return redirect(url_for('auth.login'))
+    return render_template('auth/reset_password.html', form=form)
 
 @bp.route('/postcontactform/<subject>/<name>/<email>/<message>/<page>/<card>', methods=['POST'])
 def postContactForm(subject, name, email, message, page, card):

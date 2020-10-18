@@ -13,19 +13,22 @@ def send_async_email(app, msg):
 
 
 def send_email(subject,
-                sender, recipients,
-                text_body, html_body,
+                sender,
+                recipients,
+                text_body,
+                html_body,
                 attachments=None,
-                sync=False):
+                sync=False
+    ):
 
     # MAILTRAP CONFIG
     # port = 2525
     # smtp_server = 'smtp.mailtrap.io'
     # login = '3c7e5f92bcfd6c'
     # password = 'd5926c044d6232'
-    # message = ??? # f'string
+    # message = "test msg" # f'string
     # msg = MIMEText(message, 'html')
-    # msg['Subject'] = 'Lexus Feedback'
+    # msg['Subject'] = 'Kanji Remastered Account Recovery'
     # msg['From'] = sender
     # msg['To'] = recipients
 

@@ -14,6 +14,7 @@ def send_password_reset_email(user):
                recipients=[user.email],
                text_body=render_template('email/reset_password.txt', user=user, token=token),
                html_body=render_template('email/reset_password.html', user=user, token=token))
+    print('SEND_password_reset_email')
 
 
 def send_mail():
@@ -24,7 +25,7 @@ def send_mail():
     password = 'd5926c044d6232'
 
     sender = "kanjiremastered@gmail.com"
-    recipients = "opensrcjapan@gmail.com"
+    recipients = "alej.canizales@gmail.com"
     message = f"<h2>Stuff about Mailtrap from {sender} to {recipients}</h2>"
     msg = MIMEText(message, 'html')
     msg['Subject'] = 'A Test of Mailtrap.io'
@@ -34,3 +35,4 @@ def send_mail():
     with smtplib.SMTP(smtp_server, port) as server:
         server.login(login, password)
         server.sendmail(sender, recipients, msg.as_string())
+    print('SEND_EMAIL')
