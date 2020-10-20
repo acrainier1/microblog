@@ -168,12 +168,14 @@ def update_user_data():
     return jsonify(response)
 
 
-@bp.route('/reset_password_email/<email>', methods=['GET', 'POST'])
+@bp.route('/reset_password_email/<email>', methods=['GET'])
 def reset_password_request(email):
     user = User.query.filter_by(email=email).first()
+    print('user', user)
     if user:
-        print('reset_password_email=====')
+        print('reset_password_email =====', email)
         send_mail(user)
+    return jsonify({"response": "placeholder string return"})
 
 
 @bp.route('/reset_password/<token>', methods=['GET', 'POST'])

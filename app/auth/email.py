@@ -17,22 +17,21 @@ def send_password_reset_email(user):
     print('SEND_password_reset_email')
 
 
-def send_mail():
+def send_mail(email=''):
     # MAILTRAP CONFIG
     port = 2525
     smtp_server = 'smtp.mailtrap.io'
     login = '3c7e5f92bcfd6c'
     password = 'd5926c044d6232'
 
-    sender = "kanjiremastered@gmail.com"
-    recipients = "alej.canizales@gmail.com"
-    message = f"<h2>Stuff about Mailtrap from {sender} to {recipients}</h2>"
+    sender = 'kanjiremastered@gmail.com'
+    recipient = 'alex.c.canizales@gmail.com'
+    message = f"<h2>Stuff about Mailtrap from {sender} to {recipient}</h2>"
     msg = MIMEText(message, 'html')
     msg['Subject'] = 'A Test of Mailtrap.io'
     msg['From'] = sender
-    msg['To'] = recipients
+    msg['To'] = recipient
 
     with smtplib.SMTP(smtp_server, port) as server:
         server.login(login, password)
-        server.sendmail(sender, recipients, msg.as_string())
-    print('SEND_EMAIL')
+        server.sendmail(sender, recipient, msg.as_string())
