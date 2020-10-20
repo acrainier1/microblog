@@ -178,7 +178,7 @@ def search(search_term):
 
         If there is no data found, returned as an array with boiler plate
     '''
-    print("search_term:", search_term, "@bp.route('/search/<search_term>', methods=['GET'])")
+    # print("search_term:", search_term, "@bp.route('/search/<search_term>', methods=['GET'])")
 
     NO_DATA = jsonify([ ['', '', [], 'NO_DATA'] ])
     search_term = scrub_chars(search_term)
@@ -223,7 +223,7 @@ def byradicals(delimiter, search_term):
         functionality are taken care of by search queries below
     '''
 
-    print(search_term, "@bp.route('/byradicals/<delimiter>/<search_term>', methods=['GET'])")
+    # print(search_term, "@bp.route('/byradicals/<delimiter>/<search_term>', methods=['GET'])")
     # columns = ["[Order1]",
     #            "[Type1]",
     #            "[Radical1]", "[Radical2]", "[Radical3]", "[Radical4]",
@@ -293,7 +293,7 @@ def kanji(search_term):
             ]
     '''
 
-    print("search_term:", search_term, "@bp.route('/kanji/<search_term>', methods=['GET'])")
+    # print("search_term:", search_term, "@bp.route('/kanji/<search_term>', methods=['GET'])")
     result = KanjiData.query.filter_by(Id=int(search_term)).first()
     if result:
         nested = nest_kanji_result(result)
@@ -315,7 +315,7 @@ def kanji(search_term):
 
 @bp.route('/kanjiset/<int:search_term>', methods=['GET'])
 def kanjiset(search_term):
-    print("search_term:", search_term, "@bp.route('/kanjiset/<int:search_term>', methods=['GET'])")
+    # print("search_term:", search_term, "@bp.route('/kanjiset/<int:search_term>', methods=['GET'])")
 
     nested_results = []
     results = KanjiData.query.filter(
@@ -331,7 +331,7 @@ def kanjiset(search_term):
 
 @bp.route('/test/<search_term>', methods=['GET'])
 def testroute(search_term):
-    print("search_term:", search_term, "@bp.route('/test/<search_term>', methods=['GET'])")
+    # print("search_term:", search_term, "@bp.route('/test/<search_term>', methods=['GET'])")
     start = time.time()
     DATABASE_URL = os.environ.get('DATABASE_URL')
     if DATABASE_URL:
