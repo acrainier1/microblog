@@ -1,6 +1,9 @@
 from flask import jsonify, request, url_for, abort
+import ssl
+import base64
 from app import db
 from app.api import bp
+from app.api.auth0 import AuthError, requires_auth
 from app.api.auth import token_auth, basic_auth
 from app.api.errors import bad_request
 from app.auth.email import send_mail, send_password_reset_email
@@ -164,7 +167,6 @@ def update_user_data():
     db.session.commit()
     response = user.new_data()
     response['statusCode'] = 201
-    print('new data ====', response)
     return jsonify(response)
 
 
@@ -190,6 +192,25 @@ def reset_password(token):
         flash(_('Your password has been reset.'))
         return redirect(url_for('auth.login'))
     return render_template('auth/reset_password.html', form=form)
+
+
+@bp.route('/exams', methods=['POST'])
+@requires_auth
+def add_exam():
+    # data = request.get_json()
+    encoded_email = request.headers.get('Finder')
+    decoded_email = base64.b64decode(encoded_email).decode("utf-8")
+    print(encoded_email, decoded_email)
+    exams = { "data": 'exam data' }
+    print('========', exams)
+    return jsonify(exams)
+
+@bp.errorhandler(AuthError)
+def handle_auth_error(ex):
+    response = jsonify(ex.error)
+    response.status_code = ex.status_code
+    return response
+
 
 @bp.route('/postcontactform/<subject>/<name>/<email>/<message>/<page>/<card>', methods=['POST'])
 def postContactForm(subject, name, email, message, page, card):

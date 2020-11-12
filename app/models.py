@@ -15,7 +15,13 @@ from app.search import add_to_index, remove_from_index, query_index
 
 
 
-
+'''
+    ALWAYS MANUALLY CHECK MIGRATIONS!
+    ALWAYS REMOVE THE op.drop_table('kanjidata') IN THE UPGRADE PART OF MIGRATION
+    AND THE op.create_table('kanjidata') IN THE DOWNGRADE PART OF MIGRATION!
+    THIS ONLY HAPPENS BECAUSE [kanjidata] ISN'T CREATED IN Models.py
+    BECAUSE IT'S MISSING HERE IT TRIES TO DROP THE TABLE ERRONEOUSLY!   
+'''
 class SearchableMixin(object):
     @classmethod
     def search(cls, expression, page, per_page):
@@ -105,23 +111,44 @@ class User(UserMixin, PaginatedAPIMixin, db.Model):
     
     posts = db.relationship('Post', backref='author', lazy='dynamic')
     
+    # RELATIONSHIPS
     followed = db.relationship(
-        'User', secondary=followers,
+        'User',
+        secondary=followers,
         primaryjoin=(followers.c.follower_id == id),
         secondaryjoin=(followers.c.followed_id == id),
-        backref=db.backref('followers', lazy='dynamic'), lazy='dynamic')
+        backref=db.backref('followers', lazy='dynamic'),
+        lazy='dynamic'
+    )
     
-    messages_sent = db.relationship('Message',
-                                    foreign_keys='Message.sender_id',
-                                    backref='author', lazy='dynamic')
+    messages_sent = db.relationship(
+        'Message',
+        foreign_keys='Message.sender_id',
+        backref='author',
+        lazy='dynamic'
+    )
     
-    messages_received = db.relationship('Message',
-                                        foreign_keys='Message.recipient_id',
-                                        backref='recipient', lazy='dynamic')
+    messages_received = db.relationship(
+        'Message',
+        foreign_keys='Message.recipient_id',
+        backref='recipient',
+        lazy='dynamic'
+    )
     
-    notifications = db.relationship('Notification', backref='user',
-                                    lazy='dynamic')
+    notifications = db.relationship(
+        'Notification',
+        backref='user',
+        lazy='dynamic'
+    )
 
+    # user_mnemonics = db.relationship(
+    #     'KanjiData',
+    #     foreign_keys='KanjiData.Id',
+    #     backref='user',
+    #     lazy='dynamic'
+    # )
+
+    # METHODS
     def __repr__(self):
         return '<User {}>'.format(self.username)
 
@@ -321,26 +348,11 @@ class KanjiData(db.Model):
         return f'<Kanji {self.Kanji}>'
 
 
+class CustomMnemonics(db.Model):
+    Id = db.Column(db.Integer, primary_key=True)
+    Mnemonic = db.Column(db.String(512))
+    User = db.Column(db.String(256))
+    Kanji = db.Column(db.Integer, db.ForeignKey('kanji_data.Id'))
 
-
-    # Id = db.Column(db.Integer, primary_key=True)
-    # Frequency = db.Column(db.Integer)
-    # Kanji = db.Column(db.String(32))
-    # Type = db.Column(db.String(32))
-    # Meaning1 = db.Column(db.String(32))
-    # Meaning2 = db.Column(db.String(32))
-    # Meaning3 = db.Column(db.String(32))
-    # Bushu1 = db.Column(db.String(32))
-    # Bushu2 = db.Column(db.String(32))
-    # Bushu3 = db.Column(db.String(32))
-    # Bushu4 = db.Column(db.String(32))
-    # Radical1 = db.Column(db.String(32))
-    # Radical2 = db.Column(db.String(32))
-    # Radical3 = db.Column(db.String(32))
-    # Radical4 = db.Column(db.String(32))
-    # Onyomi_Reading1 = db.Column(db.String(32))
-    # Onyomi_Reading2 = db.Column(db.String(32))
-    # Kunyomi_Reading1 = db.Column(db.String(32))
-    # Kunyomi_Reading2 = db.Column(db.String(32))
-    # Mnemonic = db.Column(db.String(256))
-    # Notes = db.Column(db.String(256))
+    def create_menominc(self):
+        pass
