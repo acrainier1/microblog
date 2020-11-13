@@ -7,7 +7,7 @@ from app.api.auth0 import AuthError, requires_auth
 from app.api.auth import token_auth, basic_auth
 from app.api.errors import bad_request
 from app.auth.email import send_mail, send_password_reset_email
-from app.models import User, KanjiData
+from app.models import User, KanjiData, CustomMnemonics
 
 
 @bp.route('/users/<int:id>', methods=['GET'])
@@ -197,13 +197,39 @@ def reset_password(token):
 @bp.route('/exams', methods=['POST'])
 @requires_auth
 def add_exam():
-    # data = request.get_json()
-    encoded_email = request.headers.get('Finder')
-    decoded_email = base64.b64decode(encoded_email).decode("utf-8")
-    print(encoded_email, decoded_email)
+    data = request.get_json()
+    mnemonic = data.get('mnemonic')
+    kanji = int(data.get('kanji'))
+    encoded_unique_ID = request.headers.get('Finder')
+    decoded_unique_ID = base64.b64decode(encoded_unique_ID).decode("utf-8")
+    custom_mnemonic = CustomMnemonics()
+
+    existing_user = None
+    if CustomMnemonics.query.filter_by(User=decoded_unique_ID).first():
+        existing_user = CustomMnemonics.query.filter_by(User=decoded_unique_ID).first()
+        print('existing_user', existing_user.Id)
+
+    existing_kanji = None
+    if CustomMnemonics.query.filter_by(Kanji=kanji).first():
+        existing_kanji = CustomMnemonics.query.filter_by(Kanji=kanji).first()
+        print('existing_kanji', existing_kanji.Id)
+
+    existing_mnemonic = CustomMnemonics.query.filter_by(
+                            User=decoded_unique_ID).filter_by(
+                            Kanji=kanji).first()
+    print('existing_mnemonic', existing_mnemonic)
+    
+    if existing_user and existing_kanji and existing_user.Id == existing_kanji.Id:
+        existing_user.set_mnemonic(mnemonic, decoded_unique_ID, kanji)
+        print('existing', existing_user.Id, existing_kanji.Id)
+    else:
+        custom_mnemonic.set_mnemonic(mnemonic, decoded_unique_ID, kanji)
+        print('new')
+    
+    db.session.commit()
     exams = { "data": 'exam data' }
-    print('========', exams)
     return jsonify(exams)
+
 
 @bp.errorhandler(AuthError)
 def handle_auth_error(ex):

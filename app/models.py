@@ -354,5 +354,8 @@ class CustomMnemonics(db.Model):
     User = db.Column(db.String(256))
     Kanji = db.Column(db.Integer, db.ForeignKey('kanji_data.Id'))
 
-    def create_menominc(self):
-        pass
+    def set_mnemonic(self, mnemonic, user, kanji):
+        self.Mnemonic = mnemonic
+        self.User = user
+        self.Kanji = kanji
+        db.session.add(self)
