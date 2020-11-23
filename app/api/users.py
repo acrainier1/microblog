@@ -200,32 +200,15 @@ def add_exam():
     data = request.get_json()
     mnemonic = data.get('mnemonic')
     kanji = int(data.get('kanji'))
-    encoded_unique_ID = request.headers.get('Finder')
-    decoded_unique_ID = base64.b64decode(encoded_unique_ID).decode("utf-8")
+    encoded_user = request.headers.get('Finder')
+    user = base64.b64decode(encoded_user).decode("utf-8")
+
     custom_mnemonic = CustomMnemonics()
-
-    existing_user = None
-    if CustomMnemonics.query.filter_by(User=decoded_unique_ID).first():
-        existing_user = CustomMnemonics.query.filter_by(User=decoded_unique_ID).first()
-        print('existing_user', existing_user.Id)
-
-    existing_kanji = None
-    if CustomMnemonics.query.filter_by(Kanji=kanji).first():
-        existing_kanji = CustomMnemonics.query.filter_by(Kanji=kanji).first()
-        print('existing_kanji', existing_kanji.Id)
-
-    existing_mnemonic = CustomMnemonics.query.filter_by(
-                            User=decoded_unique_ID).filter_by(
-                            Kanji=kanji).first()
-    print('existing_mnemonic', existing_mnemonic)
-    
-    if existing_user and existing_kanji and existing_user.Id == existing_kanji.Id:
-        existing_user.set_mnemonic(mnemonic, decoded_unique_ID, kanji)
-        print('existing', existing_user.Id, existing_kanji.Id)
+    existing_mnemonic = CustomMnemonics.query.filter_by(User=user).filter_by(Kanji=kanji).first()
+    if existing_mnemonic is not None:
+        existing_mnemonic.set_mnemonic(mnemonic, user, kanji)
     else:
-        custom_mnemonic.set_mnemonic(mnemonic, decoded_unique_ID, kanji)
-        print('new')
-    
+        custom_mnemonic.set_mnemonic(mnemonic, user, kanji)
     db.session.commit()
     exams = { "data": 'exam data' }
     return jsonify(exams)
