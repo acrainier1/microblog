@@ -194,9 +194,9 @@ def reset_password(token):
     return render_template('auth/reset_password.html', form=form)
 
 
-@bp.route('/exams', methods=['POST'])
+@bp.route('/savecustommnemonic', methods=['POST'])
 @requires_auth
-def add_exam():
+def save_customMnemonic():
     data = request.get_json()
     mnemonic = data.get('mnemonic')
     kanji = int(data.get('kanji'))
@@ -210,8 +210,25 @@ def add_exam():
     else:
         custom_mnemonic.set_mnemonic(mnemonic, user, kanji)
     db.session.commit()
-    exams = { "data": 'exam data' }
-    return jsonify(exams)
+    response = { "statusCode": 201 }
+    return jsonify(response)
+
+@bp.route('/fetchcustommnemonic', methods=['POST'])
+@requires_auth
+def get_customMnemonic():
+    data = request.get_json()
+    kanji = int(data.get('kanji'))
+    encoded_user = request.headers.get('Finder')
+    user = base64.b64decode(encoded_user).decode("utf-8")
+
+    existing_mnemonic = CustomMnemonics.query.filter_by(User=user).filter_by(Kanji=kanji).first()
+    if existing_mnemonic is not None:
+        response = { "mnemonic": existing_mnemonic.Mnemonic }
+        print('existing_mnemonic', existing_mnemonic.Kanji, existing_mnemonic.Mnemonic)
+    else:
+        response = { "mnemonic": '' }
+    response['statusCode'] = 201
+    return jsonify(response)
 
 
 @bp.errorhandler(AuthError)

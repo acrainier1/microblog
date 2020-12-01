@@ -30,7 +30,7 @@
 ~/<top_level_directory>$
 csv-to-sqlite -f kanjidata.csv -o app.db -D; sqlite3 app.db 
 
-(2) <!-- in sqlite3, update all table data -->
+(2) <!-- in sqlite3, copy & paste these commands to update all table data -->
 DELETE FROM kanji_data;
 INSERT INTO kanji_data SELECT * FROM [kanjidata];
 UPDATE kanji_data AS A
