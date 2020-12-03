@@ -213,6 +213,7 @@ def save_custom_notes():
     response = { "statusCode": 201 }
     return jsonify(response)
 
+
 @bp.route('/fetchcustomnotes', methods=['POST'])
 @requires_auth
 def fetch_custom_notes():
