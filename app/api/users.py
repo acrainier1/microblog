@@ -194,39 +194,39 @@ def reset_password(token):
     return render_template('auth/reset_password.html', form=form)
 
 
-@bp.route('/savecustommnemonic', methods=['POST'])
+@bp.route('/savecustomnotes', methods=['POST'])
 @requires_auth
-def save_customMnemonic():
+def save_custom_notes():
     data = request.get_json()
-    mnemonic = data.get('mnemonic')
+    notes = data.get('notes')
     kanji = int(data.get('kanji'))
     encoded_user = request.headers.get('Finder')
     user = base64.b64decode(encoded_user).decode("utf-8")
 
-    custom_mnemonic = CustomMnemonics()
-    existing_mnemonic = CustomMnemonics.query.filter_by(User=user).filter_by(Kanji=kanji).first()
-    if existing_mnemonic is not None:
-        existing_mnemonic.set_mnemonic(mnemonic, user, kanji)
+    custom_notes = CustomMnemonics()
+    existing_notes = CustomMnemonics.query.filter_by(User=user).filter_by(Kanji=kanji).first()
+    if existing_notes is not None:
+        existing_notes.set_notes(notes, user, kanji)
     else:
-        custom_mnemonic.set_mnemonic(mnemonic, user, kanji)
+        custom_notes.set_notes(notes, user, kanji)
     db.session.commit()
     response = { "statusCode": 201 }
     return jsonify(response)
 
-@bp.route('/fetchcustommnemonic', methods=['POST'])
+@bp.route('/fetchcustomnotes', methods=['POST'])
 @requires_auth
-def get_customMnemonic():
+def fetch_custom_notes():
     data = request.get_json()
     kanji = int(data.get('kanji'))
     encoded_user = request.headers.get('Finder')
     user = base64.b64decode(encoded_user).decode("utf-8")
 
-    existing_mnemonic = CustomMnemonics.query.filter_by(User=user).filter_by(Kanji=kanji).first()
-    if existing_mnemonic is not None:
-        response = { "mnemonic": existing_mnemonic.Mnemonic }
-        print('existing_mnemonic', existing_mnemonic.Kanji, existing_mnemonic.Mnemonic)
+    existing_notes = CustomMnemonics.query.filter_by(User=user).filter_by(Kanji=kanji).first()
+    if existing_notes is not None:
+        response = { "notes": existing_notes.Mnemonic }
+        print('existing_notes', existing_notes.Kanji, existing_notes.Mnemonic)
     else:
-        response = { "mnemonic": '' }
+        response = { "notes": '' }
     response['statusCode'] = 201
     return jsonify(response)
 
@@ -268,18 +268,3 @@ def postContactForm(subject, name, email, message, page, card):
     #     }
     #     cursor.execute(INSERT_SQL, values)
     return jsonify({"status": "success"})
-
-
-@bp.route('/savemnemonic/<user>/<int:id>/<user_mnemonic>', methods=['POST'])
-@token_auth.login_required
-def save_mnemonic(user, id, mnemonic):
-    pass
-    # # ============ STATUS CODE ============
-    # mnemonic = Mnemonics.query.get_or_404(id)
-    # # ============ STATUS CODE ============
-    # page = request.args.get('page', 1, type=int)
-    # per_page = min(request.args.get('per_page', 10, type=int), 100)
-    # data = User.to_collection_dict(user.followed, page, per_page,
-    #                                'api.get_followed', id=id)
-    # confirmation = ["Your menmonic device has been saved."]                            
-    # return jsonify(confirmation)
