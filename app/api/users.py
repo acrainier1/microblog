@@ -224,8 +224,8 @@ def fetch_custom_notes():
 
     existing_notes = CustomNotes.query.filter_by(User=user).filter_by(Kanji=kanji).first()
     if existing_notes is not None:
-        response = { "notes": existing_notes.Mnemonic }
-        print('existing_notes', existing_notes.Kanji, existing_notes.Mnemonic)
+        response = { "notes": existing_notes.Notes }
+        print('existing_notes', existing_notes.Kanji, existing_notes.Notes)
     else:
         response = { "notes": '' }
     response['statusCode'] = 201
