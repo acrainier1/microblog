@@ -7,7 +7,7 @@ from app.api.auth0 import AuthError, requires_auth
 from app.api.auth import token_auth, basic_auth
 from app.api.errors import bad_request
 from app.auth.email import send_mail, send_password_reset_email
-from app.models import User, KanjiData, CustomMnemonics
+from app.models import User, KanjiData, CustomNotes
 
 
 @bp.route('/users/<int:id>', methods=['GET'])
@@ -203,8 +203,8 @@ def save_custom_notes():
     encoded_user = request.headers.get('Finder')
     user = base64.b64decode(encoded_user).decode("utf-8")
 
-    custom_notes = CustomMnemonics()
-    existing_notes = CustomMnemonics.query.filter_by(User=user).filter_by(Kanji=kanji).first()
+    custom_notes = CustomNotes()
+    existing_notes = CustomNotes.query.filter_by(User=user).filter_by(Kanji=kanji).first()
     if existing_notes is not None:
         existing_notes.set_notes(notes, user, kanji)
     else:
@@ -222,7 +222,7 @@ def fetch_custom_notes():
     encoded_user = request.headers.get('Finder')
     user = base64.b64decode(encoded_user).decode("utf-8")
 
-    existing_notes = CustomMnemonics.query.filter_by(User=user).filter_by(Kanji=kanji).first()
+    existing_notes = CustomNotes.query.filter_by(User=user).filter_by(Kanji=kanji).first()
     if existing_notes is not None:
         response = { "notes": existing_notes.Mnemonic }
         print('existing_notes', existing_notes.Kanji, existing_notes.Mnemonic)

@@ -348,14 +348,14 @@ class KanjiData(db.Model):
         return f'<Kanji {self.Kanji}>'
 
 
-class CustomMnemonics(db.Model):
+class CustomNotes(db.Model):
     Id = db.Column(db.Integer, primary_key=True)
-    Mnemonic = db.Column(db.String(512))
+    Notes = db.Column(db.String(512))
     User = db.Column(db.String(256))
     Kanji = db.Column(db.Integer, db.ForeignKey('kanji_data.Id'))
 
-    def set_notes(self, mnemonic, user, kanji):
-        self.Mnemonic = mnemonic
+    def set_notes(self, notes, user, kanji):
+        self.Notes = notes
         self.User = user
         self.Kanji = kanji
         db.session.add(self)
