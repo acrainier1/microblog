@@ -329,6 +329,22 @@ def kanjiset(search_term):
     return jsonify([])
 
 
+@bp.route('/customkanjiset/<search_term>', methods=['GET'])
+def customkanjiset(search_term):
+    # print("search_term:", search_term, "@bp.route('/customkanjiset/<search_term>', methods=['GET'])")
+
+    kanjis = search_term.split(',')
+    nested_results = []
+    for kanji in kanjis:
+        result = KanjiData.query.filter_by(Kanji=kanji).first()
+        if result:
+            nested = nest_kanji_result(result)
+            nested_results.append(nested)
+    if nested_results:
+        return jsonify(nested_results)
+    return jsonify([])
+
+
 @bp.route('/test/<search_term>', methods=['GET'])
 def testroute(search_term):
     # print("search_term:", search_term, "@bp.route('/test/<search_term>', methods=['GET'])")
