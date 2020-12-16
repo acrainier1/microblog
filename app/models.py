@@ -352,7 +352,8 @@ class CustomNotes(db.Model):
     Id = db.Column(db.Integer, primary_key=True)
     Notes = db.Column(db.String(512))
     User = db.Column(db.String(256))
-    Kanji = db.Column(db.Integer, db.ForeignKey('kanji_data.Id'))
+    Kanji = db.Column(db.Integer)
+    # Kanji = db.Column(db.Integer, db.ForeignKey('kanji_data.Id'))
 
     def set_notes(self, notes, user, kanji):
         self.Notes = notes
