@@ -348,6 +348,7 @@ def customkanjiset(search_term):
 @bp.route('/test/<search_term>', methods=['GET'])
 def testroute(search_term):
     # print("search_term:", search_term, "@bp.route('/test/<search_term>', methods=['GET'])")
+
     start = time.time()
     DATABASE_URL = os.environ.get('DATABASE_URL')
     if DATABASE_URL:
