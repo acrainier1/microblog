@@ -6,7 +6,7 @@ import csv
 
 
 DATABASE_URL = os.environ.get('DATABASE_URL')
-KANJI_DATA = 'kanjidata.csv'
+KANJI_DATA = 'kanjidataWithRadicals.csv'
 
 
 conn = psycopg2.connect(DATABASE_URL, sslmode='require')
