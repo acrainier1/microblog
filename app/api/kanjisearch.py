@@ -316,7 +316,7 @@ def kanji(search_term):
 @bp.route('/kanjiset/<int:search_term>', methods=['GET'])
 def kanjiset(search_term):
     # print("search_term:", search_term, "@bp.route('/kanjiset/<int:search_term>', methods=['GET'])")
-
+    print('Config', Config)
     nested_results = []
     results = KanjiData.query.filter(
         KanjiData.Id.between(search_term, search_term+99))

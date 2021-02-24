@@ -202,6 +202,7 @@ def save_custom_notes():
     kanji = int(data.get('kanji'))
     encoded_user = request.headers.get('Finder')
     user = base64.b64decode(encoded_user).decode("utf-8")
+    print(data)
 
     custom_notes = CustomNotes()
     existing_notes = CustomNotes.query.filter_by(User=user).filter_by(Kanji=kanji).first()
@@ -221,6 +222,7 @@ def fetch_custom_notes():
     kanji = int(data.get('kanji'))
     encoded_user = request.headers.get('Finder')
     user = base64.b64decode(encoded_user).decode("utf-8")
+    print(data)
 
     existing_notes = CustomNotes.query.filter_by(User=user).filter_by(Kanji=kanji).first()
     if existing_notes is not None:
